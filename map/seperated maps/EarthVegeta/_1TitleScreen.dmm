@@ -1,0 +1,24 @@
+"a" = (/turf/Special/Black,/area/Outside)
+"b" = (/obj/Login/Newz,/turf/Special/Black,/area/Outside)
+"c" = (/obj/Login/Loadz,/turf/Special/Black,/area/Outside)
+"d" = (/obj/Login/Screenz,/turf/Special/Black,/area/Outside)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaa
+aaaaaaabbbbbbbbaa
+aaaaaaabbbbbbbbaa
+aaaaaaabbbbbbbbaa
+aaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaa
+aaaaaaaaacccccccc
+aaaaaaaaacccccccc
+aaaaaaaaacccccccc
+daaaaaaaacccccccc
+"}

@@ -1,0 +1,1001 @@
+mob
+	proc
+		JinVersionOneTrans()
+			src.JinVersionOne=1
+			var/icon/E=icon('Effects.dmi',"Shock")
+			Log("Admin","[ExtractInfo(src)] has activated Jinchuuriki Version One.")
+			if(src.JinV1FirstTrans)
+				spawn()
+					src.JinV1FirstTrans=0
+					spawn()for(var/i=200, i>0, i--)
+						new/obj/Effects/Lightning(locate(rand(1,500),rand(1,500),src.z))
+						if(prob(50))sleep(1)
+					spawn()DarknessFlash(src)
+					spawn()for(var/turf/e in range(20,src))
+						if(prob(60))continue
+						if(prob(5))spawn()new/obj/Effects/Lightning(e)
+						if(prob(50))sleep(0.3)
+					sleep()
+					spawn()Shockwave(E,1)
+					spawn()LightningFlash(src)
+					Quake(10)
+					sleep(20)
+					spawn()Shockwave(E,1.2)
+					spawn()Shockwave(E,1)
+					Quake(20)
+					sleep(30)
+					spawn()Shockwave(E,1.5)
+					spawn()Shockwave(E,1.2)
+					spawn()Shockwave(E,1)
+					Quake(30)
+					sleep(10)
+					spawn()LightningFlash(src)
+					spawn()Shockwave(E,2)
+					spawn()Shockwave(E,1.5)
+					spawn()Shockwave(E,1.2)
+					spawn()Shockwave(E,1)
+					spawn()Crater(src)
+					Quake(80)
+					spawn()LightningFlash(src)
+
+			else
+				spawn()
+					spawn()Shockwave(E,1)
+					Quake(10)
+					spawn()Shockwave(E,1.2)
+					spawn()Shockwave(E,1)
+					spawn()Crater(src)
+			src.overlays-=image(icon='BijuuInitial.dmi', pixel_x=-32, pixel_y=-32)
+			src.overlays+=image(icon='BijuuV1.dmi', pixel_x=-32, pixel_y=-32)
+			src.JinStats(1)
+			src.JinchBP(1)
+
+		JinVersionTwoTrans()
+			src.JinVersionTwo=1
+			var/icon/E=icon('Effects.dmi',"Shock")
+			Log("Admin","[ExtractInfo(src)] has activated Jinchuuriki Version Two.")
+			if(src.JinV2FirstTrans)
+				spawn()
+					src.JinV2FirstTrans=0
+					spawn()for(var/i=200, i>0, i--)
+						new/obj/Effects/Lightning(locate(rand(1,500),rand(1,500),src.z))
+						if(prob(50))sleep(1)
+					spawn()DarknessFlash(src)
+					spawn()for(var/turf/e in range(20,src))
+						if(prob(60))continue
+						if(prob(5))spawn()new/obj/Effects/Lightning(e)
+						if(prob(50))sleep(0.3)
+					sleep()
+					spawn()Shockwave(E,1)
+					spawn()LightningFlash(src)
+					Quake(10)
+					sleep(20)
+					spawn()Shockwave(E,1.2)
+					spawn()Shockwave(E,1)
+					Quake(20)
+					sleep(30)
+					spawn()Shockwave(E,1.5)
+					spawn()Shockwave(E,1.2)
+					spawn()Shockwave(E,1)
+					Quake(30)
+					sleep(10)
+					spawn()LightningFlash(src)
+					spawn()Shockwave(E,2)
+					spawn()Shockwave(E,1.5)
+					spawn()Shockwave(E,1.2)
+					spawn()Shockwave(E,1)
+					spawn()Crater(src)
+					Quake(80)
+					spawn()LightningFlash(src)
+
+			else
+				spawn()
+					spawn()Shockwave(E,1)
+					Quake(10)
+					spawn()Shockwave(E,1.2)
+					spawn()Shockwave(E,1)
+					spawn()Crater(src)
+
+			src.JinStats(2)
+			src.JinchBP(2)
+
+		JinFullTrans()
+			src.JinFullTrans=1
+			var/icon/E=icon('Effects.dmi',"Shock")
+			Log("Admin","[ExtractInfo(src)] has activated Jinchuuriki Full Transformation.")
+			if(src.JinFTFirstTrans)
+				spawn()
+					src.JinFTFirstTrans=0
+					spawn()for(var/i=200, i>0, i--)
+						new/obj/Effects/Lightning(locate(rand(1,500),rand(1,500),src.z))
+						if(prob(50))sleep(1)
+					spawn()DarknessFlash(src)
+					spawn()for(var/turf/e in range(20,src))
+						if(prob(60))continue
+						if(prob(5))spawn()new/obj/Effects/Lightning(e)
+						if(prob(50))sleep(0.3)
+					sleep()
+					spawn()Shockwave(E,1)
+					spawn()LightningFlash(src)
+					Quake(10)
+					sleep(20)
+					spawn()Shockwave(E,1.2)
+					spawn()Shockwave(E,1)
+					Quake(20)
+					sleep(30)
+					spawn()Shockwave(E,1.5)
+					spawn()Shockwave(E,1.2)
+					spawn()Shockwave(E,1)
+					Quake(30)
+					sleep(10)
+					spawn()LightningFlash(src)
+					spawn()Shockwave(E,2)
+					spawn()Shockwave(E,1.5)
+					spawn()Shockwave(E,1.2)
+					spawn()Shockwave(E,1)
+					spawn()Crater(src)
+					Quake(80)
+					spawn()LightningFlash(src)
+
+			else
+				spawn()
+					spawn()Shockwave(E,1)
+					Quake(10)
+					spawn()Shockwave(E,1.2)
+					spawn()Shockwave(E,1)
+					spawn()Crater(src)
+
+			src.JinStats(3)
+			src.JinchBP(3)
+
+		JinStats(var/FormNum)//JinStats compensates for all transformations and buffs
+		//it takes the boosts from bijuu when it sets you to form 1
+		//it takes the boosts from form 1 when it sets you to form 2
+		//etc
+		//it takes the boosts from form 3 when it sets you to form 2
+		//etc
+			switch(FormNum)
+				if(0)
+					switch(src.TailedBeast)
+						if("Ichibi")
+							if(src.JinVersionOne)
+								src.StrengthMultiplier/=1.15
+								src.EnduranceMultiplier/=1.75
+								src.SpeedMultiplier/=1.075
+								src.ForceMultiplier/=1.15
+								src.ResistanceMultiplier/=1.75
+								src.OffenseMultiplier/=1.15
+								src.DefenseMultiplier/=1.15
+
+							src.StrengthMultiplier*=1.1
+							src.EnduranceMultiplier*=1.5
+							src.SpeedMultiplier*=1.05
+							src.ForceMultiplier*=1.1
+							src.ResistanceMultiplier*=1.5
+							src.OffenseMultiplier*=1.1
+							src.DefenseMultiplier*=1.1
+
+						if("Nibi")
+							if(src.JinVersionOne)
+								src.StrengthMultiplier/=1.15
+								src.EnduranceMultiplier/=1.15
+								src.SpeedMultiplier/=1.75
+								src.ForceMultiplier/=1.15
+								src.ResistanceMultiplier/=1.15
+								src.OffenseMultiplier/=1.15
+								src.DefenseMultiplier/=1.75
+
+							src.StrengthMultiplier*=1.1
+							src.EnduranceMultiplier*=1.1
+							src.SpeedMultiplier*=1.25
+							src.ForceMultiplier*=1.1
+							src.ResistanceMultiplier*=1.1
+							src.OffenseMultiplier*=1.1
+							src.DefenseMultiplier*=1.5
+
+						if("Sanbi")
+							if(src.JinVersionOne)
+								src.StrengthMultiplier/=1.15
+								src.EnduranceMultiplier/=1.15
+								src.SpeedMultiplier/=1.15
+								src.ForceMultiplier/=1.75
+								src.ResistanceMultiplier/=1.15
+								src.OffenseMultiplier/=1.15
+								src.DefenseMultiplier/=1.15
+
+							src.StrengthMultiplier*=1.1
+							src.EnduranceMultiplier*=1.1
+							src.SpeedMultiplier*=1.1
+							src.ForceMultiplier*=1.5
+							src.ResistanceMultiplier*=1.5
+							src.OffenseMultiplier*=1.1
+							src.DefenseMultiplier*=1.1
+
+						if("Yonbi")
+							if(src.JinVersionOne)
+								src.StrengthMultiplier/=1.5
+								src.EnduranceMultiplier/=1.4
+								src.SpeedMultiplier/=1.15
+								src.ForceMultiplier/=1.4
+								src.ResistanceMultiplier/=1.15
+								src.OffenseMultiplier/=1.15
+								src.DefenseMultiplier/=1.15
+
+							src.StrengthMultiplier*=1.35
+							src.EnduranceMultiplier*=1.3
+							src.SpeedMultiplier*=1.1
+							src.ForceMultiplier*=1.3
+							src.ResistanceMultiplier*=1.1
+							src.OffenseMultiplier*=1.1
+							src.DefenseMultiplier*=1.1
+
+						if("Gobi")
+							if(src.JinVersionOne)
+								src.StrengthMultiplier/=1.5
+								src.EnduranceMultiplier/=1.15
+								src.SpeedMultiplier/=1.2
+								src.ForceMultiplier/=1.15
+								src.ResistanceMultiplier/=1.15
+								src.OffenseMultiplier/=1.4
+								src.DefenseMultiplier/=1.15
+
+							src.StrengthMultiplier*=1.35
+							src.EnduranceMultiplier*=1.1
+							src.SpeedMultiplier*=1.15
+							src.ForceMultiplier*=1.1
+							src.ResistanceMultiplier*=1.1
+							src.OffenseMultiplier*=1.3
+							src.DefenseMultiplier*=1.1
+
+						if("Rokubi")
+							if(src.JinVersionOne)
+								src.StrengthMultiplier/=1.15
+								src.EnduranceMultiplier/=1.75
+								src.SpeedMultiplier/=1.15
+								src.ForceMultiplier/=1.15
+								src.ResistanceMultiplier/=1.75
+								src.OffenseMultiplier/=1.15
+								src.DefenseMultiplier/=1.15
+
+							src.StrengthMultiplier*=1.1
+							src.EnduranceMultiplier*=1.5
+							src.SpeedMultiplier*=1.1
+							src.ForceMultiplier*=1.1
+							src.ResistanceMultiplier*=1.5
+							src.OffenseMultiplier*=1.1
+							src.DefenseMultiplier*=1.1
+
+						if("Chomei")
+							if(src.JinVersionOne)
+								src.StrengthMultiplier/=1.15
+								src.EnduranceMultiplier/=1.15
+								src.SpeedMultiplier/=1.15
+								src.ForceMultiplier/=1.75
+								src.ResistanceMultiplier/=1.15
+								src.OffenseMultiplier/=1.15
+								src.DefenseMultiplier/=1.75
+
+							src.StrengthMultiplier*=1.1
+							src.EnduranceMultiplier*=1.1
+							src.SpeedMultiplier*=1.1
+							src.ForceMultiplier*=1.5
+							src.ResistanceMultiplier*=1.1
+							src.OffenseMultiplier*=1.1
+							src.DefenseMultiplier*=1.5
+
+						if("Gyuki")
+							if(src.JinVersionOne)
+								src.StrengthMultiplier/=1.5
+								src.EnduranceMultiplier/=1.5
+								src.SpeedMultiplier/=1.15
+								src.ForceMultiplier/=1.5
+								src.ResistanceMultiplier/=1.15
+								src.OffenseMultiplier/=1.5
+								src.DefenseMultiplier/=1.15
+
+							src.StrengthMultiplier*=1.35
+							src.EnduranceMultiplier*=1.35
+							src.SpeedMultiplier*=1.1
+							src.ForceMultiplier*=1.35
+							src.ResistanceMultiplier*=1.1
+							src.OffenseMultiplier*=1.35
+							src.DefenseMultiplier*=1.1
+
+						if("Kurama")
+							if(src.JinVersionOne)
+								src.StrengthMultiplier/=1.35
+								src.EnduranceMultiplier/=1.35
+								src.SpeedMultiplier/=1.35
+								src.ForceMultiplier/=1.35
+								src.ResistanceMultiplier/=1.35
+								src.OffenseMultiplier/=1.35
+								src.DefenseMultiplier/=1.35
+
+							src.StrengthMultiplier*=1.25
+							src.EnduranceMultiplier*=1.25
+							src.SpeedMultiplier*=1.25
+							src.ForceMultiplier*=1.25
+							src.ResistanceMultiplier*=1.25
+							src.OffenseMultiplier*=1.25
+							src.DefenseMultiplier*=1.25
+
+				if(1)
+					switch(src.TailedBeast)
+						if("Ichibi")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.25
+								src.EnduranceMultiplier/=2
+								src.SpeedMultiplier/=1.125
+								src.ForceMultiplier/=1.25
+								src.ResistanceMultiplier/=2
+								src.OffenseMultiplier/=1.25
+								src.DefenseMultiplier/=1.25
+							else
+								src.StrengthMultiplier/=1.1
+								src.EnduranceMultiplier/=1.5
+								src.SpeedMultiplier/=1.05
+								src.ForceMultiplier/=1.1
+								src.ResistanceMultiplier/=1.5
+								src.OffenseMultiplier/=1.1
+								src.DefenseMultiplier/=1.1
+
+							src.StrengthMultiplier*=1.15
+							src.EnduranceMultiplier*=1.75
+							src.SpeedMultiplier*=1.075
+							src.ForceMultiplier*=1.15
+							src.ResistanceMultiplier*=1.75
+							src.OffenseMultiplier*=1.15
+							src.DefenseMultiplier*=1.15
+
+						if("Nibi")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.2
+								src.EnduranceMultiplier/=1.2
+								src.SpeedMultiplier/=1.5
+								src.ForceMultiplier/=1.2
+								src.ResistanceMultiplier/=1.2
+								src.OffenseMultiplier/=1.2
+								src.DefenseMultiplier/=2
+							else
+								src.StrengthMultiplier/=1.1
+								src.EnduranceMultiplier/=1.1
+								src.SpeedMultiplier/=1.25
+								src.ForceMultiplier/=1.1
+								src.ResistanceMultiplier/=1.1
+								src.OffenseMultiplier/=1.1
+								src.DefenseMultiplier/=1.5
+
+							src.StrengthMultiplier*=1.15
+							src.EnduranceMultiplier*=1.15
+							src.SpeedMultiplier*=1.345
+							src.ForceMultiplier*=1.15
+							src.ResistanceMultiplier*=1.15
+							src.OffenseMultiplier*=1.15
+							src.DefenseMultiplier*=1.75
+
+						if("Sanbi")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.2
+								src.EnduranceMultiplier/=1.2
+								src.SpeedMultiplier/=1.2
+								src.ForceMultiplier/=2
+								src.ResistanceMultiplier/=2
+								src.OffenseMultiplier/=1.2
+								src.DefenseMultiplier/=1.2
+							else
+								src.StrengthMultiplier/=1.1
+								src.EnduranceMultiplier/=1.1
+								src.SpeedMultiplier/=1.1
+								src.ForceMultiplier/=1.5
+								src.ResistanceMultiplier/=1.5
+								src.OffenseMultiplier/=1.1
+								src.DefenseMultiplier/=1.1
+
+							src.StrengthMultiplier*=1.15
+							src.EnduranceMultiplier*=1.15
+							src.SpeedMultiplier*=1.15
+							src.ForceMultiplier*=1.75
+							src.ResistanceMultiplier*=1.75
+							src.OffenseMultiplier*=1.15
+							src.DefenseMultiplier*=1.15
+
+						if("Yonbi")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.75
+								src.EnduranceMultiplier/=1.5
+								src.SpeedMultiplier/=1.2
+								src.ForceMultiplier/=1.5
+								src.ResistanceMultiplier/=1.2
+								src.OffenseMultiplier/=1.2
+								src.DefenseMultiplier/=1.2
+							else
+								src.StrengthMultiplier/=1.35
+								src.EnduranceMultiplier/=1.3
+								src.SpeedMultiplier/=1.1
+								src.ForceMultiplier/=1.3
+								src.ResistanceMultiplier/=1.1
+								src.OffenseMultiplier/=1.1
+								src.DefenseMultiplier/=1.1
+
+							src.StrengthMultiplier*=1.5
+							src.EnduranceMultiplier*=1.4
+							src.SpeedMultiplier*=1.15
+							src.ForceMultiplier*=1.4
+							src.ResistanceMultiplier*=1.15
+							src.OffenseMultiplier*=1.15
+							src.DefenseMultiplier*=1.15
+
+						if("Gobi")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.75
+								src.EnduranceMultiplier/=1.2
+								src.SpeedMultiplier/=1.25
+								src.ForceMultiplier/=1.2
+								src.ResistanceMultiplier/=1.2
+								src.OffenseMultiplier/=1.5
+								src.DefenseMultiplier/=1.2
+							else
+								src.StrengthMultiplier/=1.35
+								src.EnduranceMultiplier/=1.1
+								src.SpeedMultiplier/=1.15
+								src.ForceMultiplier/=1.1
+								src.ResistanceMultiplier/=1.1
+								src.OffenseMultiplier/=1.3
+								src.DefenseMultiplier/=1.1
+
+							src.StrengthMultiplier*=1.5
+							src.EnduranceMultiplier*=1.15
+							src.SpeedMultiplier*=1.2
+							src.ForceMultiplier*=1.15
+							src.ResistanceMultiplier*=1.15
+							src.OffenseMultiplier*=1.4
+							src.DefenseMultiplier*=1.15
+
+						if("Rokubi")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.2
+								src.EnduranceMultiplier/=2
+								src.SpeedMultiplier/=1.2
+								src.ForceMultiplier/=1.2
+								src.ResistanceMultiplier/=2
+								src.OffenseMultiplier/=1.2
+								src.DefenseMultiplier/=1.2
+							else
+								src.StrengthMultiplier/=1.1
+								src.EnduranceMultiplier/=1.5
+								src.SpeedMultiplier/=1.1
+								src.ForceMultiplier/=1.1
+								src.ResistanceMultiplier/=1.5
+								src.OffenseMultiplier/=1.1
+								src.DefenseMultiplier/=1.1
+
+							src.StrengthMultiplier*=1.15
+							src.EnduranceMultiplier*=1.75
+							src.SpeedMultiplier*=1.15
+							src.ForceMultiplier*=1.15
+							src.ResistanceMultiplier*=1.75
+							src.OffenseMultiplier*=1.15
+							src.DefenseMultiplier*=1.15
+
+						if("Chomei")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.2
+								src.EnduranceMultiplier/=1.2
+								src.SpeedMultiplier/=1.2
+								src.ForceMultiplier/=2
+								src.ResistanceMultiplier/=1.2
+								src.OffenseMultiplier/=1.2
+								src.DefenseMultiplier/=2
+							else
+								src.StrengthMultiplier/=1.1
+								src.EnduranceMultiplier/=1.1
+								src.SpeedMultiplier/=1.1
+								src.ForceMultiplier/=1.5
+								src.ResistanceMultiplier/=1.1
+								src.OffenseMultiplier/=1.1
+								src.DefenseMultiplier/=1.5
+
+							src.StrengthMultiplier*=1.15
+							src.EnduranceMultiplier*=1.15
+							src.SpeedMultiplier*=1.15
+							src.ForceMultiplier*=1.75
+							src.ResistanceMultiplier*=1.15
+							src.OffenseMultiplier*=1.15
+							src.DefenseMultiplier*=1.75
+
+						if("Gyuki")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.75
+								src.EnduranceMultiplier/=1.75
+								src.SpeedMultiplier/=1.2
+								src.ForceMultiplier/=1.75
+								src.ResistanceMultiplier/=1.2
+								src.OffenseMultiplier/=1.75
+								src.DefenseMultiplier/=1.2
+							else
+								src.StrengthMultiplier/=1.35
+								src.EnduranceMultiplier/=1.35
+								src.SpeedMultiplier/=1.1
+								src.ForceMultiplier/=1.35
+								src.ResistanceMultiplier/=1.1
+								src.OffenseMultiplier/=1.35
+								src.DefenseMultiplier/=1.1
+
+							src.StrengthMultiplier*=1.5
+							src.EnduranceMultiplier*=1.5
+							src.SpeedMultiplier*=1.15
+							src.ForceMultiplier*=1.5
+							src.ResistanceMultiplier*=1.15
+							src.OffenseMultiplier*=1.5
+							src.DefenseMultiplier*=1.15
+
+						if("Kurama")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.5
+								src.EnduranceMultiplier/=1.5
+								src.SpeedMultiplier/=1.5
+								src.ForceMultiplier/=1.5
+								src.ResistanceMultiplier/=1.5
+								src.OffenseMultiplier/=1.5
+								src.DefenseMultiplier/=1.5
+							else
+								src.StrengthMultiplier/=1.25
+								src.EnduranceMultiplier/=1.25
+								src.SpeedMultiplier/=1.25
+								src.ForceMultiplier/=1.25
+								src.ResistanceMultiplier/=1.25
+								src.OffenseMultiplier/=1.25
+								src.DefenseMultiplier/=1.25
+
+							src.StrengthMultiplier*=1.35
+							src.EnduranceMultiplier*=1.35
+							src.SpeedMultiplier*=1.35
+							src.ForceMultiplier*=1.35
+							src.ResistanceMultiplier*=1.35
+							src.OffenseMultiplier*=1.35
+							src.DefenseMultiplier*=1.35
+
+				if(2)
+					switch(src.TailedBeast)
+						if("Ichibi")
+							if(src.JinFullTrans)
+								src.StrengthMultiplier/=1.2
+								src.EnduranceMultiplier/=3
+								src.SpeedMultiplier/=1.2
+								src.ForceMultiplier/=1.2
+								src.ResistanceMultiplier/=3
+								src.OffenseMultiplier/=1.2
+								src.DefenseMultiplier/=0.25
+							else
+								src.StrengthMultiplier/=1.15
+								src.EnduranceMultiplier/=1.75
+								src.SpeedMultiplier/=1.075
+								src.ForceMultiplier/=1.15
+								src.ResistanceMultiplier/=1.75
+								src.OffenseMultiplier/=1.15
+								src.DefenseMultiplier/=1.15
+
+							src.StrengthMultiplier*=1.25
+							src.EnduranceMultiplier*=2
+							src.SpeedMultiplier*=1.125
+							src.ForceMultiplier*=1.25
+							src.ResistanceMultiplier*=2
+							src.OffenseMultiplier*=1.25
+							src.DefenseMultiplier*=1.25
+
+						if("Nibi")
+							if(src.JinFullTrans)
+								src.StrengthMultiplier/=1.25
+								src.EnduranceMultiplier/=0.5
+								src.SpeedMultiplier/=1.75
+								src.ForceMultiplier/=1.25
+								src.ResistanceMultiplier/=0.5
+								src.OffenseMultiplier/=1.25
+								src.DefenseMultiplier/=3
+							else
+								src.StrengthMultiplier/=1.15
+								src.EnduranceMultiplier/=1.15
+								src.SpeedMultiplier/=1.345
+								src.ForceMultiplier/=1.15
+								src.ResistanceMultiplier/=1.15
+								src.OffenseMultiplier/=1.15
+								src.DefenseMultiplier/=1.75
+
+							src.StrengthMultiplier*=1.2
+							src.EnduranceMultiplier*=1.2
+							src.SpeedMultiplier*=1.5
+							src.ForceMultiplier*=1.2
+							src.ResistanceMultiplier*=1.2
+							src.OffenseMultiplier*=1.2
+							src.DefenseMultiplier*=2
+
+						if("Sanbi")
+							if(src.JinFullTrans)
+								src.StrengthMultiplier/=1.25
+								src.EnduranceMultiplier/=1.25
+								src.SpeedMultiplier/=1.25
+								src.ForceMultiplier/=3
+								src.ResistanceMultiplier/=3
+								src.OffenseMultiplier/=1.25
+								src.DefenseMultiplier/=0.25
+							else
+								src.StrengthMultiplier/=1.15
+								src.EnduranceMultiplier/=1.15
+								src.SpeedMultiplier/=1.15
+								src.ForceMultiplier/=1.75
+								src.ResistanceMultiplier/=1.75
+								src.OffenseMultiplier/=1.15
+								src.DefenseMultiplier/=1.15
+
+							src.StrengthMultiplier*=1.2
+							src.EnduranceMultiplier*=1.2
+							src.SpeedMultiplier*=1.2
+							src.ForceMultiplier*=2
+							src.ResistanceMultiplier*=2
+							src.OffenseMultiplier*=1.2
+							src.DefenseMultiplier*=1.2
+
+						if("Yonbi")
+							if(src.JinFullTrans)
+								src.StrengthMultiplier/=2.25
+								src.EnduranceMultiplier/=2
+								src.SpeedMultiplier/=1.25
+								src.ForceMultiplier/=2
+								src.ResistanceMultiplier/=1.25
+								src.OffenseMultiplier/=0.5
+								src.DefenseMultiplier/=0.5
+							else
+								src.StrengthMultiplier/=1.5
+								src.EnduranceMultiplier/=1.4
+								src.SpeedMultiplier/=1.15
+								src.ForceMultiplier/=1.4
+								src.ResistanceMultiplier/=1.15
+								src.OffenseMultiplier/=1.15
+								src.DefenseMultiplier/=1.15
+
+							src.StrengthMultiplier*=1.75
+							src.EnduranceMultiplier*=1.5
+							src.SpeedMultiplier*=1.2
+							src.ForceMultiplier*=1.5
+							src.ResistanceMultiplier*=1.2
+							src.OffenseMultiplier*=1.2
+							src.DefenseMultiplier*=1.2
+
+						if("Gobi")
+							if(src.JinFullTrans)
+								src.StrengthMultiplier/=2.25
+								src.EnduranceMultiplier/=1.25
+								src.SpeedMultiplier/=1.5
+								src.ForceMultiplier/=1.25
+								src.ResistanceMultiplier/=1.25
+								src.OffenseMultiplier/=2
+								src.DefenseMultiplier/=0.25
+							else
+								src.StrengthMultiplier/=1.5
+								src.EnduranceMultiplier/=1.15
+								src.SpeedMultiplier/=1.2
+								src.ForceMultiplier/=1.15
+								src.ResistanceMultiplier/=1.15
+								src.OffenseMultiplier/=1.4
+								src.DefenseMultiplier/=1.15
+
+							src.StrengthMultiplier*=1.75
+							src.EnduranceMultiplier*=1.2
+							src.SpeedMultiplier*=1.25
+							src.ForceMultiplier*=1.2
+							src.ResistanceMultiplier*=1.2
+							src.OffenseMultiplier*=1.5
+							src.DefenseMultiplier*=1.2
+
+						if("Rokubi")
+							if(src.JinFullTrans)
+								src.StrengthMultiplier/=1.25
+								src.EnduranceMultiplier/=3
+								src.SpeedMultiplier/=1.25
+								src.ForceMultiplier/=1.25
+								src.ResistanceMultiplier/=3
+								src.OffenseMultiplier/=1.25
+								src.DefenseMultiplier/=0.25
+							else
+								src.StrengthMultiplier/=1.15
+								src.EnduranceMultiplier/=1.75
+								src.SpeedMultiplier/=1.15
+								src.ForceMultiplier/=1.15
+								src.ResistanceMultiplier/=1.75
+								src.OffenseMultiplier/=1.15
+								src.DefenseMultiplier/=1.15
+
+							src.StrengthMultiplier*=1.2
+							src.EnduranceMultiplier*=2
+							src.SpeedMultiplier*=1.2
+							src.ForceMultiplier*=1.2
+							src.ResistanceMultiplier*=2
+							src.OffenseMultiplier*=1.2
+							src.DefenseMultiplier*=1.2
+
+						if("Chomei")
+							if(src.JinFullTrans)
+								src.StrengthMultiplier/=1.25
+								src.EnduranceMultiplier/=0.5
+								src.SpeedMultiplier/=1.25
+								src.ForceMultiplier/=3
+								src.ResistanceMultiplier/=0.5
+								src.OffenseMultiplier/=1.25
+								src.DefenseMultiplier/=3
+							else
+								src.StrengthMultiplier/=1.15
+								src.EnduranceMultiplier/=1.15
+								src.SpeedMultiplier/=1.15
+								src.ForceMultiplier/=1.75
+								src.ResistanceMultiplier/=1.15
+								src.OffenseMultiplier/=1.15
+								src.DefenseMultiplier/=1.75
+
+							src.StrengthMultiplier*=1.2
+							src.EnduranceMultiplier*=1.2
+							src.SpeedMultiplier*=1.2
+							src.ForceMultiplier*=2
+							src.ResistanceMultiplier*=1.2
+							src.OffenseMultiplier*=1.2
+							src.DefenseMultiplier*=2
+
+						if("Gyuki")
+							if(src.JinFullTrans)
+								src.StrengthMultiplier/=2
+								src.EnduranceMultiplier/=2
+								src.SpeedMultiplier/=1.2
+								src.ForceMultiplier/=2
+								src.ResistanceMultiplier/=0.5
+								src.OffenseMultiplier/=2
+								src.DefenseMultiplier/=0.5
+							else
+								src.StrengthMultiplier/=1.5
+								src.EnduranceMultiplier/=1.5
+								src.SpeedMultiplier/=1.15
+								src.ForceMultiplier/=1.5
+								src.ResistanceMultiplier/=1.15
+								src.OffenseMultiplier/=1.5
+								src.DefenseMultiplier/=1.15
+
+							src.StrengthMultiplier*=1.75
+							src.EnduranceMultiplier*=1.75
+							src.SpeedMultiplier*=1.2
+							src.ForceMultiplier*=1.75
+							src.ResistanceMultiplier*=1.2
+							src.OffenseMultiplier*=1.75
+							src.DefenseMultiplier*=1.2
+
+						if("Kurama")
+							if(src.JinFullTrans)
+								src.StrengthMultiplier/=2
+								src.EnduranceMultiplier/=2
+								src.SpeedMultiplier/=2
+								src.ForceMultiplier/=2
+								src.ResistanceMultiplier/=2
+								src.OffenseMultiplier/=2
+								src.DefenseMultiplier/=2
+							else
+								src.StrengthMultiplier/=1.35
+								src.EnduranceMultiplier/=1.35
+								src.SpeedMultiplier/=1.35
+								src.ForceMultiplier/=1.35
+								src.ResistanceMultiplier/=1.35
+								src.OffenseMultiplier/=1.35
+								src.DefenseMultiplier/=1.35
+
+							src.StrengthMultiplier*=1.5
+							src.EnduranceMultiplier*=1.5
+							src.SpeedMultiplier*=1.5
+							src.ForceMultiplier*=1.5
+							src.ResistanceMultiplier*=1.5
+							src.OffenseMultiplier*=1.5
+							src.DefenseMultiplier*=1.5
+
+				if(3)
+					switch(src.TailedBeast)
+						if("Ichibi")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.25
+								src.EnduranceMultiplier/=2
+								src.SpeedMultiplier/=1.125
+								src.ForceMultiplier/=1.25
+								src.ResistanceMultiplier/=2
+								src.OffenseMultiplier/=1.25
+								src.DefenseMultiplier/=1.25
+
+							src.StrengthMultiplier*=1.2
+							src.EnduranceMultiplier*=3
+							src.SpeedMultiplier*=1.2
+							src.ForceMultiplier*=1.2
+							src.ResistanceMultiplier*=3
+							src.OffenseMultiplier*=1.2
+							src.DefenseMultiplier*=0.25
+
+						if("Nibi")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.2
+								src.EnduranceMultiplier/=1.2
+								src.SpeedMultiplier/=1.5
+								src.ForceMultiplier/=1.2
+								src.ResistanceMultiplier/=1.2
+								src.OffenseMultiplier/=1.2
+								src.DefenseMultiplier/=2
+
+							src.StrengthMultiplier*=1.25
+							src.EnduranceMultiplier*=0.5
+							src.SpeedMultiplier*=1.75
+							src.ForceMultiplier*=1.25
+							src.ResistanceMultiplier*=0.5
+							src.OffenseMultiplier*=1.25
+							src.DefenseMultiplier*=3
+
+						if("Sanbi")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.2
+								src.EnduranceMultiplier/=1.2
+								src.SpeedMultiplier/=1.2
+								src.ForceMultiplier/=2
+								src.ResistanceMultiplier/=2
+								src.OffenseMultiplier/=1.2
+								src.DefenseMultiplier/=1.2
+
+							src.StrengthMultiplier*=1.25
+							src.EnduranceMultiplier*=1.25
+							src.SpeedMultiplier*=1.25
+							src.ForceMultiplier*=3
+							src.ResistanceMultiplier*=3
+							src.OffenseMultiplier*=1.25
+							src.DefenseMultiplier*=0.25
+
+						if("Yonbi")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.75
+								src.EnduranceMultiplier/=1.5
+								src.SpeedMultiplier/=1.2
+								src.ForceMultiplier/=1.5
+								src.ResistanceMultiplier/=1.2
+								src.OffenseMultiplier/=1.2
+								src.DefenseMultiplier/=1.2
+
+							src.StrengthMultiplier*=2.25
+							src.EnduranceMultiplier*=2
+							src.SpeedMultiplier*=1.25
+							src.ForceMultiplier*=2
+							src.ResistanceMultiplier*=1.25
+							src.OffenseMultiplier*=0.5
+							src.DefenseMultiplier*=0.5
+
+						if("Gobi")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.75
+								src.EnduranceMultiplier/=1.2
+								src.SpeedMultiplier/=1.25
+								src.ForceMultiplier/=1.2
+								src.ResistanceMultiplier/=1.2
+								src.OffenseMultiplier/=1.5
+								src.DefenseMultiplier/=1.2
+
+							src.StrengthMultiplier*=2.25
+							src.EnduranceMultiplier*=1.25
+							src.SpeedMultiplier*=1.5
+							src.ForceMultiplier*=1.25
+							src.ResistanceMultiplier*=1.25
+							src.OffenseMultiplier*=2
+							src.DefenseMultiplier*=0.25
+
+						if("Rokubi")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.2
+								src.EnduranceMultiplier/=2
+								src.SpeedMultiplier/=1.2
+								src.ForceMultiplier/=1.2
+								src.ResistanceMultiplier/=2
+								src.OffenseMultiplier/=1.2
+								src.DefenseMultiplier/=1.2
+
+							src.StrengthMultiplier*=1.25
+							src.EnduranceMultiplier*=3
+							src.SpeedMultiplier*=1.25
+							src.ForceMultiplier*=1.25
+							src.ResistanceMultiplier*=3
+							src.OffenseMultiplier*=1.25
+							src.DefenseMultiplier*=0.25
+
+						if("Chomei")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.2
+								src.EnduranceMultiplier/=1.2
+								src.SpeedMultiplier/=1.2
+								src.ForceMultiplier/=2
+								src.ResistanceMultiplier/=1.2
+								src.OffenseMultiplier/=1.2
+								src.DefenseMultiplier/=2
+
+							src.StrengthMultiplier*=1.25
+							src.EnduranceMultiplier*=0.5
+							src.SpeedMultiplier*=1.25
+							src.ForceMultiplier*=3
+							src.ResistanceMultiplier*=0.5
+							src.OffenseMultiplier*=1.25
+							src.DefenseMultiplier*=3
+
+						if("Gyuki")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.75
+								src.EnduranceMultiplier/=1.75
+								src.SpeedMultiplier/=1.2
+								src.ForceMultiplier/=1.75
+								src.ResistanceMultiplier/=1.2
+								src.OffenseMultiplier/=1.75
+								src.DefenseMultiplier/=1.2
+
+							src.StrengthMultiplier*=2
+							src.EnduranceMultiplier*=2
+							src.SpeedMultiplier*=1.2
+							src.ForceMultiplier*=2
+							src.ResistanceMultiplier*=0.5
+							src.OffenseMultiplier*=2
+							src.DefenseMultiplier*=0.5
+
+						if("Kurama")
+							if(src.JinVersionTwo)
+								src.StrengthMultiplier/=1.5
+								src.EnduranceMultiplier/=1.5
+								src.SpeedMultiplier/=1.5
+								src.ForceMultiplier/=1.5
+								src.ResistanceMultiplier/=1.5
+								src.OffenseMultiplier/=1.5
+								src.DefenseMultiplier/=1.5
+
+							src.StrengthMultiplier*=2
+							src.EnduranceMultiplier*=2
+							src.SpeedMultiplier*=2
+							src.ForceMultiplier*=2
+							src.ResistanceMultiplier*=2
+							src.OffenseMultiplier*=2
+							src.DefenseMultiplier*=2
+
+		RevertJinVersionOneTrans()
+			src.JinStats(0)
+			src.RevertJinchBP(1)
+			src.JinVersionOne=0
+
+		RevertJinVersionTwoTrans()
+			src.JinStats(1)
+			src.RevertJinchBP(2)
+			src.JinVersionTwo=0
+
+		RevertJinFullTrans()
+			src.JinStats(2)
+			src.RevertJinchBP(3)
+			src.JinFullTrans=0
+
+		JinchBP(var/num)
+			switch(num)
+				if(1)
+					src.Power_Multiplier+=2
+					if(src.TailedBeast=="Kurama")
+						src.Power_Multiplier+=1
+				if(2)
+					src.Power_Multiplier+=7
+					if(src.TailedBeast=="Kurama")
+						src.Power_Multiplier+=4
+				if(3)
+					src.Power_Multiplier+=20
+					if(src.TailedBeast=="Kurama")
+						src.Power_Multiplier+=20
+
+		RevertJinchBP(var/num)
+			switch(num)
+				if(1)
+					src.Power_Multiplier-=2
+					if(src.TailedBeast=="Kurama")
+						src.Power_Multiplier-=1
+				if(2)
+					src.Power_Multiplier-=7
+					if(src.TailedBeast=="Kurama")
+						src.Power_Multiplier-=4
+				if(3)
+					src.Power_Multiplier-=20
+					if(src.TailedBeast=="Kurama")
+						src.Power_Multiplier-=20
