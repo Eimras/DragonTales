@@ -149,7 +149,7 @@
 #include "Feva\Zanzoken.dm"
 #include "kunaimod\custom_skills.dm"
 #include "kunaimod\THE CORRECT ONE.dm"
-#include "map\GameMap.dmm"
+#include "map\GalionMap.dmm"
 #include "QuickSort\QuickSort.dm"
 #include "SkillCode\_BlastX.dm"
 // END_INCLUDE

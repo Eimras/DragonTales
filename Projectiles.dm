@@ -446,7 +446,9 @@ obj/Projectiles
 			if(src.Owner.RipplePassive&&!P.Divine)
 				if(P.IsEvil())
 					Damage*=(src.Owner.RipplePassive+1)
-			P.Health-=Damage
+
+			P.Health-=BlockDamage(P,Damage)
+
 			if(src.Shotgun)
 				P.Shotgunned+=1
 				if(P.Shotgunned>2)

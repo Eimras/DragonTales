@@ -11841,18 +11841,16 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 
 			if("Stance")
 				if(!Z.BuffUsing)
-					if(src.ActiveBuffs>0)
-						src << "Turn off your buffs first."
-						return
+
 					/*for(var/obj/Skills/Swords/WeaponMaster/P in src) if(P.BuffUsing)
 						src<< "Stances and sword buffs cannot be used together."
 						return
 					for(var/obj/Skills/Buffs/WeaponSoul/P in src) if(P.BuffUsing)
 						src<< "Stances and sword buffs cannot be used together."
 						return*/
-						if(src.StanceLock==1)
-							src<<"You're trying to set a stance at the same time as activating one. Don't do that."
-							return
+					if(src.StanceLock==1)
+						src<<"You're trying to set a stance at the same time as activating one. Don't do that."
+						return
 					src.BuffCalc=1.5
 					if(locate(/obj/Skills/TierS/SpiritEnergyNu,src)&&src.SpiritWeaponChosen!="Style")
 						src.BuffCalc*=1.1
@@ -12152,6 +12150,9 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 								src.OMessage(10,"[src] switches to Satsui Stance!","<font color=red>[src]([src.key]) activated Stance (Ansatsuken T4).")
 
 					else if(src.Stance=="Monkey")
+						if(src.ActiveBuffs>0)
+							src << "Turn off your buffs first."
+							return
 						src.ActiveBuffs+=MAXBUFFS
 						src.SpeedMultiplier*=2
 						src.OffenseMultiplier*=1.35
@@ -12161,6 +12162,9 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 						src.OMessage(10,"[src] switches to Golden Monkey Stance!","<font color=red>[src]([src.key]) activated Stance (Monkey).")
 
 					else if(src.Stance=="CQC")
+						if(src.ActiveBuffs>0)
+							src << "Turn off your buffs first."
+							return
 						src.ActiveBuffs+=MAXBUFFS
 						src.Power_Multiplier+=0.75
 						src.StrengthMultiplier*=1.2

@@ -23,15 +23,6 @@ mob/var/list/masteries=list(\
 
 
 mob/proc/SetVars()
-	if(src.Race== "Pathfinder")
-		src.trans["1req"] = 200
-		src.trans["1give"] = 30000000
-		src.trans["1multi"]=3
-	//if(src.Race== "Aetherian")
-	//	src.trans["1req"] = 4000000
-	//	src.trans["1give"] = 30000000
-	//	src.trans["1multi"]=4
-
 	if(src.Race=="Nobody")
 		src.trans["1req"]=100
 		src.trans["1give"]=10000000

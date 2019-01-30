@@ -829,7 +829,7 @@ mob
 						if(!locate(/obj/Skills/Bojack, src))
 							src.contents+=new/obj/Skills/Bojack
 					if(num==2)
-						src.Ascend(11.25)
+						src.Ascend(12)
 				if(src.Class=="Captain")
 					if(num==1)
 						src.Ascend(6)

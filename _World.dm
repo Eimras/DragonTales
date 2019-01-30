@@ -125,6 +125,10 @@ proc/GlobalSave()
 
 var/Updates={"
 <i>|Version MM/DD/YYYY|</i><br><br>
+<b>Version V1.2.0 1/27/2019</b><br>
+<i>A new era</i><br>
+- Aligned tick_lag and world fps. Set client FPS to 40.<br>
+
 <b>Version V1.1.4 11/21/2016</b><br>
 -Added custom stances.  Has to be set up by an admin with Edit.<br>
 -Added Global Disable SkillTree and Disable SkillTree to admin commands, allows locking skilltree usage on a global/indiviudal level respectively.<br>

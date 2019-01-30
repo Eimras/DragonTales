@@ -1017,7 +1017,7 @@ mob/proc/UpdateRaceScreen(var/wut,var/amountz)
 							src.Plan--
 					if(Plan>7&&(src.CheckUnlock("Anti-Spiral")!=1))
 						Plan=1
-					if(Plan>8)
+					if(Plan>7)
 						Plan=1
 					if(Plan<1)
 						Plan=7
@@ -1044,24 +1044,6 @@ mob/proc/UpdateRaceScreen(var/wut,var/amountz)
 						Rac=5
 				if(Rac==5)
 					if(src.CheckUnlock("Makyo")!=1)
-						Rac=6
-				if(Rac==6)
-					if(src.CheckUnlock("Quarter Saiyan")!=1)
-						Rac=7
-				if(Rac==7)
-					if(src.CheckUnlock("Popo")!=1)
-						Rac=8
-				if(Rac==8)
-					if(src.CheckUnlock("Nobody")!=1)
-						Rac=9
-/*				if(Rac==8)
-		//			if(src.CheckUnlock("Faggot")!=1)
-					Rac=9*/
-				if(Rac==9)
-					if(src.CheckUnlock("1/16th Saiyan")!=1)
-						Rac=10
-				if(Rac==10)
-					if(src.CheckUnlock("Throwback")!=1)
 						Rac=11
 				if(Rac==11)
 					if(src.CheckUnlock("Half Demon")!=1)
@@ -1089,28 +1071,6 @@ mob/proc/UpdateRaceScreen(var/wut,var/amountz)
 						Rac=11*/
 				if(Rac==11)
 					if(src.CheckUnlock("Half Demon")!=1)
-						Rac=10
-				if(Rac==10)
-					if(src.CheckUnlock("Throwback")!=1)
-						Rac=9
-				if(Rac==9)
-					if(src.CheckUnlock("1/16th Saiyan")!=1)
-						Rac=8
-/*				if(Rac==8)
-				{
-					//if(src.CheckUnlock("Faggot")!=1)
-
-					Rac=7
-
-				}*/
-				if(Rac==8)
-					if(src.CheckUnlock("Nobody")!=1)
-						Rac=7
-				if(Rac==7)
-					if(src.CheckUnlock("Popo")!=1)
-						Rac=6
-				if(Rac==6)
-					if(src.CheckUnlock("Quarter Saiyan")!=1)
 						Rac=5
 				if(Rac==5)
 					if(src.CheckUnlock("Makyo")!=1)
@@ -1223,18 +1183,6 @@ mob/proc/UpdateRaceScreen(var/wut,var/amountz)
 						Rac=4
 				if(Rac==4)
 					if(src.CheckUnlock("Dragon")!=1)
-						Rac=5
-				if(Rac==5)
-					if(src.CheckUnlock("Makaioshin")!=1)
-						Rac=6
-/*				if(Rac==7)
-					//if(src.CheckUnlock("Half Demon")!=1)
-					Rac=8*/
-				if(Rac==6)
-					if(src.CheckUnlock("God of Destruction")!=1)
-						Rac=7
-				if(Rac==7)
-					if(src.CheckUnlock("Mazoku")!=1)
 						Rac=8
 				if(Rac==8)
 					Rac=1
@@ -1244,16 +1192,7 @@ mob/proc/UpdateRaceScreen(var/wut,var/amountz)
 			if(Rac<1)
 				Rac=8
 				if(Rac==8)
-					Rac=7
-				if(Rac==7)
-					if(src.CheckUnlock("Mazoku")!=1)
-						Rac=6
-				if(Rac==6)
-					if(src.CheckUnlock("God of Destruction")!=1)
-						Rac=5
-				if(Rac==5)
-					if(src.CheckUnlock("Makaioshin")!=1)
-						Rac=4
+					Rac=4
 				if(Rac==4)
 					if(src.CheckUnlock("Dragon")!=1)
 						Rac=3
@@ -1317,37 +1256,12 @@ mob/proc/UpdateRaceScreen(var/wut,var/amountz)
 				if(Rac==5)
 					if(src.CheckUnlock("Aetherian")!=1)
 						Rac=6
-/*				if(Rac==6)
-					//if(src.CheckUnlock("Youkai")!=1)
-					Rac=7*/
-				if(Rac==7)
-				{
-					if(src.CheckUnlock("Golem")!=1)
-					{
-						Rac=8
-					}
-				}
-				if(Rac==8)
-					if(src.CheckUnlock("Manakete")!=1)
-						Rac=1
 				if(Rac>8)
 					Rac=1
 				//Rac=1
 			if(Rac<1)
 				Rac=9
 				if(Rac==9)
-					if(src.CheckUnlock("Lamia")!=1)
-						Rac=8
-				if(Rac==8)
-					if(src.CheckUnlock("Manakete")!=1)
-						Rac=7
-				if(Rac==7)
-					if(src.CheckUnlock("Golem")!=1)
-						Rac=6
-/*				if(Rac==6)
-					//if(src.CheckUnlock("Youkai")!=1)
-					Rac=5*/
-				if(Rac==5)
 					if(src.CheckUnlock("Aetherian")!=1)
 						Rac=4
 				if(Rac==4)
@@ -1391,7 +1305,7 @@ mob/proc/UpdateRaceScreen(var/wut,var/amountz)
 		if(src.CheckIfDestroyed("Android",amountz))
 			//Rac=1
 			if(Rac<1)
-				Rac=3
+				Rac=2
 			if(Rac>3)
 				Rac=1
 			if(Rac==2)
@@ -1422,25 +1336,7 @@ mob/proc/UpdateRaceScreen(var/wut,var/amountz)
 				src.Race="Changeling"
 				src.icon='Frieza1.dmi'
 				src.Class="Frieza"
-	if(Plan==8)//???
-		if(Rac<1)
-			Rac=5
-		if(Rac>5)
-			Rac=1
-		if(Rac==1)
-			src.Race="Anti-Spiral"
-			src.Class="Messenger"
-		//	if(src.key == "" && src.CheckUnlock("Anti-Spiral")!=1)
-				//Rac=2 vaxel
-		if(Rac==2)
-			src.Race="Pathfinder"
-		if(Rac==3)
-			src.Race="Pathless"
-		if(Rac==4)
-			src.Race="Kurama"
-		if(Rac==5)
-			src.Race="Synchronizer"
-			src.Class="Maid"
+
 	winset(src,"RaceName","text=\"[src.Race]\"")
 	if(src.Race=="Human")
 		winset(usr,"Iconz","image=['i_Human.png']")

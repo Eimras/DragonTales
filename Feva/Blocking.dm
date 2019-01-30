@@ -8,6 +8,8 @@ atom
 obj/Effects/Shield
 	icon='BlockSprite.dmi'
 	Grabbable=0
+
+
 proc
 	BlockDamage(mob/m,Damage)
 		var/NewDamage=Damage

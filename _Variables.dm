@@ -55,11 +55,11 @@ var
 	//WorldDevPoints=0 //Adds Dev points to the world
 	SuperCatchUp=0 //Useful when training was in in order to catch up quickly
 	StatUpdate=1 //Updates Stats
-	WorldStatAmount=10000 //Set's everyone's stats to a number multiplied by their mod
+	WorldStatAmount=1 //Set's everyone's stats to a number multiplied by their mod
 	BPUpdate=0 //Updates BP
 	BPUpdateAmount=0 //The number of base increase
 	WorldEnergyAmount=100//30000 //Amount of energy in the world?
-	WorldDamageMult=3.5 //Damage everyone in the world?
+	WorldDamageMult=1.5 //Damage everyone in the world?
 	ForceDamageMulti=1 //Alters damage for force based moves.
 	WorldDefaultAcc=50 //Global accuracy
 	WorldWhiffChance=10 // Global whiff
