@@ -1977,7 +1977,7 @@ obj/Skills
 				usr.Skill1X("KunaiBarrage",src)
 
 		SpiritGun
-			Cooldown=10
+			Cooldown=25
 			Learn=list("energyreq"=5000,"difficulty"=500)
 			icon_state="Blast"
 			sicon='BlastSpiralingKi.dmi'

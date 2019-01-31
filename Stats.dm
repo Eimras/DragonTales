@@ -1233,7 +1233,7 @@ mob/proc/Available_Power()
 				if(src.DjinnMagic=="Life")
 					PUGain+=0.5
 				if(src.ExplosionExpert)
-					PUGain/=2
+					PUGain/=1.5
 //				if(src.ChiBlockTimer)
 //					PUGain/=1.5
 				if(src.CursedBeta=="Irreverence")
