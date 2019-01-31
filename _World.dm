@@ -10,19 +10,32 @@ var/Crazy=0
 client
 	fps = 40
 world
-	name="Change This"
+	name="Dragon Tales"
 	status=":yuh:"
 	turf=/turf/Special/Blank
 	area=/area/Outside
 	mob= /mob/Creation
-	hub="Fumikage Tokoyami.MessatsuRealms"
-	hub_password="^t(a`~cV*6Wffv3?"
+	hub="Sarmie.DragonTales"
+	hub_password="DTUltimaPassword"
 	tick_lag=0.5
 	fps=20
 	//step_size=16//32
 	cache_lifespan=2
 	loop_checks=0
 	view=8
+
+	world/proc/UpdateHub()
+	var/ssdis=""
+	ssdis += "<b>Dragon Tales</b> &#8212; "
+	ssdis += "<b>Roleplay</b>";
+	ssdis += " ("
+	ssdis += "<a href=\"https://discord.gg/AsUhakr\">" //Link for clicky, set to the discord
+	ssdis += "Discord"
+	ssdis += "</a>"
+	ssdis += ")"
+	ssdis += "<br>The best RP this side of Universe 4 - NEW WIPE<br>"
+	src.status = ssdis
+
 	OpenPort()
 		..()
 		world<<"World Link: byond://[address]:[port]."
@@ -30,7 +43,7 @@ world
 		//..()
 
 		LOGscheduler.start() // kick off the scheduler for logging at the start of the world
-
+		UpdateHub()
 //		debuglog << "Preparing to load world."
 		WorldLoading=1
 //		debuglog << "Worldloading set to 1."

@@ -418,7 +418,7 @@ mob/Players/verb
 		else if(ismob(A))
 			var/mob/M = A
 			//usr << "This is: [M]"
-			usr << browse(M.playerdescription, "window=[M.name]_profile;display=1;size=480x600;border=0;can_close=1;can_resize=1;can_minimize=1;titlebar=1")
+			usr<<browse("<html><HEAD><META http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><title>\"[M]\"</title></HEAD> [M:playerdescription] </html>","window=CharacterDescription;display=1;size=1200x800;can_minimize=0;titlebar=1")
 	LethalityToggle()
 		set category= "Other"
 		if(src.Lethal)
@@ -458,7 +458,7 @@ mob/Players/verb
 			src.Frozen=1
 			sleep(30)
 			if(prob(30))
-				src<<"And... voilá, you're free!"
+				src<<"And... voilï¿½, you're free!"
 				view(src)<<"[src] breaks free from their restrains!"
 				src.Cuffed=0
 				src.Cablecuffed=0
@@ -1475,5 +1475,3 @@ proc/SpamCheck(var/mob/M,var/T)
 			Punishment("Action=Add&Punishment=Mute&Key=[M.key]&IP=[M.client.address]&ComputerID=[M.client.computer_id]&Duration=[Duration]&User=[M.key]&Reason=[Reason]&Time=[TimeStamp()]")
 			Punishment("Action=Add&Punishment=Ban&Key=[M.key]&IP=[M.client.address]&ComputerID=[M.client.computer_id]&Duration=[world.realtime+((10*60*60*24)*7)]&User=Auto&Reason=Spamming&Time=[TimeStamp()]")
 		return 0
-
-
