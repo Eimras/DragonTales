@@ -1,0 +1,6 @@
+ {
+   "cmd": "dm.exe",
+   "args": [ "C:/Users/Sarmie/Documents/GitHub/dragontales/DragonballRebirth.dme" ],
+   "sh": false,
+   "cwd": "C:/Program Files (x86)/BYOND/bin"
+ }
