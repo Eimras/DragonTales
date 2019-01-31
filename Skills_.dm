@@ -11989,7 +11989,15 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 						src.StanceActive=1
 						src.OMessage(10,"[src] switches to Armadillo Stance!","<font color=red>[src]([src.key]) activated Stance (Armadillo).")
 					else if(src.Stance=="Resshuken")
-						if(src.SpiritLevel==2)
+						if(src.SpiritLevel==0)
+							src.StrengthMultiplier*=1.50
+							src.EnduranceMultiplier*=1.50
+							src.ForceMultiplier*=1.25
+							src.SpeedMultiplier*=1.15
+							src.ResistanceMultiplier*=1.50
+							src.OffenseMultiplier*=1.50
+							src.DefenseMultiplier*=1.25
+						else if(src.SpiritLevel==2)
 							src.StrengthMultiplier*=1.25
 							src.EnduranceMultiplier*=1.25
 							src.ForceMultiplier*=1.25
@@ -12003,7 +12011,7 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 							src.ResistanceMultiplier*=1.35
 							src.OffenseMultiplier*=1.35
 							src.DefenseMultiplier*=1.35
-						else if(src.SpiritLevel==4||src.SpiritLevel==0)
+						else if(src.SpiritLevel==4)
 							src.StrengthMultiplier*=1.56
 							src.EnduranceMultiplier*=1.56
 							src.ForceMultiplier*=1.56
@@ -12306,6 +12314,14 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 						src.OMessage(10,"[src] drops their Weapon Breaker stance!","<font color=red>[src]([src.key]) deactivated Stance (Breaker).")
 					*/
 					else if(src.Stance=="Resshuken")
+						if(src.SpiritLevel==0)
+							src.StrengthMultiplier/=1.50
+							src.EnduranceMultiplier/=1.50
+							src.ForceMultiplier/=1.25
+							src.SpeedMultiplier/=1.15
+							src.ResistanceMultiplier/=1.50
+							src.OffenseMultiplier/=1.50
+							src.DefenseMultiplier/=1.25
 						if(src.SpiritLevel==2)
 							src.StrengthMultiplier/=1.25
 							src.EnduranceMultiplier/=1.25
@@ -12320,7 +12336,7 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 							src.ResistanceMultiplier/=1.35
 							src.OffenseMultiplier/=1.35
 							src.DefenseMultiplier/=1.35
-						else if(src.SpiritLevel==4||src.SpiritLevel==0)
+						else if(src.SpiritLevel==4)
 							src.StrengthMultiplier/=1.56
 							src.EnduranceMultiplier/=1.56
 							src.ForceMultiplier/=1.56

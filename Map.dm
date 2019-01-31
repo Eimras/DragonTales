@@ -3465,6 +3465,10 @@ obj/Turfs
 		density=1
 
 obj/Turfs/Trees
+	JungleTree
+		icon = 'jungle tree.dmi'
+		pixel_x = -32
+		density = 1
 	SmallPine
 		icon='Trees.dmi'
 		icon_state="P2"
