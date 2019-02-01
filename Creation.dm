@@ -1512,7 +1512,7 @@ mob/proc/UpdateRaceScreen(var/wut,var/amountz)
 			src<<output("Sanctuary is a legendary planet that comes and goes. Legend claims that it is the graveyard of all true heroes and villians, and has been the site of countless battles that determined the fate of each era they've occured in.","planetblurb")
 
 obj/Login
-	name="Dragon Tales"
+	name="Change this"
 	Screenz
 		layer=555
 		mouse_opacity = 0

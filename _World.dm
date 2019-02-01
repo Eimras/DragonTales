@@ -10,7 +10,7 @@ var/Crazy=0
 client
 	fps = 40
 world
-	name="Dragon Tales"
+	name="Change This"
 	status=":yuh:"
 	turf=/turf/Special/Blank
 	area=/area/Outside
