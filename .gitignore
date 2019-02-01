@@ -3,6 +3,7 @@ Data/
 .svn/
 test_server/
 
+.atom-build.json
 *.ban
 *.bdb
 *.log
