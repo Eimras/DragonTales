@@ -10710,6 +10710,8 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 				if(Z.Using)
 					return
 				var/Drain=src.EnergyMax/3
+				if(src.SpiritLevel==0)
+					Drain=src.EnergyMax/6
 				if(src.SpiritLevel==3)
 					Drain=src.EnergyMax/5
 				if(src.SpiritLevel==4)

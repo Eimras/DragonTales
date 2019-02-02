@@ -259,7 +259,6 @@ window "AdminHelpWindow"
 		anchor2 = none
 		text-color = #ffffff
 		background-color = #5b5b5b
-		drop-zone = true
 		saved-params = ""
 		cells = 1x0
 		current-cell = 1,1
@@ -343,7 +342,6 @@ window "Baby"
 		text-color = #ffffff
 		background-color = #400040
 		border = line
-		drop-zone = true
 		saved-params = ""
 		show-lines = horizontal
 		highlight-color = #000000
@@ -5587,7 +5585,6 @@ window "gridwindow"
 		anchor2 = 100,100
 		text-color = #ffffff
 		background-color = #000000
-		drop-zone = true
 		saved-params = ""
 		cells = 1x1
 		current-cell = 1,1
@@ -5640,7 +5637,7 @@ window "mainwindow"
 		background-color = #000000
 		is-default = true
 		saved-params = "pos;size;is-maximized"
-		title = "Messatsu Realms"
+		title = "Dragon Tales"
 		statusbar = false
 		icon = 'frontpage\\th.jpg'
 		image-mode = tile
@@ -5665,6 +5662,7 @@ window "mainwindow"
 		size = 60x20
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "is-checked"
 		text = ""
 		command = ""
@@ -5687,6 +5685,7 @@ window "mainwindow"
 		size = 671x448
 		anchor1 = 0,0
 		anchor2 = 100,100
+		background-color = none
 		saved-params = "splitter"
 		right = "rpane"
 		is-vert = true
@@ -5762,6 +5761,7 @@ window "mapwindow"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -5776,10 +5776,9 @@ window "mapwindow"
 		size = 640x480
 		anchor1 = 0,0
 		anchor2 = 100,100
-		text-color = none
 		is-default = true
-		drop-zone = true
 		saved-params = "icon-size"
+		letterbox = false
 		on-show = ".winset\"mainwindow.mainvsplit.left=mapwindow\""
 		on-hide = ".winset\"mainwindow.mainvsplit.left=\""
 	elem "StanceLabel"
@@ -6214,6 +6213,7 @@ window "infowindow"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Info"
 		titlebar = false
@@ -6231,7 +6231,6 @@ window "infowindow"
 		text-color = #ffffff
 		background-color = #000000
 		is-default = true
-		drop-zone = true
 		saved-params = ""
 		highlight-color = #55aaff
 		tab-text-color = #ffffff
@@ -6586,7 +6585,6 @@ window "Steal"
 		text-color = #ffffff
 		background-color = #454545
 		border = line
-		drop-zone = true
 		saved-params = ""
 		show-lines = horizontal
 
@@ -6627,7 +6625,6 @@ window "Grid1"
 		background-color = #0080c0
 		is-default = true
 		border = line
-		drop-zone = true
 		saved-params = ""
 		cells = 1x1
 		current-cell = 1,1
@@ -6685,7 +6682,6 @@ window "Grid2"
 		background-color = #0080c0
 		is-default = true
 		border = line
-		drop-zone = true
 		saved-params = ""
 		cells = 2x1
 		current-cell = 1,1
@@ -7081,7 +7077,6 @@ window "Finalize_Screen"
 		anchor2 = none
 		background-color = #202020
 		border = line
-		drop-zone = true
 		saved-params = ""
 		cells = 1x1
 		current-cell = 1,1
@@ -8024,7 +8019,6 @@ window "report"
 		size = 325x20
 		anchor1 = none
 		anchor2 = none
-		background-color = #ffffff
 		border = sunken
 		saved-params = ""
 		no-command = true
@@ -8117,7 +8111,6 @@ window "report"
 		size = 325x91
 		anchor1 = none
 		anchor2 = none
-		background-color = #ffffff
 		border = sunken
 		saved-params = ""
 		multi-line = true
@@ -8321,7 +8314,7 @@ window "skilltree"
 	elem "skilltree"
 		type = MAIN
 		pos = 281,0
-		size = 404x421
+		size = 551x418
 		anchor1 = none
 		anchor2 = none
 		background-color = #464646
@@ -8331,49 +8324,10 @@ window "skilltree"
 		can-minimize = false
 		can-resize = false
 		macro = "macro"
-	elem "button115"
-		type = BUTTON
-		pos = 162,0
-		size = 81x32
-		anchor1 = 80,8
-		anchor2 = 100,12
-		font-family = "Angsana New"
-		font-size = 12
-		text-color = #ffff80
-		background-color = #0a0a0a
-		saved-params = "is-checked"
-		text = "200 RPP -> 1 Dev"
-		command = "rpp200dp"
-	elem "button114"
-		type = BUTTON
-		pos = 243,0
-		size = 81x32
-		anchor1 = 80,8
-		anchor2 = 100,12
-		font-family = "Angsana New"
-		font-size = 12
-		text-color = #ffff80
-		background-color = #0a0a0a
-		saved-params = "is-checked"
-		text = "400 RPP -> 2 Dev"
-		command = "rpp400dp"
-	elem "RPP2DP"
-		type = BUTTON
-		pos = 324,0
-		size = 81x32
-		anchor1 = 80,8
-		anchor2 = 100,12
-		font-family = "Angsana New"
-		font-size = 12
-		text-color = #ffff80
-		background-color = #0a0a0a
-		saved-params = "is-checked"
-		text = "500 RPP -> 3 Dev"
-		command = "rpp500dp"
 	elem "button92"
 		type = BUTTON
-		pos = 323,113
-		size = 81x18
+		pos = 440,112
+		size = 110x18
 		anchor1 = 40,32
 		anchor2 = 60,37
 		font-family = "Angsana New"
@@ -8385,8 +8339,8 @@ window "skilltree"
 		command = "skilltreez \"MiscT4\""
 	elem "button91"
 		type = BUTTON
-		pos = 242,32
-		size = 81x20
+		pos = 330,32
+		size = 110x20
 		anchor1 = 60,8
 		anchor2 = 80,12
 		font-family = "Angsana New"
@@ -8398,8 +8352,8 @@ window "skilltree"
 		command = "skilltreez \"SuperStances\""
 	elem "button90"
 		type = BUTTON
-		pos = 320,134
-		size = 81x18
+		pos = 437,133
+		size = 111x18
 		anchor1 = 80,27
 		anchor2 = 100,32
 		font-family = "Angsana New"
@@ -8412,8 +8366,8 @@ window "skilltree"
 		command = "devskilltreez \"BuffT4\""
 	elem "button89"
 		type = BUTTON
-		pos = 242,113
-		size = 81x18
+		pos = 330,112
+		size = 110x18
 		anchor1 = 60,27
 		anchor2 = 80,32
 		font-family = "Angsana New"
@@ -8425,8 +8379,8 @@ window "skilltree"
 		command = "skilltreez \"SwordT4\""
 	elem "button88"
 		type = BUTTON
-		pos = 80,113
-		size = 81x18
+		pos = 108,112
+		size = 110x18
 		anchor1 = 19,27
 		anchor2 = 39,32
 		font-family = "Angsana New"
@@ -8438,8 +8392,8 @@ window "skilltree"
 		command = "skilltreez \"BeamT4\""
 	elem "button87"
 		type = BUTTON
-		pos = 161,113
-		size = 82x18
+		pos = 220,112
+		size = 111x18
 		anchor1 = 40,27
 		anchor2 = 60,32
 		font-family = "Angsana New"
@@ -8451,8 +8405,8 @@ window "skilltree"
 		command = "skilltreez \"UnarmedT4\""
 	elem "button86"
 		type = BUTTON
-		pos = 242,92
-		size = 81x19
+		pos = 330,91
+		size = 110x19
 		anchor1 = 60,22
 		anchor2 = 80,27
 		font-family = "Angsana New"
@@ -8464,8 +8418,8 @@ window "skilltree"
 		command = "skilltreez \"SwordT3\""
 	elem "button85"
 		type = BUTTON
-		pos = 80,92
-		size = 81x19
+		pos = 108,91
+		size = 110x19
 		anchor1 = 19,22
 		anchor2 = 39,27
 		font-family = "Angsana New"
@@ -8477,8 +8431,8 @@ window "skilltree"
 		command = "skilltreez \"BeamT3\""
 	elem "button83"
 		type = BUTTON
-		pos = 161,92
-		size = 82x19
+		pos = 220,91
+		size = 111x19
 		anchor1 = 40,22
 		anchor2 = 60,27
 		font-family = "Angsana New"
@@ -8490,8 +8444,8 @@ window "skilltree"
 		command = "skilltreez \"UnarmedT3\""
 	elem "button82"
 		type = BUTTON
-		pos = 323,92
-		size = 81x19
+		pos = 440,91
+		size = 111x19
 		anchor1 = 80,22
 		anchor2 = 100,27
 		font-family = "Angsana New"
@@ -8503,8 +8457,8 @@ window "skilltree"
 		command = "skilltreez \"BuffT3\""
 	elem "button81"
 		type = BUTTON
-		pos = 242,72
-		size = 81x18
+		pos = 330,72
+		size = 110x17
 		anchor1 = 60,17
 		anchor2 = 80,22
 		font-family = "Angsana New"
@@ -8516,8 +8470,8 @@ window "skilltree"
 		command = "skilltreez \"SwordT2\""
 	elem "button80"
 		type = BUTTON
-		pos = 161,72
-		size = 82x18
+		pos = 220,72
+		size = 111x17
 		anchor1 = 40,17
 		anchor2 = 60,22
 		font-family = "Angsana New"
@@ -8529,8 +8483,8 @@ window "skilltree"
 		command = "skilltreez \"UnarmedT2\""
 	elem "button71"
 		type = BUTTON
-		pos = 324,32
-		size = 81x20
+		pos = 441,32
+		size = 111x20
 		anchor1 = 80,8
 		anchor2 = 100,12
 		font-family = "Angsana New"
@@ -8542,8 +8496,8 @@ window "skilltree"
 		command = "skilltreez \"Passives\""
 	elem "button70"
 		type = BUTTON
-		pos = 161,32
-		size = 82x20
+		pos = 220,32
+		size = 111x20
 		anchor1 = 40,8
 		anchor2 = 60,12
 		font-family = "Angsana New"
@@ -8555,8 +8509,8 @@ window "skilltree"
 		command = "skilltreez \"AdvStances\""
 	elem "button69"
 		type = BUTTON
-		pos = 80,32
-		size = 81x20
+		pos = 110,32
+		size = 110x20
 		anchor1 = 20,8
 		anchor2 = 40,12
 		font-family = "Angsana New"
@@ -8568,8 +8522,8 @@ window "skilltree"
 		command = "skilltreez \"Stances\""
 	elem "button68"
 		type = BUTTON
-		pos = 0,113
-		size = 81x18
+		pos = 0,112
+		size = 111x18
 		anchor1 = 0,27
 		anchor2 = 20,32
 		font-family = "Angsana New"
@@ -8581,8 +8535,8 @@ window "skilltree"
 		command = "skilltreez \"BlastT4\""
 	elem "button67"
 		type = BUTTON
-		pos = 0,92
-		size = 81x19
+		pos = 0,91
+		size = 111x19
 		anchor1 = 0,22
 		anchor2 = 20,27
 		font-family = "Angsana New"
@@ -8595,7 +8549,7 @@ window "skilltree"
 	elem "button66"
 		type = BUTTON
 		pos = 0,32
-		size = 81x20
+		size = 111x20
 		anchor1 = 0,8
 		anchor2 = 20,12
 		font-family = "Angsana New"
@@ -8608,7 +8562,7 @@ window "skilltree"
 	elem "button65"
 		type = BUTTON
 		pos = 0,72
-		size = 81x18
+		size = 111x17
 		anchor1 = 0,17
 		anchor2 = 20,22
 		font-family = "Angsana New"
@@ -8620,8 +8574,8 @@ window "skilltree"
 		command = "skilltreez \"BlastT2\""
 	elem "button64"
 		type = BUTTON
-		pos = 323,72
-		size = 81x18
+		pos = 440,72
+		size = 111x17
 		anchor1 = 80,17
 		anchor2 = 100,22
 		font-family = "Angsana New"
@@ -8633,8 +8587,8 @@ window "skilltree"
 		command = "skilltreez \"BuffT2\""
 	elem "button63"
 		type = BUTTON
-		pos = 324,51
-		size = 81x21
+		pos = 441,51
+		size = 111x21
 		anchor1 = 80,13
 		anchor2 = 100,18
 		font-family = "Angsana New"
@@ -8646,8 +8600,8 @@ window "skilltree"
 		command = "skilltreez \"BuffT1\""
 	elem "button62"
 		type = BUTTON
-		pos = 80,72
-		size = 81x18
+		pos = 108,72
+		size = 110x17
 		anchor1 = 19,17
 		anchor2 = 39,22
 		font-family = "Angsana New"
@@ -8659,8 +8613,8 @@ window "skilltree"
 		command = "skilltreez \"BeamT2\""
 	elem "button61"
 		type = BUTTON
-		pos = 80,52
-		size = 81x19
+		pos = 108,52
+		size = 110x19
 		anchor1 = 19,12
 		anchor2 = 39,17
 		font-family = "Angsana New"
@@ -8672,8 +8626,8 @@ window "skilltree"
 		command = "skilltreez \"BeamT1\""
 	elem "button60"
 		type = BUTTON
-		pos = 242,52
-		size = 81x19
+		pos = 330,52
+		size = 110x19
 		anchor1 = 60,12
 		anchor2 = 80,17
 		font-family = "Angsana New"
@@ -8685,8 +8639,8 @@ window "skilltree"
 		command = "skilltreez \"SwordT1\""
 	elem "button59"
 		type = BUTTON
-		pos = 161,52
-		size = 82x19
+		pos = 220,52
+		size = 111x19
 		anchor1 = 40,12
 		anchor2 = 60,17
 		font-family = "Angsana New"
@@ -8699,7 +8653,7 @@ window "skilltree"
 	elem "button58"
 		type = BUTTON
 		pos = 0,52
-		size = 81x19
+		size = 111x19
 		anchor1 = 0,12
 		anchor2 = 20,17
 		font-family = "Angsana New"
@@ -8711,14 +8665,13 @@ window "skilltree"
 		command = "skilltreez \"BlastT1\""
 	elem "skilltreegrid"
 		type = GRID
-		pos = 0,155
-		size = 404x266
+		pos = 0,154
+		size = 551x264
 		anchor1 = 0,37
 		anchor2 = 100,100
 		text-color = #ffff00
 		background-color = #1d1d1d
 		is-default = true
-		drop-zone = true
 		saved-params = ""
 		cells = 1x0
 		current-cell = 1,1
@@ -8728,7 +8681,7 @@ window "skilltree"
 	elem "STRewardPoints"
 		type = LABEL
 		pos = 0,0
-		size = 161x32
+		size = 551x32
 		anchor1 = 0,0
 		anchor2 = 100,8
 		font-family = "Angsana New"
@@ -8743,7 +8696,7 @@ window "techtree"
 	elem "techtree"
 		type = MAIN
 		pos = 281,0
-		size = 900x447
+		size = 922x626
 		anchor1 = none
 		anchor2 = none
 		background-color = #464646
@@ -8755,10 +8708,10 @@ window "techtree"
 		macro = "macro"
 	elem "button122"
 		type = BUTTON
-		pos = 600,55
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 614,77
+		size = 154x35
+		anchor1 = 67,12
+		anchor2 = 83,18
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #b30059
@@ -8768,10 +8721,10 @@ window "techtree"
 		command = "techtreez \"MovingTechnology\""
 	elem "button121"
 		type = BUTTON
-		pos = 300,80
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 307,112
+		size = 154x34
+		anchor1 = 33,18
+		anchor2 = 50,23
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #ff0000
@@ -8781,10 +8734,10 @@ window "techtree"
 		command = "techtreez \"ModernSecurityTechnology\""
 	elem "button120"
 		type = BUTTON
-		pos = 300,55
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 307,77
+		size = 154x35
+		anchor1 = 33,12
+		anchor2 = 50,18
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #a85400
@@ -8794,10 +8747,10 @@ window "techtree"
 		command = "techtreez \"ModernCommunicationTechnology\""
 	elem "button119"
 		type = BUTTON
-		pos = 750,105
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 768,146
+		size = 154x36
+		anchor1 = 83,23
+		anchor2 = 100,29
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #a8ffff
@@ -8807,10 +8760,10 @@ window "techtree"
 		command = "techtreez \"ModernRegenTankUpgrades\""
 	elem "button118"
 		type = BUTTON
-		pos = 0,155
-		size = 150x50
-		anchor1 = none
-		anchor2 = none
+		pos = 0,218
+		size = 153x69
+		anchor1 = 0,35
+		anchor2 = 17,46
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #dfdfdf
@@ -8820,10 +8773,10 @@ window "techtree"
 		command = "techtreez \"MaterialsTechnology5\""
 	elem "button117"
 		type = BUTTON
-		pos = 0,105
-		size = 150x50
-		anchor1 = none
-		anchor2 = none
+		pos = 0,146
+		size = 153x72
+		anchor1 = 0,23
+		anchor2 = 17,35
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #c4c4c4
@@ -8833,10 +8786,10 @@ window "techtree"
 		command = "techtreez \"MaterialsTechnology4\""
 	elem "button112"
 		type = BUTTON
-		pos = 0,80
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 0,112
+		size = 153x34
+		anchor1 = 0,18
+		anchor2 = 17,23
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #b0b0b0
@@ -8846,10 +8799,10 @@ window "techtree"
 		command = "techtreez \"MaterialsTechnology3\""
 	elem "button106"
 		type = BUTTON
-		pos = 0,55
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 0,77
+		size = 153x35
+		anchor1 = 0,12
+		anchor2 = 17,18
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #9a9a9a
@@ -8859,10 +8812,10 @@ window "techtree"
 		command = "techtreez \"MaterialsTechnology2\""
 	elem "button116"
 		type = BUTTON
-		pos = 600,30
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 614,42
+		size = 154x35
+		anchor1 = 67,7
+		anchor2 = 83,12
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #ffff80
@@ -8872,10 +8825,10 @@ window "techtree"
 		command = "techtreez \"SwordTechnology\""
 	elem "button113"
 		type = BUTTON
-		pos = 450,180
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 461,252
+		size = 153x35
+		anchor1 = 50,40
+		anchor2 = 67,46
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #ffac59
@@ -8885,10 +8838,10 @@ window "techtree"
 		command = "techtreez \"AdvancedScannerKit\""
 	elem "button111"
 		type = BUTTON
-		pos = 450,155
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 461,218
+		size = 153x34
+		anchor1 = 50,35
+		anchor2 = 67,40
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #ffac59
@@ -8898,10 +8851,10 @@ window "techtree"
 		command = "techtreez \"AdvancedScannerTechnology\""
 	elem "button110"
 		type = BUTTON
-		pos = 750,80
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 768,112
+		size = 154x34
+		anchor1 = 83,18
+		anchor2 = 100,23
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #a8ffff
@@ -8911,10 +8864,10 @@ window "techtree"
 		command = "techtreez \"RegenTankUpgrades\""
 	elem "button109"
 		type = BUTTON
-		pos = 750,55
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 768,77
+		size = 154x35
+		anchor1 = 83,12
+		anchor2 = 100,18
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #53ffff
@@ -8924,10 +8877,10 @@ window "techtree"
 		command = "techtreez \"RegenTankTechnology\""
 	elem "button108"
 		type = BUTTON
-		pos = 450,105
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 461,146
+		size = 153x36
+		anchor1 = 50,23
+		anchor2 = 67,29
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #ff8204
@@ -8937,10 +8890,10 @@ window "techtree"
 		command = "techtreez \"ModernScannerTechnology\""
 	elem "button107"
 		type = BUTTON
-		pos = 450,130
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 461,182
+		size = 153x36
+		anchor1 = 50,29
+		anchor2 = 67,35
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #ff8204
@@ -8950,10 +8903,10 @@ window "techtree"
 		command = "techtreez \"ModernScannerKit\""
 	elem "button105"
 		type = BUTTON
-		pos = 450,80
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 461,112
+		size = 153x34
+		anchor1 = 50,18
+		anchor2 = 67,23
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #d56a00
@@ -8963,10 +8916,10 @@ window "techtree"
 		command = "techtreez \"PortableScannerTechnology\""
 	elem "button104"
 		type = BUTTON
-		pos = 0,30
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 0,42
+		size = 153x35
+		anchor1 = 0,7
+		anchor2 = 17,12
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #808080
@@ -8976,10 +8929,10 @@ window "techtree"
 		command = "techtreez \"MaterialsTechnology\""
 	elem "button103"
 		type = BUTTON
-		pos = 150,80
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 153,112
+		size = 154x34
+		anchor1 = 17,18
+		anchor2 = 33,23
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #00c100
@@ -8989,10 +8942,10 @@ window "techtree"
 		command = "techtreez \"ModernMiningTechnology\""
 	elem "button102"
 		type = BUTTON
-		pos = 750,30
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 768,42
+		size = 154x35
+		anchor1 = 83,7
+		anchor2 = 100,12
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #00d5d5
@@ -9002,10 +8955,10 @@ window "techtree"
 		command = "techtreez \"MedicalTechnology\""
 	elem "button101"
 		type = BUTTON
-		pos = 450,55
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 461,77
+		size = 153x35
+		anchor1 = 50,12
+		anchor2 = 67,18
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #b75b00
@@ -9015,10 +8968,10 @@ window "techtree"
 		command = "techtreez \"ScannerTechnology\""
 	elem "button100"
 		type = BUTTON
-		pos = 300,30
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 307,42
+		size = 154x35
+		anchor1 = 33,7
+		anchor2 = 50,12
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #d70000
@@ -9028,10 +8981,10 @@ window "techtree"
 		command = "techtreez \"SecurityTechnology\""
 	elem "button99"
 		type = BUTTON
-		pos = 150,55
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 153,77
+		size = 154x35
+		anchor1 = 17,12
+		anchor2 = 33,18
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #008c00
@@ -9041,10 +8994,10 @@ window "techtree"
 		command = "techtreez \"MiningTechnology\""
 	elem "button98"
 		type = BUTTON
-		pos = 450,30
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 461,42
+		size = 153x35
+		anchor1 = 50,7
+		anchor2 = 67,12
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #914800
@@ -9054,10 +9007,10 @@ window "techtree"
 		command = "techtreez \"CommunicationTechnology\""
 	elem "techinfolabel"
 		type = LABEL
-		pos = 0,274
-		size = 900x173
-		anchor1 = none
-		anchor2 = none
+		pos = 0,349
+		size = 922x275
+		anchor1 = 0,56
+		anchor2 = 100,95
 		text-color = #ffffff
 		background-color = #000000
 		border = line
@@ -9067,10 +9020,10 @@ window "techtree"
 		text-wrap = true
 	elem "button66"
 		type = BUTTON
-		pos = 150,30
-		size = 150x25
-		anchor1 = none
-		anchor2 = none
+		pos = 153,42
+		size = 154x35
+		anchor1 = 17,7
+		anchor2 = 33,12
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #ffff00
@@ -9080,14 +9033,13 @@ window "techtree"
 		command = "techtreez \"BasicTechnology\""
 	elem "techtreegrid"
 		type = GRID
-		pos = 0,227
-		size = 899x45
-		anchor1 = none
-		anchor2 = none
+		pos = 0,290
+		size = 921x62
+		anchor1 = 0,46
+		anchor2 = 100,56
 		text-color = #ffff00
 		background-color = #1d1d1d
 		is-default = true
-		drop-zone = true
 		saved-params = ""
 		cells = 1x0
 		current-cell = 1,1
@@ -9097,9 +9049,9 @@ window "techtree"
 	elem "TechTreeRewardPoints"
 		type = LABEL
 		pos = 0,0
-		size = 899x30
-		anchor1 = none
-		anchor2 = none
+		size = 922x40
+		anchor1 = 0,0
+		anchor2 = 100,6
 		font-family = "Angsana New"
 		font-size = 15
 		text-color = #ffff80
@@ -9112,7 +9064,7 @@ window "tierstree"
 	elem "tierstree"
 		type = MAIN
 		pos = 281,0
-		size = 404x284
+		size = 596x510
 		anchor1 = none
 		anchor2 = none
 		background-color = #464646
@@ -9124,10 +9076,10 @@ window "tierstree"
 		macro = "macro"
 	elem "button97"
 		type = BUTTON
-		pos = 324,52
-		size = 81x20
-		anchor1 = none
-		anchor2 = none
+		pos = 477,92
+		size = 120x36
+		anchor1 = 80,18
+		anchor2 = 100,25
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #e1e100
@@ -9137,10 +9089,10 @@ window "tierstree"
 		command = "tiersskilltreez \"Ripple\""
 	elem "button96"
 		type = BUTTON
-		pos = 324,32
-		size = 81x20
-		anchor1 = none
-		anchor2 = none
+		pos = 477,57
+		size = 120x35
+		anchor1 = 80,11
+		anchor2 = 100,18
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #8080c0
@@ -9150,10 +9102,10 @@ window "tierstree"
 		command = "tiersskilltreez \"Stand\""
 	elem "button95"
 		type = BUTTON
-		pos = 243,52
-		size = 81x20
-		anchor1 = none
-		anchor2 = none
+		pos = 358,92
+		size = 119x36
+		anchor1 = 60,18
+		anchor2 = 80,25
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #c0c0c0
@@ -9163,10 +9115,10 @@ window "tierstree"
 		command = "tiersskilltreez \"DualWield\""
 	elem "button94"
 		type = BUTTON
-		pos = 243,32
-		size = 81x20
-		anchor1 = none
-		anchor2 = none
+		pos = 358,57
+		size = 119x35
+		anchor1 = 60,11
+		anchor2 = 80,18
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #ffff80
@@ -9176,10 +9128,10 @@ window "tierstree"
 		command = "tiersskilltreez \"Keyblade\""
 	elem "button93"
 		type = BUTTON
-		pos = 81,52
-		size = 81x20
-		anchor1 = none
-		anchor2 = none
+		pos = 120,92
+		size = 119x36
+		anchor1 = 20,18
+		anchor2 = 40,25
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #ff8000
@@ -9189,10 +9141,10 @@ window "tierstree"
 		command = "tiersskilltreez \"HitenMitsurugi\""
 	elem "button40"
 		type = BUTTON
-		pos = 81,32
-		size = 81x20
-		anchor1 = none
-		anchor2 = none
+		pos = 120,57
+		size = 119x35
+		anchor1 = 20,11
+		anchor2 = 40,18
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #c60000
@@ -9202,10 +9154,10 @@ window "tierstree"
 		command = "tiersskilltreez \"Ansatsuken\""
 	elem "tiersinfolabel"
 		type = LABEL
-		pos = 0,122
-		size = 402x162
-		anchor1 = none
-		anchor2 = none
+		pos = 0,219
+		size = 594x291
+		anchor1 = 0,43
+		anchor2 = 100,100
 		text-color = #ffffff
 		background-color = #000000
 		saved-params = ""
@@ -9214,10 +9166,10 @@ window "tierstree"
 		text-wrap = true
 	elem "button67"
 		type = BUTTON
-		pos = 162,32
-		size = 81x20
-		anchor1 = none
-		anchor2 = none
+		pos = 239,57
+		size = 119x35
+		anchor1 = 40,11
+		anchor2 = 60,18
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #ffffff
@@ -9227,10 +9179,10 @@ window "tierstree"
 		command = "tiersskilltreez \"HeroOfAspect\""
 	elem "button66"
 		type = BUTTON
-		pos = 0,32
-		size = 81x20
-		anchor1 = none
-		anchor2 = none
+		pos = 0,57
+		size = 120x35
+		anchor1 = 0,11
+		anchor2 = 20,18
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #ff0000
@@ -9240,10 +9192,10 @@ window "tierstree"
 		command = "tiersskilltreez \"Sharingan\""
 	elem "button65"
 		type = BUTTON
-		pos = 162,52
-		size = 81x20
-		anchor1 = none
-		anchor2 = none
+		pos = 239,92
+		size = 119x36
+		anchor1 = 40,18
+		anchor2 = 60,25
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #00ff00
@@ -9253,10 +9205,10 @@ window "tierstree"
 		command = "tiersskilltreez \"KingOfBraves\""
 	elem "button58"
 		type = BUTTON
-		pos = 0,52
-		size = 81x20
-		anchor1 = none
-		anchor2 = none
+		pos = 0,92
+		size = 120x36
+		anchor1 = 0,18
+		anchor2 = 20,25
 		font-family = "Angsana New"
 		font-size = 13
 		text-color = #35bdff
@@ -9266,25 +9218,25 @@ window "tierstree"
 		command = "tiersskilltreez \"SpiritEnergy\""
 	elem "tiersskilltreegrid"
 		type = GRID
-		pos = 0,74
-		size = 404x45
-		anchor1 = none
-		anchor2 = none
+		pos = 0,133
+		size = 596x81
+		anchor1 = 0,26
+		anchor2 = 100,42
 		text-color = #ffff00
 		background-color = #1d1d1d
 		is-default = true
-		drop-zone = true
 		saved-params = ""
 		cells = 1x0
 		current-cell = 1,1
 		show-lines = none
+		highlight-color = #000000
 		is-list = true
 	elem "TierSRewardPoints"
 		type = LABEL
 		pos = 0,0
-		size = 404x32
-		anchor1 = none
-		anchor2 = none
+		size = 596x57
+		anchor1 = 0,0
+		anchor2 = 100,11
 		font-family = "Angsana New"
 		font-size = 15
 		text-color = #ffff80

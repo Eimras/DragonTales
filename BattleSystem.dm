@@ -1265,7 +1265,8 @@ mob/proc/Melee(var/damagemulti,var/speedmulti,var/iconoverlay,var/forcewarp,var/
 			Damage*=(100/P.Health)
 			Accuracy*=3
 		if(src.ExplosionExpert)
-			Damage*=src.ForceMod/1.5
+			//Damage*=src.ForceMod/2
+			Damage*=1+sqrt(src.ForceMod + src.ForceMultiplier/2)
 		if(src.NineLives)
 			Damage*=9
 		if(src.NineLivesFinal)
@@ -1294,8 +1295,8 @@ mob/proc/Melee(var/damagemulti,var/speedmulti,var/iconoverlay,var/forcewarp,var/
 				src.Southpaw=0
 
 		if(src.SoulCrushing)
-			Damage*=2
-			Accuracy*=0.85
+	//		Damage*=2
+			Accuracy*=0.75
 
 		if(src.GunKata)
 			Damage*=1.15
