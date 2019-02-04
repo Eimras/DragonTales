@@ -141,7 +141,16 @@ proc/GlobalSave()
 var/Updates={"
 <i>|Version MM/DD/YYYY|</i><br><br>
 <b>Version V1.2.0 1/27/2019</b><br>
-<i>A new era</i><br>
+- Movement Speed slowed dramatically. <br>
+- Wound Toggle should show on sense now. A wound label has been added to the interface aswell. <br>
+- Power Up rates are reduced dramatically as you PU higher. This should compliment the update below nicely.<br>
+- You no longer lose BP from energy and health lost. Instead, this is based on Injury and Fatigue. If you really want to fuck someone up, turn wounds on. <br>
+- BP Add has been removed completely. This may adversely effect some things that were dependent on it. <br>
+- Soul Crushing Form and Explosions Fists received nerfs. <br>
+- Knockbacks occur immediately. They were stalled by a number of calls prior to the KB one. KB speed is fast, so chaining them should not be a real issue.<br>
+- Knockback distances greatly reduced, and also factor damage as well as strength vs endurance. <br>
+- Speed factor in accuracy formula changed from a direct multiplier to an additive value. <br>
+- Damage values on most/all projectiles are now pushed into a diminshing returns function. This should reduce damage greatly. <br>
 - Aligned tick_lag and world fps. Set client FPS to 40.<br>
 
 <b>Version V1.1.4 11/21/2016</b><br>

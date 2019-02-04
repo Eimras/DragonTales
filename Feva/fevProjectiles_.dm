@@ -69,7 +69,7 @@ obj/Projectiles/fevProjectile
 	OmegaBlaster
 		icon='Blasts.dmi'
 		icon_state="1"
-		Damage_Multiplier=15
+		Damage_Multiplier=5
 		MultiHit=50
 		Knockback=1
 		Deflectable=1

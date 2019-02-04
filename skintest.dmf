@@ -1,31 +1,43 @@
 macro "macro"
 	elem 
-		name = "CENTER+REP"
+		name = "Center+REP"
 		command = ".center"
 	elem 
-		name = "NORTHEAST+REP"
+		name = "Northeast+REP"
 		command = ".northeast"
 	elem 
-		name = "SOUTHEAST+REP"
+		name = "Southeast+REP"
 		command = ".southeast"
 	elem 
-		name = "SOUTHWEST+REP"
+		name = "Southwest+REP"
 		command = ".southwest"
 	elem 
-		name = "NORTHWEST+REP"
+		name = "Northwest+REP"
 		command = ".northwest"
 	elem 
-		name = "WEST+REP"
-		command = ".west"
+		name = "West"
+		command = "KeyDown \"WEST\""
 	elem 
-		name = "NORTH+REP"
-		command = ".north"
+		name = "West+UP"
+		command = "KeyUp \"WEST\""
 	elem 
-		name = "EAST+REP"
-		command = ".east"
+		name = "North"
+		command = "KeyDown \"NORTH\""
 	elem 
-		name = "SOUTH+REP"
-		command = ".south"
+		name = "North+UP"
+		command = "KeyUp \"NORTH\""
+	elem 
+		name = "East"
+		command = "KeyDown \"EAST\""
+	elem 
+		name = "East+UP"
+		command = "KeyUp \"EAST\""
+	elem 
+		name = "South"
+		command = "KeyDown \"SOUTH\""
+	elem 
+		name = "South+UP"
+		command = "KeyUp \"SOUTH\""
 	elem 
 		name = "F1+REP"
 		command = ".options"
@@ -5662,7 +5674,6 @@ window "mainwindow"
 		size = 60x20
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = ""
 		command = ""
@@ -5685,7 +5696,6 @@ window "mainwindow"
 		size = 671x448
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = none
 		saved-params = "splitter"
 		right = "rpane"
 		is-vert = true
@@ -5761,7 +5771,6 @@ window "mapwindow"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -5781,9 +5790,22 @@ window "mapwindow"
 		letterbox = false
 		on-show = ".winset\"mainwindow.mainvsplit.left=mapwindow\""
 		on-hide = ".winset\"mainwindow.mainvsplit.left=\""
+	elem "WoundLabel"
+		type = LABEL
+		pos = 352,435
+		size = 89x20
+		anchor1 = 100,100
+		anchor2 = none
+		font-family = "@Arial Unicode MS"
+		text-color = #ff8000
+		background-color = #282828
+		is-visible = false
+		border = sunken
+		saved-params = ""
+		text = "WOUNDS ON"
 	elem "StanceLabel"
 		type = LABEL
-		pos = 350,435
+		pos = 443,435
 		size = 105x20
 		anchor1 = 100,100
 		anchor2 = none
@@ -6213,7 +6235,6 @@ window "infowindow"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Info"
 		titlebar = false

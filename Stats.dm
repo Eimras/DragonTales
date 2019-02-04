@@ -666,6 +666,8 @@ mob/Players/Stat()
 								stat("They seem to be in a [Target.Stance] stance.")
 							if(usr.Target in SenseDetect(usr,usr.SenseRange()))
 								stat("Direction","[CheckDirection(Target)]")
+							if(Target.WoundIntent)
+								stat("<font color=red>Wound</font> intent active.")
 					if(usr.SenseActive>1||usr.Admin)
 						statpanel("Enhanced Sense")
 						if(statpanel("Enhanced Sense"))
@@ -691,6 +693,8 @@ mob/Players/Stat()
 											stat("Repression:", "[Get_Sense_Repression(Target)]")
 								stat("Health:","[Target.Health]%")
 								stat("Energy:","[(Target.Energy/Target.EnergyMax)*100]%")
+						if(Target.WoundIntent)
+							stat("<font color=red>Wound</font> intent active.")
 				/*			if(src.Admin)//SenseReq*1000<EnergyMax)
 								stat("Strength","[Commas(((Target.Strength*Target.StrengthMultiplier)/(Strength*StrengthMultiplier))*100)]% yours")
 								stat("Endurance","[Commas(((Target.Endurance*Target.EnduranceMultiplier)/(Endurance*EnduranceMultiplier))*100)]% yours")
@@ -962,7 +966,7 @@ mob/proc/Recover(var/blah,Amount=1)
 				src.EssenceAnnounce3=0
 
 
-
+mob/var/tmp/ap_looping //Available Power Loop
 mob/proc/Available_Power()
 	while(src.AFKTimer)
 		sleep(10)
@@ -1025,16 +1029,19 @@ mob/proc/Available_Power()
 		//Health
 		if(src.Race!="Android"&&!src.MachinaMod&&!src.Resolve&&!src.Berserkering)
 			if(!src.Anger&&src.BraveType!="Defense"&&src.BraveLevel<2&&src.BraveType!="Both"&&!src.Enlightenment)
-				Ratio*=max(sqrt(max(Health/100,0.01)),0.01)
+			//	Ratio*=max(sqrt(max(Health/100,0.01)),0.01)
+				Ratio*= 1 - (TotalInjury*0.75)/100
 		//
 		//Energy
 		if(src.Race!="Android"&&!src.Berserkering&&src.BraveType!="Defense"&&src.BraveLevel<2&&src.BraveType!="Both"&&!src.MachinaMod&&!src.Resolve&&!src.WarriorLevel>2&&!src.Enlightenment)
-			Ratio*=max(sqrt(max(Energy/EnergyMax,0.01)),0.01)
+		//	Ratio*=max(sqrt(max(Energy/EnergyMax,0.01)),0.01)
+			Ratio*= 1 - (TotalFatigue*0.25)/100
+
 		//
 //		if(Anger) Ratio*=Anger
 		if(KaiokenBP) Ratio+=KaiokenBP
 		if(BurningShotBP) Ratio+=BurningShotBP
-		if(PlusPower) Ratio+=PlusPower
+	//	if(PlusPower) Ratio+=PlusPower
 		if(AbsorbPower)Ratio+=AbsorbPower
 		if(RPPower) Ratio*=RPPower
 		if(CyberPower&&!src.MachinaMod)Ratio+=CyberPower
@@ -1046,7 +1053,6 @@ mob/proc/Available_Power()
 		if(InUBW2)Ratio*=2
 		if(InIH2)Ratio*=2
 
-//		if(Anger) Ratio*=Anger
 		var/weights=0
 		for(var/obj/Items/Weights/W in src)
 			if(W.suffix)
@@ -1060,6 +1066,8 @@ mob/proc/Available_Power()
 		Power=Ratio*GetPowerUpRatio()
 		if(Anger)Power*=Anger
 		if(weights)Power*=weights
+
+
 		Recover("Block",1)
 		Recover("DragonDash",1)
 		Recover("AerialRecov",1)
@@ -1220,12 +1228,13 @@ mob/proc/Available_Power()
 				//if(src.Race=="Saiyan"&&src.ssj["active"]>0)
 				//	PUGain*=src.SaiyanPUNerf
 				//restored because minor overheat restored
-				if(src.z==6)
-					if(src.Race=="Kaio")
+				if(src.Race=="Kaio")
+					PUGain+=0.5
+				for(var/obj/Skills/Buffs/Mystic/A in src)
+					if(A.BuffUsing)
 						PUGain+=0.5
-					for(var/obj/Skills/Buffs/Mystic/A in src)
-						if(A.BuffUsing)
-							PUGain+=0.5
+
+
 				if(src.DjinnActive)
 					PUGain+=0.5
 				if(src.FullDjinnActive)
@@ -1250,9 +1259,24 @@ mob/proc/Available_Power()
 					PUGain=0
 				if(src.Berserkering)
 					PUGain=0
+
+				//Power Control Diminshing.
+				var addpu = PUGain
+				if(src.ControlPower >= 300)
+					addpu *= 0.20
+				else if(src.ControlPower >= 250)
+					addpu *= 0.35
+				else if(src.ControlPower >= 200)
+					addpu *= 0.5
+				else if(src.ControlPower >= 150)
+					addpu *= 0.75
+
 				src.ControlPower+=PUGain
+
+
 				if(src.ControlPower>100)
 					src.EzPowerControl=1
+
 				if(src.Energy<=src.EnergyMax/10)
 					src.PowerUp=0
 					src.Auraz("Remove")
@@ -1485,6 +1509,10 @@ mob/proc/Update_Stat_Labels()
 				src<<output("Temp CD:[src.TemperatureReducerCD]","BarTempCD")
 			else
 				winshow(src, "BarTempCD",0)
+			if(src.WoundIntent)
+				winshow(src, "WoundLabel",1)
+			else
+				winshow(src,"WoundLabel",0)
 			if(src.Lethal==1)
 				winshow(src, "BarLethal",1)
 				src<<output("LETHAL ON","BarLethal")

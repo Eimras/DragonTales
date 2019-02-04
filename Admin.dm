@@ -322,10 +322,10 @@ mob/Admin3/verb
 				if(m.MadScientist > round(m.TotalMadScientistEXP/100))
 					m.MadScientist=round(m.TotalMadScientistEXP/100)
 
-	MakeMazokuHuman(var/mob/m in world)
+/*	MakeMazokuHuman(var/mob/m in world)
 		set category="Admin"
 		if(m.Race=="Human")
-			m.Class="Mazoku"
+			m.Class="Mazoku"*/
 	SetAscensionReqs()
 		set category="Admin"
 		var/race=input(usr, "What race's requirements do you want to modify?", "Set Ascension Reqs") in list("Demi", "Namekian", "Human", "Spirit Doll", "Half Demon", "Tuffle", "Heran", "Aetherian", "Kitsune", "Tanuki", "Neko")
@@ -3045,7 +3045,7 @@ mob/Admin3/verb
 
 			Log("Admin","[ExtractInfo(usr)] granted [selection] to [P].")
 
-	ToggleHalfDemonNerf()
+/*	ToggleHalfDemonNerf()
 		set category="Admin"
 		if(HalfDemonNerf)
 			for(var/mob/m in world)
@@ -3060,7 +3060,7 @@ mob/Admin3/verb
 					m.LowPower=1
 					m << "Your demonic power is at a low point..."
 			HalfDemonNerf=1
-			Log("Admin","[ExtractInfo(usr)] turned the half demon nerf <FONT COLOR='#00FF00'>ON</FONT COLOR>.")
+			Log("Admin","[ExtractInfo(usr)] turned the half demon nerf <FONT COLOR='#00FF00'>ON</FONT COLOR>.")*/
 	SetCyberBPCap()
 		set category="Admin"
 		var/cyBP = input("What will the new cyber BP cap be?","[CyberBPCap]",CyberBPCap) as num
@@ -3074,7 +3074,7 @@ mob/Admin3/verb
 		for(var/mob/Players/P)
 			P.Age_Increase(Year)
 		Log("Admin","<font color=green>[ExtractInfo(usr)] set the year to [setyear].")
-	MakeGijiSSj(mob/M in world)
+/*	MakeGijiSSj(mob/M in world)
 		set category="Admin"
 		M.GijiSSj(1)
 	MakeSSjGod(mob/M in world)
@@ -3082,13 +3082,13 @@ mob/Admin3/verb
 		if(SSJGod)
 			M.RevertSSJG()
 		else
-			M.SSJGod(1)
-	MakeSuperSpiral(mob/M in world)
+			M.SSJGod(1)*/
+/*	MakeSuperSpiral(mob/M in world)
 		set category="Admin"
 		if(SSJGod)
 			M.RevertSuperSpiral()
 		else
-			M.SuperSpiralMode(1)
+			M.SuperSpiralMode(1)*/
 /*	MakeSuperButch(mob/M in world)
 		set category="Admin"
 		if(SSJGod)

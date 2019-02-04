@@ -10102,44 +10102,8 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 				if(!src.CanBlast(Drain)) return
 				src.Attacking=1
 				src.Beaming=1
-				view(src)<< "[usr] performs a handseal! \[Snake]"
-				for(var/mob/E in hearers(12,src))
-					E<<sound('KunaiMod/Sounds/handseal.ogg')
-				sleep(60/src.HandsealMastery)
-				sleep(3)
-				src.HandsealMastery+=0.25
-				view(src)<< "[usr] performs a handseal! \[Ram]"
-				for(var/mob/E in hearers(12,src))
-					E<<sound('KunaiMod/Sounds/handseal.ogg')
-				sleep(60/src.HandsealMastery)
-				sleep(3)
-				src.HandsealMastery+=0.25
-				view(src)<< "[usr] performs a handseal! \[Monkey]"
-				for(var/mob/E in hearers(12,src))
-					E<<sound('KunaiMod/Sounds/handseal.ogg')
-				sleep(60/src.HandsealMastery)
-				sleep(3)
-				src.Attacking=0
-				src.Beaming=0
-				src.HandsealMastery+=0.25
-				view(src)<< "[usr] performs a handseal! \[Boar]"
-				for(var/mob/E in hearers(12,src))
-					E<<sound('KunaiMod/Sounds/handseal.ogg')
-				sleep(60/src.HandsealMastery)
-				sleep(3)
-				src.HandsealMastery+=0.25
-				view(src)<< "[usr] performs a handseal! \[Horse]"
-				for(var/mob/E in hearers(12,src))
-					E<<sound('KunaiMod/Sounds/handseal.ogg')
-				sleep(60/src.HandsealMastery)
-				sleep(3)
-				src.HandsealMastery+=0.25
-				view(src)<< "[usr] performs a handseal! \[Tiger]"
-				for(var/mob/E in hearers(12,src))
-					E<<sound('KunaiMod/Sounds/finalhandseal.ogg')
-				sleep(60/src.HandsealMastery)
-				sleep(3)
-				src.HandsealMastery+=0.25
+				view(src)<< "[usr] performs a series of handseals!"
+				sleep(10)
 				src.Energy-=Drain/src.Efficiency*100*(1/Z.Level)
 				Z.Skill_Increase(2.5)
 				if(Z.Level<100)
@@ -17511,6 +17475,8 @@ mob/proc/Quake(var/duration=30)
 		sleep(1)
 
 mob/proc/Earthquake(var/duration=30,var/xpixelmin=0,var/xpixelmax=5,var/ypixelmin=0,var/ypixelmax=5)
+	set background = 1
+	set waitfor = 0
 	if(client)
 		while(duration)
 			duration-=1

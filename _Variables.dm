@@ -58,11 +58,11 @@ var
 	WorldStatAmount=1 //Set's everyone's stats to a number multiplied by their mod
 	BPUpdate=0 //Updates BP
 	BPUpdateAmount=0 //The number of base increase
-	WorldEnergyAmount=100//30000 //Amount of energy in the world?
+	WorldEnergyAmount=1000//30000 //Amount of energy in the world?
 	WorldDamageMult=1.5 //Damage everyone in the world?
 	ForceDamageMulti=1 //Alters damage for force based moves.
-	WorldDefaultAcc=50 //Global accuracy
-	WorldWhiffChance=10 // Global whiff
+	WorldDefaultAcc=60 //Global accuracy
+	WorldWhiffChance=20 // Global whiff
 	PassiveStatCap=5 //Adjusts passive stat cap
 	BaseReward=500 //Base level reward
 	WorldPUDrain=1.5 //Sets the drain of PU
