@@ -147,7 +147,7 @@ mob/proc/MovementSpeed()
 		if(src.WillSpeed||src.LightningAura||src.ForceSpeed||src.LightningArmor||src.BreathHero||(src.InUBW&&src.MadeOfSwords)||(src.Race=="Half Demon"&&src.trans["active"]>=1))
 			Delay=1.2
 	if(Race!="Android"&&!src.GateNumber>=2&&!src.SatsuiNoHado&&!src.MachinaMod&&!src.WillSpeed&&!src.Resolve&&!src.Berserkering&&!(src.InUBW&&src.MadeOfSwords))
-		if(!LastBreath)
+		if(!LastBreath && !GetPassive("adrenaline"))
 			Delay*=((100/(sqrt(max(1,Health))*sqrt(max(1,Health))))/4)
 	//	Delay*=EnergyMax/max((sqrt(max(1,Energy))*sqrt(max(1,Energy))),EnergyMax/100)/2
 		if(Delay>49||src.BladeSlow)

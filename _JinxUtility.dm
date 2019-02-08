@@ -398,6 +398,13 @@ mob
 					if(src.AscensionsUnlocked>=3&&src.AscensionsAcquired==2)
 						return 3
 				return 0
+			if(race=="Alien")
+				if(src.AscensionsAcquired < 1)
+					if(src.AscensionsUnlocked>=1)
+						return 1
+				if(src.AscensionsAcquired < 2)
+					if(src.AscensionsUnlocked>=2&&src.AscensionsAcquired==1)
+						return 2
 
 		Ascension(var/race, var/num)
 			if(num!="Fury")
@@ -1031,19 +1038,164 @@ mob
 				if(num==3)
 					src.Ascend(25)
 					src.EnergyMult(1.25)
+			if(race=="Alien")
+				if(num==1)
+					src.Ascend(5)
+
+				if(num==2)
+					src.Ascend(10)
+
+
+			if(race=="Dragon")
+				if(num==1) //Elemental Class
+					src.Ascend(5)
+					src.AllMult(1.25)
+					while(!src.Class)
+						src.Class = input("Which elemental class of dragon do you wish to become?") in list("Fire","Water","Earth","Wind","Poison","Time","Space","Gold")
+						var alertmsg
+						switch(Class)
+							if("Fire") alertmsg = "A dragon of fire is guided by their emotions, which is an especially potent blend, making them the most destructive of all types."
+							if("Water") alertmsg = "A dragon of water is one who reflects the ocean tides. Their calm is absolute, as is their destructive fury."
+							if("Earth") alertmsg = "A dragon of earth has a resolve solidified like stone. Their will is as unbreakable as their bodies."
+							if("Wind") alertmsg = "A dragon of wind rides the airstreams that is life with a natural flow. They have a carefree lifestyle."
+							if("Poison") alertmsg = "A dragon of poison is one who embodies the most manipulative, and antagonistic nature of all. They all have forked tounges, and a nature that seems to corrode life itself."
+							if("Time") alertmsg = "A dragon of time perceives the world from the flow of time. From the passage of seasons, to birth and death. History, and the Future. Their wisdom is grand."
+							if("Space") alertmsg = "A dragon of space perceives the vastness of the Universe. That all things are, and eventually will not be. The dragon of space sees it all."
+							if("Gold") alertmsg = "A dragon of gold sees the wealth in all things, material possession and mind alike."
+						if(alert("[alertmsg]"))
+							break
+
+					switch(Class)
+						if("Fire")
+							NewAnger(2.5)
+						if("Water")
+							StrMult(1.3)
+							ForMult(1.6)
+							DefMult(1.6)
+						if("Earth")
+							EndMult(1.7)
+							ResMult(1.7)
+						if("Wind")
+							SpdMult(1.5)
+							OffMult(1.3)
+							DefMult(1.3)
+						if("Poison")
+							EnergyMult(1.3)
+							RecovMult(1.3)
+							ForMult(1.3)
+							EndMult(1.3)
+							OffMult(1.2)
+						if("Time")
+							SpdMult(2.5)
+						if("Space")
+							AllMult(1.3)
+						if("Gold")
+							StrMult(1.4)
+							ForMult(1.4)
+							OffMult(1.4)
+							DefMult(1.4)
+				if(num==2) //Divinity
+					src.Ascend(10)
+					src.Divine = 1
+					AllMult(1.1)
+					src << "You have awoken your innate divinity."
+
+				if(num==3) //
+					src.Ascend(25)
+					AllMult(1.1)
+				if(num==4) //God
+					src.Ascend(50)
+					AllMult(1.1)
 			if(race=="Kaio")
 				if(num==1)
 					src.Ascend(5)
+					src.contents += new/obj/Skills/Materialization
+					src.contents += new/obj/Skills/DonateRPP
+					src << "No longer are you a mere Shinjin. The majority of your kind never even reaches this point. But you have."
+					switch(input("Your developments lead to this moment. The choice to remain true to your blood, or to give into the seeds of chaos.") in list("Kaio","Makaio"))
+						if("Kaio")
+							src.contents += new/obj/Skills/Buffs/Mystic
+							src.Class = "Kaio"
+							src<<"You remain true to your blood. Your energy becomes pure, flowing through you with graceful might."
+
+							src<<"To those around you, you're a pyre. Perhaps a hopeful beacon, maybe one of teaching, or perhaps something sinister. It is ultimately what you make of yourself."
+
+							src<<"You've attained the power of healing. It comes at the expense of your own lifeforce however."
+							src.contents+=new/obj/Skills/Heal
+							src.contents += new/obj/Skills/Rank/GivePower
+							src.EnergyMult(1.2)
+						if("Makaio")
+							src.contents += new/obj/Skills/Buffs/Majin
+							src.Class = "Makaio"
+							src<<"You open yourself to the sinister influences. Potent, yet terrible energies flow through you, empowering you and your emotions."
+							src.NewAnger(2)
+							src<<"You are destined to become a tyrant of this world."
+					switch(input("Each Shinjin represents a quadrant of the Universe in being. Which do you?") in list("North","South","East","West"))
+						if("North")
+							src.contents += new/obj/Skills/Rank/Kaioken
+							src.contents += new/obj/Skills/Attacks/SpiritBomb
+							src.KaiokenMastery = 3
+							src.EndMult(1.5)
+							src.ResMult(1.5)
+							src.StrMult(0.8)
+							src.ForMult(0.8)
+							src<<"You recall that great focus allows for even greater, though extremely straining power. Through this pain, your body becomes a beacon to whatever you stand for, utilizing power spread across many bodies to unleash an attack of extreme purity.."
+							src<<"You learn to use Kaioken and Spirit Bomb."
+
+						if("South")
+							src.contents += new/obj/Skills/Rank/BurningShot //I need to rework this. Maybe ramp up damages, offense, and SPEED. Burning Shot gotta go fass.
+							src.contents += new/obj/Skills/Attacks/HyperTornado
+							src.SpdMult(1.3)
+							src.StrMult(1.2)
+							src.ForMult(1.2)
+							src<<"You recall the ability to ignite your lifeforce to become an unstoppable force. You learn to quick your beat into a terrifying whirlwind of power."
+							src<<"You learn to use Burning Shot and Hyper Tornado."
+						if("East")
+							src.contents += new/obj/Skills/Rank/SpiritBurst //Rework too?? Everything is kinda weak compared to kaioken tbh...
+							src.contents += new/obj/Skills/Attacks/Beams/SuperDragonFist
+							src.StrMult(1.15)
+							src.ForMult(1.15)
+							src.EndMult(1.15)
+							src.ResMult(1.15)
+							src<<"You recall that control is key. In control, you can use your energy to its maximum potential. When it's time, you can unleash all of it until a terrifying wave of power."
+							src<<"You learn to use Spirit Burst and Super Dragon Fist."
+						if("West")
+							src.contents += new/obj/Skills/LimitBreaker
+							src.contents += new/obj/Skills/Attacks/HomingFinisher
+							src.StrMult(1.2)
+							src.SpdMult(1.3)
+							src.ForMult(1.2)
+							src<<"You recall a means to overcome the natural limiters of your body. Like your rival quadrant, a straining move. Simply overcoming is not enough. You learn how to restrict your opponents movements, to deliver your greatest finisher."
+							src<<"You learn to use Limit Breaker and Homing Finisher."
+
+
 					//PASSIVES.
-				if(num==2)
+
+				if(num==2) //SSj2 God Ki awakening
 					src.Ascend(10)
 					src.EnergyMult(1.2)
-				if(num==3)
+					src.RecovMult(1.2)
+					src.contents += new/obj/Skills/Rank/GodKi
+					src.god_ticks = 1 //2x power.
+				//	switch(Class)
+				//		if("Kaio")
+				//			src
+				//		if("Makaio")
+				//			src.
+				if(num==3) //Kaioshin / Makaioshin. Obtained in Late SSj2 / Early SSj3 Era
+					src.god_ticks = 2
+					src.contents += new/obj/Skills/Rank/UnlockPotential
+					switch(Class)
+						if("Kaio")
+							src.contents += new/obj/Skills/Rank/Mysticize
+						if("Makaio")
+							src.contents += new/obj/Skills/Rank/Majinize
+
+				if(num==4) //God Era
 					src.Ascend(20)
-					//PASSIVES.  AGAIN.
-				if(num==4)
-					src.Ascend(40)
-					//ALL THE PASSIVES!!!
+					src.god_ticks = 3
+
+
 /*		TierSUp()
 			if(src.KeybladeLevel)
 				src.KeybladeAscensions()

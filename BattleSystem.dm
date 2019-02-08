@@ -818,6 +818,7 @@ proc/Accuracy_Formula(mob/Offender,mob/Defender,Chance=WorldDefaultAcc)
 		if(Defender.GER && !Offender.SpiralOffense)
 			TotalAccuracy=0
 	//	Offender << "Your total accuracy is [TotalAccuracy]"
+
 		return TotalAccuracy//Chance*(Offense/max(Defense,0.01))
 
 
@@ -1670,10 +1671,13 @@ mob/proc/Melee(var/damagemulti,var/speedmulti,var/iconoverlay,var/forcewarp,var/
 			Delay/=10
 
 		var/whiff = 0
-		if(!prob(Accuracy_Formula(src,P,WorldWhiffChance)&&!Tengenkotsu)||src.AttackHardness==1) //whiffing
+		var probb = Accuracy_Formula(src,P,WorldWhiffChance)//&&!Tengenkotsu
+	//	world << "whiff chance [100-probb]"
+		if(!prob(probb)||src.AttackHardness==1) //whiffing
 			if(!src.HeavyShot&&!src.StrengthOfWill)
 				Damage/=rand(3,7)
 				whiff = 1
+		//		world << "It whiffed"
 		if(P.KingCrimson)
 			Damage=0
 			P.Melee(2,2)

@@ -167,8 +167,17 @@ mob/proc/Percent(A)
 	//return "[round(100*(A/(Strength+Endurance+Force+Resistance+Speed+Offense+Defense+Regeneration+Recovery)),0.1)]%"
 	return "[round(100*(A/(Strength+Endurance+Force+Resistance+Offense+Defense+Speed)),0.1)]%"
 proc/Crater(atom/A)
+	for(var/obj/Effects/Crater/C in view(0))
+		C.scale+=0.5
+		var/matrix/m = matrix()
+		m.Scale(C.scale,C.scale)
+		C.appearance_flags = KEEP_TOGETHER
+		animate(C, transform=m,time=2)
+		return
 	var/obj/Effects/Crater/C=new
 	C.loc=A.loc
+
+
 proc/Purge_Old_Saves() for(var/File in flist("Saves/"))
 	var/savefile/F=new("Saves/Players/[File]")
 	if(F["Last_Used"]<=world.realtime-864000*7) fdel("Saves/Players/[File]")

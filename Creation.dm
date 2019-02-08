@@ -454,7 +454,7 @@ mob/Creation/verb
 	NextStep2(mob/usrr)
 		set hidden=1
 		set name=".Next_Step"
-		if(RaceLock.Find(usrr.Race))
+		if(LockedRaces.Find(usrr.Race) && !(usrr.key in LockedRaces[usrr.Race]))
 			usrr<<"This race has been locked out."
 			return
 		if(!usrr)
@@ -469,8 +469,8 @@ mob/Creation/verb
 	NextStep()
 		set hidden=1
 		set name=".Next_Step"
-		if(RaceLock.Find(usr.Race))
-			usr<<"This race has been locked out."
+		if(LockedRaces.Find(Race) && !(key in LockedRaces[Race]))
+			src<<"This race has been locked out."
 			return
 		winshow(usr,"Race_Screen",0)
 		winshow(usr,"Finalize_Screen",1)
@@ -984,9 +984,19 @@ mob/var/Plan=1
 mob/var/Rac=1
 mob/var/Tin=1
 
+var/list/earth_races = list("Human","Youkai","Half Saiyan","Makyo","Half Demon","Demi")
+var/list/namek_races = list("Namekian")
+var/list/vegeta_races = list("Saiyan","Tsufurujin")
+var/list/afterlife_races = list("Kaio","Demon","Majin","Dragon")
+var/list/arconia_races = list("Alien","Heran","Aetherian")
+var/list/android_races = list("Android","Bio")
+var/list/ice_races = list("Changeling")
+
+proc/GetAllRaces()
+	. = earth_races + namek_races + vegeta_races + afterlife_races + arconia_races + android_races + ice_races
+
 var/list/Planets=list("Earth","Namek","Vegeta","Ice","Arconia","Sanctuary","AlienRuin","AlienGrassland","AlienOcean","AlienArctic","AlienDesolate","???")
 var/list/TierSLockOut=list()
-var/list/RaceLock=list()
 var/list/TechLockOut=list()
 
 mob/proc/CheckIfDestroyed(var/blah,var/lulz)
@@ -1026,316 +1036,137 @@ mob/proc/UpdateRaceScreen(var/wut,var/amountz)
 					switch(amountz)
 						if("+")
 							Rac++
-							if(Plan==1&&Rac==3)
-								Rac++//no nekos
 						if("-")
 							Rac--
-							if(Plan==1&&Rac==3)
-								Rac--//no cats
+
 	else
 		amountz="+"
 	src.Hairz("Remove")
 	src.Class="Fighter"
-	if(Plan==1)//Earth  - Human/Makyojin
-		if(src.CheckIfDestroyed("Earth",amountz))
-			if(Rac>2)
-				if(Rac==4)
-					if(src.CheckUnlock("Half Saiyan")!=1)
-						Rac=5
-				if(Rac==5)
-					if(src.CheckUnlock("Makyo")!=1)
-						Rac=11
-				if(Rac==11)
-					if(src.CheckUnlock("Half Demon")!=1)
-						Rac=12
-/*				if(Rac==12)
-					if(src.CheckUnlock("Demi")!=1)
-						Rac=13*/
-				if(Rac==14)
-					if(src.CheckUnlock("Dhampir")!=1)
-						Rac=15
-				if(Rac==15)
-					Rac=1
-				if(Rac>14)
-					Rac=1
-				//Rac=1
-			if(Rac<1)
-				Rac=15
-				if(Rac==15)
-					Rac=14
-				if(Rac==14)
-					if(src.CheckUnlock("Dhampir")!=1)
-						Rac=13
-/*				if(Rac==12)
-					if(src.CheckUnlock("Demi")!=1)
-						Rac=11*/
-				if(Rac==11)
-					if(src.CheckUnlock("Half Demon")!=1)
-						Rac=5
-				if(Rac==5)
-					if(src.CheckUnlock("Makyo")!=1)
-						Rac=4
-				if(Rac==4)
-					if(src.CheckUnlock("Half Saiyan")!=1)
-						Rac=3
-			if(Rac==1)
-				Race="Human"
-				if(src.gender=="female")
-					src.icon='FemaleLight.dmi'
-				else
-					src.icon='MaleLight.dmi'
-			if(Rac==2)
-				Race="Spirit Doll"
-				src.icon='BalaKrishna.dmi'
-			/*if(Rac==3)
-			{
-				Race="Neko"
-				Class="Kitty"
-				if(src.gender=="female")
-					src.icon='FemaleLight.dmi'
-				else
-					src.icon='MaleLight.dmi'
-			}*/
-			if(Rac==4)
-				Race="Half Saiyan"
-				src.icon='MaleLight.dmi'
-				src.Class="Fighter"
-			if(Rac==5)
-				Race="Makyo"
-				src.icon='Makyo1.dmi'
-			if(Rac==6)
-				Race="Quarter Saiyan"
-				src.icon='MaleLight.dmi'
-			if(Rac==7)
-				Race="Popo"
-				src.icon='CustomMale.dmi'
-			if(Rac==8)
-				Race="Nobody"
-				if(src.gender=="female")
-					src.icon='FemaleLight.dmi'
-				else
-					src.icon='MaleLight.dmi'
 
-			if(Rac==9)
-				Race="1/16th Saiyan"
-				if(src.gender=="female")
-					src.icon='FemaleLight.dmi'
-				else
-					src.icon='MaleLight.dmi'
-			if(Rac==10)
-				Race="Throwback"
-				if(src.gender=="female")
-					src.icon='FemaleLight.dmi'
-				else
-					src.icon='MaleLight.dmi'
-			if(Rac==11)
-				src.Race="Half Demon"
-				src.icon='MaleLight.dmi'
-				src.Class="Pride"
-			if(Rac==12)
-				src.Race="Demi"
-				if(src.gender=="female")
-					src.icon='FemaleLight.dmi'
-				else
-					src.icon='MaleLight.dmi'
-			if(Rac==13)
-				src.Race="Neko"
-				src.Class="Kitty"
-				if(src.gender=="female")
-					src.icon='FemaleLight.dmi'
-				else
-					src.icon='MaleLight.dmi'
-			if(Rac==14)
-				src.Race="Dhampir"
+
+	var/list/available_races = list()
+	switch(Plan)
+		if(1) if(src.CheckIfDestroyed("Earth",amountz)) available_races = earth_races.Copy()
+		if(2) if(src.CheckIfDestroyed("Namek",amountz)) available_races = namek_races.Copy()
+		if(3) if(src.CheckIfDestroyed("Vegeta",amountz)) available_races = vegeta_races.Copy()
+		if(4) if(src.CheckIfDestroyed("Afterlife",amountz)) available_races = afterlife_races.Copy()
+		if(5) if(src.CheckIfDestroyed("Arconia",amountz)) available_races = arconia_races.Copy()
+		if(6) if(src.CheckIfDestroyed("Android",amountz)) available_races = android_races.Copy()
+		if(7) if(src.CheckIfDestroyed("Ice",amountz)) available_races = ice_races.Copy()
+
+
+	for(var/v in available_races)
+		if(LockedRaces.Find(v) && !(key in LockedRaces[v]))
+			world << "OOF [v]"
+			available_races -= v
+
+
+	if(Rac > available_races.len) Rac = 1
+	else if(0 >= Rac) Rac = available_races.len
+
+	var/race_check = available_races[Rac]
+
+	switch(race_check)
+		if("Human")
+			Race="Human"
+			if(src.gender=="female")
 				src.icon='FemaleLight.dmi'
-	if(Plan==2)//Namek - Namekian
-		if(src.CheckIfDestroyed("Namek",amountz))
-			Rac=1
+			else
+				src.icon='MaleLight.dmi'
+		if("Half Saiyan")
+			Race="Half Saiyan"
+			src.icon='MaleLight.dmi'
+			src.Class="Fighter"
+		if("Makyo")
+			Race="Makyo"
+			src.icon='Makyo1.dmi'
+		if("Half Demon")
+			src.Race="Half Demon"
+			src.icon='MaleLight.dmi'
+			src.Class="Pride"
+		if("Demi")
+			src.Race="Demi"
+			if(src.gender=="female")
+				src.icon='FemaleLight.dmi'
+			else
+				src.icon='MaleLight.dmi'
+
+		if("Namekian")
 			Race="Namekian"
 			src.icon='Namek1.dmi'
-	if(Plan==3)//Vegeta - Saiyan/Tsufujin
-		if(src.CheckIfDestroyed("Vegeta",amountz))
-			if(Rac>2)
-				Rac=1
-			if(Rac<1)
-				Rac=2
-			if(Rac==1)
-				Race="Saiyan"
-				src.Class="Normal"
-				if(src.gender=="female")
-					src.icon='FemaleLight.dmi'
-				else
-					src.icon='MaleLight.dmi'
-			if(Rac==2)
-				Race="Tsufurujin"
-				if(src.gender=="female")
-					src.icon='FemaleLight.dmi'
-				else
-					src.icon='MaleLight.dmi'
-			if(Rac==3)
-//				if(src.CheckUnlock("Trueseer")!=1)
-				Rac=1
-	if(Plan==4)//Afterlife - Kaio/Demon/Demi
-		if(src.CheckIfDestroyed("Afterlife",amountz))
-			if(Rac>=3)
-				if(Rac==3)
-					if(src.CheckUnlock("Majin")!=1)
-						Rac=4
-				if(Rac==4)
-					if(src.CheckUnlock("Dragon")!=1)
-						Rac=8
-				if(Rac==8)
-					Rac=1
-				if(Rac>7)
-					Rac=1
-				//Rac=1
-			if(Rac<1)
-				Rac=8
-				if(Rac==8)
-					Rac=4
-				if(Rac==4)
-					if(src.CheckUnlock("Dragon")!=1)
-						Rac=3
-				if(Rac==3)
-					if(src.CheckUnlock("Majin")!=1)
-						Rac=2
-			if(Rac==1)
-				src.Race="Kaio"
-				if(src.gender=="female")
-					src.icon='CustomFemale.dmi'
-				else
-					src.icon='CustomMale.dmi'
-/*			if(Rac==2)
-				src.Race="Demi"
-				if(src.gender=="female")
-					src.icon='FemaleLight.dmi'
-				else
-					src.icon='MaleLight.dmi'*/
-			if(Rac==2)
-				src.Race="Demon"
-				src.icon='Demon1.dmi'
-				src.Class="Pride"
-/*			if(Rac==4)
-				src.Race="Half Demon"
+
+		if("Saiyan")
+			Race="Saiyan"
+			src.Class="Normal"
+			if(src.gender=="female")
+				src.icon='FemaleLight.dmi'
+			else
 				src.icon='MaleLight.dmi'
-				src.Class="Pride"*/
+		if("Tsufurujin")
+			Race="Tsufurujin"
+			if(src.gender=="female")
+				src.icon='FemaleLight.dmi'
+			else
+				src.icon='MaleLight.dmi'
+
+
+		if("Kaio")
+			src.Race="Kaio"
+			if(src.gender=="female")
+				src.icon='CustomFemale.dmi'
+			else
+				src.icon='CustomMale.dmi'
+
+		if("Demon")
+			src.Race="Demon"
+			src.icon='Demon1.dmi'
+			src.Class="Pride"
+
 			//Rares
-			if(Rac==3)
-				src.Race="Majin"
-				src.icon='Majin.dmi'
+		if("Majin")
+			src.Race="Majin"
+			src.icon='Majin.dmi'
 
 				//src.icon='
-			if(Rac==4)
-				src.Race="Dragon"
-				src.icon='Dragon1.dmi'
-			if(Rac==5)
-				src.Race="Makaioshin"
-				src.icon='MaleLight.dmi'
-				src.Class="Courage"
+		if("Dragon")
+			src.Race="Dragon"
+			src.icon='Dragon1.dmi'
 
-			if(Rac==6)
-				src.Race="God of Destruction"
-				src.icon='MaleLight.dmi'
-				src.Class="Fighter"
-			if(Rac==7)
-				src.Race="Mazoku Demon"
-				src.icon='FemaleLight.dmi'
+		if("Alien")
+			src.Race="Alien"
+			src.icon='Alien1.dmi'
 
+		if("Heran")
+			src.Race="Heran"
+			src.icon='HeranBase.dmi'
+		if("Lycan")
+			src.Race="Lycan"
+			src.icon='Alien1.dmi'
+		if("Vampire")
+			src.Race="Vampire"
+			src.icon='Alien1.dmi'
+		if("Aetherian")
+			src.Race="Aetherian"
+			src.icon='Alien1.dmi'
+		if("Youkai")
+			src.Race="Youkai"
+			src.icon='MaleLight.dmi'
+			src.Class="Kitsune"
 
+		if("Android")
+			src.Race="Android"
+			src.icon='Android1.dmi'
+			src.Class="Fighter"
 
-	if(Plan==5)//Arconia - Alien
-		if(src.CheckIfDestroyed("Arconia",amountz))
-			//Rac=1
-			if(Rac>2)
-				if(Rac==3)
-					if(src.CheckUnlock("Lycan")!=1)
-						Rac=4
-				if(Rac==4)
-					if(src.CheckUnlock("Vampire")!=1)
-						Rac=5
-				if(Rac==5)
-					if(src.CheckUnlock("Aetherian")!=1)
-						Rac=6
-				if(Rac>8)
-					Rac=1
-				//Rac=1
-			if(Rac<1)
-				Rac=9
-				if(Rac==9)
-					if(src.CheckUnlock("Aetherian")!=1)
-						Rac=4
-				if(Rac==4)
-					if(src.CheckUnlock("Vampire")!=1)
-						Rac=3
-				if(Rac==3)
-					if(src.CheckUnlock("Lycan")!=1)
-						Rac=2
-			if(Rac==1)
-				src.Race="Alien"
-				src.icon='Alien1.dmi'
+		if("Bio")
+			src.Race="Bio Android"
+			src.icon='BioAndroid1.dmi'
 
-			if(Rac==2)
-				src.Race="Heran"
-				src.icon='HeranBase.dmi'
-			if(Rac==3)
-				src.Race="Lycan"
-				src.icon='Alien1.dmi'
-			if(Rac==4)
-				src.Race="Vampire"
-				src.icon='Alien1.dmi'
-			if(Rac==5)
-				src.Race="Aetherian"
-				src.icon='Alien1.dmi'
-			if(Rac==6)
-				src.Race="Youkai"
-				src.icon='MaleLight.dmi'
-				src.Class="Kitsune"
-			if(Rac==7)
-			{
-				src.Race="Golem"
-				src.Class="Fighter"
-			}
-			if(Rac==8)
-				src.Race="Manakete"
-				src.Class="Hyattr"
-			if(Rac==9)
-				src.Race="Lamia"
-				src.Class="Gorgon"
-	if(Plan==6)//Arconia - Alien
-		if(src.CheckIfDestroyed("Android",amountz))
-			//Rac=1
-			if(Rac<1)
-				Rac=2
-			if(Rac>3)
-				Rac=1
-			if(Rac==2)
-				if(src.CheckUnlock("Bio")!=1)
-					Rac=1
-			if(Rac==1)
-				src.Race="Android"
-				src.icon='Android1.dmi'
-				src.Class="Fighter"
-
-			if(Rac==2)
-				src.Race="Bio Android"
-				src.icon='BioAndroid1.dmi'
-
-			if(Rac==3)
-				src.Race="Reploid"
-				src.icon='Android1.dmi'
-				src.Class="X"
-//			if(Rac==3)
-//				src.Race="Hollow"
-//				src.icon='Android1.dmi'
-
-
-	if(Plan==7)//Ice - Changeling
-		if(src.CheckIfDestroyed("Ice",amountz))
-			Rac=1
-			if(Rac==1)
-				src.Race="Changeling"
-				src.icon='Frieza1.dmi'
-				src.Class="Frieza"
+		if("Changeling")
+			src.Race="Changeling"
+			src.icon='Frieza1.dmi'
+			src.Class="Frieza"
 
 	winset(src,"RaceName","text=\"[src.Race]\"")
 	if(src.Race=="Human")
@@ -2286,7 +2117,7 @@ mob/proc
 					src.TemperatureToleranceType="Cold"
 			if("Alien")
 				src.Race="Alien"
-				src.BaseMod=1.5
+				src.BaseMod=2
 				src.Meditation_Rate=1.5
 				src.Zenkai_Rate=0.5
 				src.Training_Rate=2.25
@@ -2530,7 +2361,7 @@ mob/proc
 			//Rares
 			if("Dragon")
 				src.Race="Dragon"
-				src.BaseMod=40
+				src.BaseMod=3
 				src.Meditation_Rate=2
 				src.Zenkai_Rate=0.5
 				src.Training_Rate=2
@@ -3292,7 +3123,7 @@ mob/proc
 				src.contents+=new/obj/Skills/Bojack
 		if(src.Race=="Kaio")
 			if(src.Base<500)src.Base=1
-			src.Decline=120
+			src.Decline=999
 			src.Decline_Rate=3
 			src.SenseReq=0.1
 			src.PrimeAge=5

@@ -4367,6 +4367,7 @@ obj/Effects
 		icon='Crater.dmi'
 		Grabbable=0
 		Savable=0
+		var/scale=1
 		New()
 			pixel_x=-32
 			pixel_y=-32

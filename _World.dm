@@ -141,6 +141,12 @@ proc/GlobalSave()
 var/Updates={"
 <i>|Version MM/DD/YYYY|</i><br><br>
 <b>Version V1.2.0 1/27/2019</b><br>
+- Aliens reworked. They have 3 customizable transformations and 2 ascensions. 1st ascension scales alien's first transformation into SSj Era. It should also be common. The second ascension, Elite status, is otherwise exclusive.<br>
+- Kaios reworked. They naturally obtain teachable and support abilities, as well as God Ki. Makaio are now a path of Kaios.<br>
+- Dragons reworked. They now scale through eras. Each dragon also obtains an elemental class.<br>
+- Kaioken now gives three different verbs instead of prompting the user. Kaioken's power has been reduced massively. Grants some stats to compensate.<br>
+- Added God Ki ability. which functions as a power multiplier. Divinity and God Ki are not the same, in that, God Ki is the actual usage of Divinity to power oneself. All God Ki users are divine, but most divine character will not ever use God Ki.<br>
+- Divinity has attained some new nifty passives.<br>
 - Movement Speed slowed dramatically. <br>
 - Wound Toggle should show on sense now. A wound label has been added to the interface aswell. <br>
 - Power Up rates are reduced dramatically as you PU higher. This should compliment the update below nicely.<br>
@@ -249,7 +255,22 @@ var/WorldLoading
 var/SecurityHex="PrivateTesting666"
 
 
-var/list/LockedRaces=list(params2list("Throwback=Soldier_Dude"),params2list("Shifter=He_Without_Sorrow"),params2list("Throwback=Jumpy"),params2list("Sage=Kitlea"),params2list("Aetherian=Raffness"),params2list("Manakete=Fushichou"))
+var/list/LockedRaces=list("Half Saiyan"=list(),\
+	"Makyo"=list(),\
+	"Half Demon"=list(),\
+	"Demi"=list(),\
+	"Saiyan"=list(),\
+	"Kaio"=list(),\
+	"Demon"=list(),\
+	"Majin"=list(),\
+	"Dragon"=list(),\
+	"Lycan"=list(),\
+	"Vampire"=list(),\
+	"Aetherian"=list(),\
+	"Android"=list(),\
+	"Bio"=list(),\
+	"Changeling"=list())
+
 //removed due to QQing
 mob/proc/CheckUnlock(var/blah)
 	if(blah=="Elite"||blah=="Low-Class"||blah=="King Kold"||blah=="Half Demon"||blah=="Trunks"||blah=="Gohan"||blah=="Majin"||blah=="Bio"||blah=="Dragon"||blah=="Vampire"||blah=="Lycan"||blah=="Legendary"||blah=="Savage"||blah=="Fire God"||blah=="Heran"||blah=="Popo"||blah=="Ancient"||blah=="Half Saiyan"||blah=="Quarter Saiyan"||blah=="Makaioshin"||blah=="Deus"||blah=="God of Destruction"||blah=="Volodarskii"||blah=="Shifter"||blah=="Aetherian"||blah=="Youkai"||blah=="Quincy"||blah=="Neko"||blah=="Hell Raven"||blah=="Nobody"||blah=="Golem"||blah=="1/16th Saiyan"||blah=="Mazoku"||blah=="Sage"||blah=="Schrodinger"||blah=="Manakete"||blah=="Anti-Spiral"||blah=="Makyo"||blah=="Human"||blah=="Demi"||blah=="Captain"||blah=="Dhampir"||blah=="Synchronizer"||blah=="Reploid"||blah=="Lamia")
@@ -333,17 +354,27 @@ mob/proc/CheckUnlock(var/blah)
 	return 0
 
 mob/proc/CheckSpecial(var/blah)
-	if(src.key=="TiltHour")return 1
 	if(src.key=="")return 1
 	if(src.key=="")return 1
 	if(src.key=="")return 1
-	if(src.Admin)return 1
-	for(var/x in LockedRaces)
-		for(var/e in x)
-			if(e=="[blah]")
-				if(x[e]==src.key)
-					return 1
-	return 0
+	if(src.key=="")return 1
+//	if(src.Admin)return 1
+
+	if(blah in LockedRaces)
+		if(src.key in LockedRaces[blah])
+			return 1
+		return 0
+	else
+		return 1
+//	for(var/x in LockedRaces)
+//		for(var/e in x)
+//			if(e=="[blah]")
+//				found = 1
+//				if(x[e]==src.key)
+//					return 1
+//	if(!found)
+//		return 1
+//	return 0
 
 
 
@@ -464,10 +495,10 @@ proc/BootFile(var/file,var/op)
 			if(op=="Load")
 				if(fexists("Saves/RaceLock"))
 					var/savefile/F=new("Saves/RaceLock")
-					F["RaceLock"]>>RaceLock
+					F["RaceLock"]>>LockedRaces
 			if(op=="Save")
 				var/savefile/F=new("Saves/RaceLock")
-				F["RaceLock"]<<RaceLock
+				F["RaceLock"]<<LockedRaces
 		if("Alliance")
 			switch(op)
 				if("Load")

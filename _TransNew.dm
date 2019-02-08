@@ -67,6 +67,13 @@ mob/proc/SetVars()
 		src.trans["2multi"]=2
 		src.trans["2req"] = 60000000
 		src.trans["2give"] = 45000000
+
+
+	if(src.Race == "Alien")
+		src.trans["1multi"] = 3
+		src.trans["2multi"] = 2
+		src.trans["3multi"] = 2
+
 	if(src.Race== "Namekian")
 		if(src.Class == "Fighter")
 			src.trans["1req"] = 2500000
@@ -1971,6 +1978,51 @@ mob/proc/PureSSj(var/x)
 		src.overlays-=image('Amazing SSj Aura.dmi', pixel_x=-32)
 		src.overlays+=image('Amazing SSj Aura.dmi', pixel_x=-32)
 
+mob/proc/SuperAlien(var/level)
+	SetVars()
+	spawn()Crater(src)
+	Earthquake(level*4,-2*level,2*level,-2*level,2*level)
+	src.Base*=trans["[level]multi"]
+	src.BaseMod*=trans["[level]multi"]
+
+	if(level == 1)
+		if(!trans["alientrans"])
+			var transtype
+			while(!transtype)
+				transtype = input("Select a focus for your transformation.") in list("Power","Potency","Fury","Protection","Spirit")
+				var alertmessage
+				switch(transtype)
+					if("Power") alertmessage = "Your physical might and durability are extraordinary, allowing you to sustain heavy attacks and deliver even heavier ones."
+					if("Potency") alertmessage = "Your assault is focused using the combined forces of your spiritual and physical might."
+					if("Fury") alertmessage = "Your power sways with the intensity of your emotions."
+					if("Protection") alertmessage = "Your body is hard as iron, and impenetrable wall."
+					if("Spirit") alertmessage = "Your spiritual might overflows with the intensity of your power."
+				if(alert("[alertmessage]"))
+					trans["alientrans"] = transtype
+					if(transtype == "Fury") NewAnger(1.8)
+				else transtype = null
+
+		switch(trans["alientrans"])
+			if("Power")
+				StrengthMultiplier *= 1.4
+				EnduranceMultiplier *= 1.4
+			if("Potency")
+				StrengthMultiplier *= 1.4
+				ForceMultiplier *= 1.4
+			if("Protection")
+				EnduranceMultiplier *= 1.4
+				ResistanceMultiplier *= 1.4
+			if("Spirit")
+				ForceMultiplier *= 1.4
+				ResistanceMultiplier *= 1.4
+
+	src.RecoveryMultiplier*=0.85
+	src.trans["active"] = level
+	src.CustomizedTrans(level)
+
+	if(level == 3)	KenShockwave(src, Size=5)  //M is the person that makes t
+
+
 mob/proc/SSj(var/x)
 	if(src.Dead==1&&src.KeepBody==0&&!src.HeartHero)
 		return
@@ -3329,6 +3381,24 @@ mob/proc/Transform()
 					trans["transing"]=1
 					src.SDJ(3)
 					trans["transing"]=0
+	if(src.Race=="Alien")
+		if(trans["active"]==0||trans["active"]==null)
+			if(trans["unlocked"]>0)
+				trans["transing"]=1
+				src.SuperAlien(1)
+				trans["transing"]=0
+		else if(trans["active"]==1)
+			if(trans["unlocked"]>1)
+				trans["transing"]=1
+				src.SuperAlien(2)
+				trans["transing"]=0
+
+		else if(trans["active"]==2)
+			if(trans["unlocked"]>2)
+				trans["transing"]=1
+				src.SuperAlien(3)
+				trans["transing"]=0
+
 	if(src.Race=="Hollow")
 		if(trans["active"]==0||trans["active"]==null)
 			if(trans["unlocked"]>0)
@@ -3574,6 +3644,8 @@ mob/proc/Revert()
 			src.RevertJinVersionOneTrans()
 			return
 	if(src.trans["transing"]==1||src.ssj["transing"]==1)return
+
+
 	if(src.Race=="Youkai"&&src.Class=="Hell Raven")
 		src.overlays-=image(icon='NuclearRaven.dmi',icon_state="One",pixel_x=-32)
 		src.overlays-=image(icon='NuclearRaven.dmi',icon_state="Two",pixel_x=-32)
@@ -3697,6 +3769,26 @@ mob/proc/Revert()
 			//src.SaiyanPUNerf=1
 			src.Hairz("Add")
 
+	if(src.Race=="Alien")
+		src.Base/=trans["[trans["active"]]multi"]
+		src.BaseMod/=trans["[trans["active"]]multi"]
+		src.RecoveryMultiplier/=0.85
+		CustomizedRevert(src.trans["active"])
+		if(src.trans["active"]==1)
+			switch(trans["alientrans"])
+				if("Power")
+					StrengthMultiplier /= 1.4
+					EnduranceMultiplier /= 1.4
+				if("Potency")
+					StrengthMultiplier /= 1.4
+					ForceMultiplier /= 1.4
+				if("Protection")
+					EnduranceMultiplier /= 1.4
+					ResistanceMultiplier /= 1.4
+				if("Spirit")
+					ForceMultiplier /= 1.4
+					ResistanceMultiplier /= 1.4
+		src.trans["active"]--
 
 	if(src.Race=="Half Saiyan"||src.Race=="Quarter Saiyan")
 		if(src.ssj4active)

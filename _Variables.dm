@@ -182,7 +182,6 @@ mob/var
 	Cursed=0
 	KaiokenMod=1
 	PlayerEXPgains=1
-	KaiokenBP
 	KaiokenMastery=1
 	KaiokenLevel
 	KaiokenActive

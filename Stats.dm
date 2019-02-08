@@ -1013,12 +1013,12 @@ mob/proc/Available_Power()
 				KeybladeMult+=SecondKeybladeMult
 		//Avaliable Power
 		var/Ratio=Base*20*Body*Power_Multiplier
+
+		var ratio_mult = 1
 		if(src.SuperKamuiAscension)
-			Ratio*=3
+			ratio_mult+=3
 		if(src.FruitEaten)
-			Ratio*=1.25
-		if(src.Race=="Half Demon" && src.LowPower)
-			Ratio/=3
+			ratio_mult+=1.25
 		if(src.GatesNerfPerc)
 			Ratio/=src.GatesNerfPerc
 		if(src.MachinaMod)
@@ -1039,20 +1039,21 @@ mob/proc/Available_Power()
 
 		//
 //		if(Anger) Ratio*=Anger
-		if(KaiokenBP) Ratio+=KaiokenBP
 		if(BurningShotBP) Ratio+=BurningShotBP
 	//	if(PlusPower) Ratio+=PlusPower
 		if(AbsorbPower)Ratio+=AbsorbPower
-		if(RPPower) Ratio*=RPPower
+		if(RPPower) ratio_mult+=RPPower
 		if(CyberPower&&!src.MachinaMod)Ratio+=CyberPower
-		if(src.KeybladeLevel)Ratio*=KeybladeMult
-		if(src.HopeOverload)Ratio*=HopeMult
-		if(CounterGuardian)Ratio*=1.5
-		if(MadeOfSwords)Ratio*=1.2
+		if(src.KeybladeLevel)ratio_mult+=KeybladeMult
+		if(src.HopeOverload)ratio_mult+=HopeMult
+		if(CounterGuardian)ratio_mult+=1.5
+		if(MadeOfSwords)ratio_mult+=1.2
 		if(CursedBeta=="Power")Ratio*=0.5
-		if(InUBW2)Ratio*=2
-		if(InIH2)Ratio*=2
+		if(InUBW2)ratio_mult+=2
+		if(InIH2)ratio_mult+=2
 
+		if(god_ki) ratio_mult+= god_ki
+		Ratio *= ratio_mult
 		var/weights=0
 		for(var/obj/Items/Weights/W in src)
 			if(W.suffix)

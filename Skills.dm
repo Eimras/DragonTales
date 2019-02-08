@@ -2139,7 +2139,7 @@ obj/Skills
 					//		if(prob(10))sleep(0.1)
 							for(var/mob/M in view(0,T))
 								if(M!=usr)
-									M.Health-=((usr.Force*usr.Power)/(M.Resistance*M.Power))*30
+									M.Health-=usr.ForVsRes(M, 30)
 					if(!usr.Beaming)
 						usr.DragonFist=1
 					usr.SkillX("Beam",src)
@@ -6869,7 +6869,30 @@ obj/Skills/Rank
 		verb/Kaioken()
 			set category="Skills"
 			set name="Kaioken"
+			Power=1
 			usr.SkillX("Kaioken",src)
+		verb/KaiokenX4()
+			set category="Skills"
+			set name="Kaioken x4"
+			Power=2
+			usr.SkillX("Kaioken",src)
+		verb/KaiokenX10()
+			set category="Skills"
+			set name="Kaioken x10"
+			Power=3
+			usr.SkillX("Kaioken",src)
+
+	GodKi
+		Learn=list("energyreq"=5000,"difficulty"=500)
+		Level=100
+		desc="Allows you to use the Legendary Kaioken technique."
+		icon_state="Kaioken"
+		Teachable=0
+		verb/GodKi()
+			set category="Skills"
+			set name="God Ki"
+			usr.SkillX("GodKi",src)
+
 	SuperKaioken
 		Learn=list("energyreq"=5000,"difficulty"=500)
 		Level=100
@@ -6905,6 +6928,8 @@ obj/Skills/Rank
 			set name="Burning Shot"
 //			src.Using=!src.Using // Whatever Using is now, reverse it. 1 becomes 0, true becomes false
 			usr.SkillX("BurningShot",src)
+
+
 
 	SpiritBurst
 		Learn=list("energyreq"=5000,"difficulty"=500)

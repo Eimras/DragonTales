@@ -9214,7 +9214,7 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 						return
 					src.Base*=2
 					src.BaseMod*=2
-					src.PlusPower*=2
+			//		src.PlusPower*=2
 					src.RecoveryMultiplier*=1.5
 					src.RegenerationMultiplier*=1.5
 					src<<"Your body's power and stress increases!"
@@ -11146,6 +11146,8 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 						return
 				if(src.PowerUp)
 					src.Transform()
+
+
 					if(src.FrenzyLevel>2 && FrenzySuper==2)
 						spawn()DarknessFlash(src)
 				/*		spawn()for(var/turf/e in range(20,src))
@@ -14651,12 +14653,26 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 						src.RPPower*=5
 						src.SpeedMultiplier*=5
 						src.OMessage(15,null,"<font color=red>[src]([src.key]) uses Super Kaioken.")
+			if("GodKi")
+				if(!Z.BuffUsing)
+					if(src.KO)return
+
+					src.OMessage(15,"[src] unleashes their godly power.","<font color=red>[src]([src.key]) uses God Ki.")
+					if(!Divine) Divine = 1
+					src.god_ki += src.god_ticks
+					Z.BuffUsing=1
+				else
+					src.god_ki -= src.god_ticks
+					src.OMessage(15,"[src] relaxes their godly power.","<font color=red>[src]([src.key]) turns off God Ki.")
+					Z.BuffUsing=0
+
 			if("Kaioken")
 				if(src.KaiokenActive)
 				//	src.SpecialSlot=0
 					src<<"You stop using Kaioken."
 					src.KaiokenActive=0
-					src.RPPower/=1+(src.KaiokenLevel)
+					src.RPPower-=(src.KaiokenLevel)
+					src.OffenseMultiplier /= 1.3
 					src.KaiokenLevel=0
 					src.SuperKaioken=0
 					src.overlays-=image(icon='AurasBig.dmi',icon_state="Kaioken",pixel_x=-32)
@@ -14664,23 +14680,30 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 				//	src << "You're already using a special buff."
 				//	return
 				//	src.SpecialSlot=1
-					var/amount=input(src,"Kaioken multiple. (You have Kaioken x[src.KaiokenMastery] mastered)") as num
-					if(amount<1) amount=1
-					amount=round(amount)
-					if(amount>=20)
-						amount=20
+					var/amount
+					var/shout
+					switch(Z.Power)
+						if(1)
+							amount = 1.25
+							shout = "[min(KaiokenMastery, 3)]"
+						if(2)
+							amount = 1.5
+							shout = "4"
+						if(3)
+							amount = 2
+							shout = "10"
 					if(!usr.KaiokenActive)
 						src.overlays+=image(icon='AurasBig.dmi',icon_state="Kaioken",pixel_x=-32)
 						view(src)<<"A bright red aura bursts all around [src]."
-					/*	if(amount>=20)
-							amount=20*/
-						if(amount>=31)
-							src.SuperKaioken=1
-							amount=30
+						view(src)<<"[src] yells: <b>Kaioken x[amount]!</b>"
+					//	if(amount>=31)
+					//		src.SuperKaioken=1
+					//		amount=30
+						src.OffenseMultiplier *= 1.3
 						src.KaiokenActive=1
 						src.KaiokenLevel=amount
-						src.RPPower*=1+(src.KaiokenLevel)
-						src.OMessage(15,null,"<font color=red>[src]([src.key]) uses Kaioken x[amount].")
+						src.RPPower+=(src.KaiokenLevel)
+						src.OMessage(15,null,"<font color=red>[src]([src.key]) uses Kaioken x[shout].")
 			if("ChaosImitate")
 			{
 				if(src.KO||Blocking)return
