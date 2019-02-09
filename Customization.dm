@@ -71,6 +71,18 @@ mob/proc/Auraz(var/Z)
 
 			else if(src.trans["active"])
 				src.Auraz("Remove")
+				if(src.Race=="Alien")
+					var trans_level = trans["active"]
+					var aura
+					while(!aura && trans_level)
+						aura = trans_flavor["[trans_level]aura"]
+						if(trans_level > 0 && !aura) trans_level-- //Use the previous level trans.
+
+
+					if(!aura) aura = image(M.sicon,M.sicon_state,pixel_x=M.pixel_x,pixel_y=M.pixel_y)
+					overlays += aura
+
+
 				if(src.Race=="Youkai"&&src.Class=="Hell Raven")
 					if(src.trans["active"]==1)
 						src.overlays+=image(icon='NuclearRaven.dmi',icon_state="One",pixel_x=-32)
@@ -210,6 +222,9 @@ mob/proc/Auraz(var/Z)
 				src.overlays += image(M.sicon,M.sicon_state,pixel_x=M.pixel_x,pixel_y=M.pixel_y)
 		if(Z=="Remove")
 			src.overlays -= image(M.sicon,M.sicon_state,pixel_x=M.pixel_x,pixel_y=M.pixel_y)
+			src.overlays-=trans_flavor["1aura"]
+			src.overlays-=trans_flavor["2aura"]
+			src.overlays-=trans_flavor["3aura"]
 			src.overlays-=image(icon='BijuuInitial.dmi', pixel_x=-32, pixel_y=-32)
 			src.overlays-=image('SuperHellRaven.dmi', pixel_x=-32);
 			src.overlays-=image('NuclearRaven.dmi', pixel_x=-32);
@@ -302,7 +317,16 @@ mob/proc/Hairz(var/Z)
 		src.Hairz("Remove")
 		Hair=Hair_Base
 		if(Hair_Color) Hair+=Hair_Color
-		if(src.ssj["active"]==1 && !src.SSJGod && src.Class != "Fire God"&& src.Class != "Legendary")
+
+		if(src.trans["active"] && src.Race == "Alien")
+			src.overlays -= Hair
+
+			var hair
+			hair = trans_flavor["[trans["active"]]hair"]
+			if(!hair) overlays += Hair
+			else overlays += hair
+
+		else if(src.ssj["active"]==1 && !src.SSJGod && src.Class != "Fire God"&& src.Class != "Legendary")
 			src.overlays += src.Hair_SSJ1//image(Hair_SSJ1)
 			src.overlays -= Hair
 		else if(src.ssj["active"]==2)

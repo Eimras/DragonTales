@@ -112,39 +112,10 @@ mob/proc/Teach(obj/Skills/A)
 	Choice.contents+=q
 
 mob/Players/verb
-/*	Meditate()
-		set category="Skills"
-		usr.SkillX("Meditate",null,1)*/
-/*	Meditate()
-		set category="Skills"
-		if(usr.icon_state == "KO" || usr.icon_state=="Train"|| usr.icon_state=="KB" || usr.icon_state=="Flight" ) return
-		if(isnull(usr.meditation_event))
-			generalEvent_id="[usr][world.realtime][rand()]"
-			usr << "You begin meditating."
-			icon_state = "Meditate"
-			usr.dir=SOUTH
-			usr.meditation_event = new(training_scheduler, usr, generalEvent_id)
-			training_scheduler.schedule(usr.meditation_event, 50)
-		else
-			Cancel_Meditation()*/
-/*	Train()
-		set category="Skills"
-		usr.SkillX("Train",null,1)*/
-/*	Train()
-		set category="Skills"
-		if(usr.icon_state == "KO" || usr.icon_state=="Meditate"|| usr.icon_state=="KB" || usr.icon_state=="Flight" ) return
-		if(isnull(usr.training_event))
-			generalEvent_id="[usr][world.realtime][rand()]"
-			usr << "You begin shadow boxing."
-			icon_state = "Train"
-			usr.dir=SOUTH
-			usr.training_event = new(training_scheduler, usr, generalEvent_id)
-			training_scheduler.schedule(usr.training_event, 50)
-		else
-			Cancel_Training()*/
 	Attack()
 		set category="Skills"
 		set name="Normal Attack"
+		set instant = 1
 		if(Blocking)return
 		if(Cuffed)
 			usr<<"You can't break those cuffs."
@@ -171,164 +142,7 @@ mob/Players/verb
 			usr<<"You can't break those cuffs."
 			return
 		usr.Grab()
-/*	Dig()
-		set category="Skills"
-		usr.SkillX("Dig",null,1)*/
-/*	Dig()
-		// usr = the key
-		// src = the mob
 
-		set category="Skills"
-		if(usr.icon_state == "KO" || usr.icon_state=="Train"|| usr.icon_state=="Meditate" || usr.icon_state=="Flight" ) return
-		if(isnull(usr.digging_event))
-			generalEvent_id="[usr][world.realtime][rand()]"
-			usr << "You begin digging for resources."
-			icon_state = "KB"
-			usr.Frozen=1
-			usr.digging_event = new(general_scheduler, usr, generalEvent_id)
-			general_scheduler.schedule(usr.digging_event, 50)
-/*			for(var/mob/Players/M in world)
-				if (!M.client) continue
-				if (usr != M && usr.client.address == M.client.address)
-					M.Cancel_Digging()*/
-		else
-			usr.Frozen=0
-			Cancel_Digging()*/
-
-/*	Test()
-		set category = "Debug"
-		src << " Hiya! <br>\
-		src = [src] [src.type]<br> \
-		usr = [src] [usr.type]"*/
- // I hope that cleared some usr/src stuff up :P
- // So above there, in Dig(), both src and usr can be used? They're somewhat interchangable?
- // In this case yea. Because mob and usr refer to the same thing.
- // Because usr is implied you could even do this
- // But that gets really confusing
- // Indeed. I'd likely forget what it was doing
-
-/*mob/proc/BlastX(var/Wut,var/obj/Skills/Z,var/bypass=0)
-	if(Z)
-		if(!locate(Z) in src)
-			return
-	if(src.Stunned)
-		return
-	var/ManaDrain=1
-	var/StaffPower=1
-//	var/Element=0
-	for(var/obj/Items/Enchantment/Staff/N in src) if (N.suffix)
-		ManaDrain=N.Mana_Drain
-		StaffPower=N.Staff_Power
-//		Element=N.Element
-	if(bypass||Z)
-		switch(Wut)
-
-/*			if("KamuiRegen")
-				if(!Z.Using)
-					src.OMessage(10, "[src]'s body threads itself back together!!", "[src]([src.key]) used Kamui Regen.")
-					var/Affinity=src.LifeFiberFusion
-					while(Affinity)
-						Affinity--
-						src.Health+=5
-					src.Health+=10
-					if(src.Health > 100)
-						src.Health=100
-					Z.Cooldown()
-
-			if("Shoryuken")
-				if(Z.Using)
-					return
-				var/Drain = src.EnergyMax/20
-				if(src.AmatsukenAscension=="Chikara no Hado")
-					Drain=0
-				if(src.AmatsukenAscension=="Satsui no Hado")
-					Drain*=0.5
-				if(src.Energy < Drain)
-					return
-				src.Energy-=Drain
-				for(var/mob/E in hearers(12,src))
-					for(var/obj/Communication/C in src)
-						E<<"<font color=[C.Text_Color]>[src] yells: <b>SHORYUKEN!</b>"
-				var/obj/o = new
-				o.loc=src.loc
-				o.dir = src.dir
-				var
-					ax=0
-				while(ax<2)
-					ax++
-					step(o, o.dir)
-					for(var/mob/m in o.loc)
-						if(src==m)
-							continue
-						switch(src.AmatsukenPath)
-							if("Hadoken")
-								src.ShoryukenCount=rand(1,3)
-							if("Shoryuken")
-								src.ShoryukenCount=rand(1,5)
-							if("Tatsumaki")
-								src.ShoryukenCount=rand(1,4)
-						src.Comboz(m)
-						src.Melee(1,1)
-
-				del o
-				if(src.AmatsukenAscension=="Chikara no Hado")
-					Z.Cooldown=20
-				Z.Cooldown()
-			if("ExShoryuken")
-				if(Z.Using)
-					return
-				var/Drain = (src.EnergyMax/20)
-				if(src.AmatsukenAscension=="Chikara no Hado")
-					Drain=0
-				if(src.AmatsukenAscension=="Satsui no Hado")
-					Drain*=0.5
-				if(src.Energy < Drain)
-					return
-				src.Energy-=Drain
-				for(var/mob/E in hearers(12,src))
-					for(var/obj/Communication/C in src)
-						E<<"<font color=[C.Text_Color]>[src] yells: <b>EX-SHORYUKEN!</b>"
-				var/obj/o = new
-				o.loc=src.loc
-				o.dir = src.dir
-				var/x=0
-				while(x<2)
-					x++
-					step(o, o.dir)
-					for(var/mob/m in o.loc)
-						if(src==o)
-							continue
-						src.ShoryukenCount=rand(2,7)
-						src.ShoryukenBurn=1
-						src.Comboz(m)
-						src.Melee(1,1)
-				del o
-
-				src.ShoryukenBurn=0
-
-				if(src.AmatsukenAscension=="Chikara no Hado")
-					Z.Cooldown=90
-				Z.Cooldown()*/
-
-			if("ComboFinisher")
-				if(Z.Using)
-					return
-				if(!src.Target)
-					src << "You need a target for this skill."
-					return
-				if(src.ComboPlusNumber>=10)
-					var/DamageMult=1+(ComboPlusNumber/20)
-					DamageMult*=1+(0.1*(src.Target.Health%50))
-					if(src.HasKeyblade("Light", 4)&&src.DiveWeapon=="Sword")
-						DamageMult*=1.5
-					if(src.HasKeyblade("Semi-Divine", 4))
-						DamageMult*=1.75
-					if(src.HasKeyblade("Divine", 4))
-						DamageMult*=2
-					src.Comboz(src.Target)
-					src.Melee(DamageMult,1)
-					src.ComboPlusNumber=0
-				Z.Cooldown()*/
 
 mob/proc/BuffX(var/Wut,var/obj/Skills/Z,var/bypass=0)
 	if(Z)
@@ -3237,7 +3051,7 @@ mob/proc/BuffX(var/Wut,var/obj/Skills/Z,var/bypass=0)
 					src << "Power sleeps within you."
 					sleep(5)
 					src.OMessage(10, "[src] vanishes in a flash of light!", "[src]([src.key]) used Dive into the Heart.")
-					src.loc = locate(223, 400, 13)
+					src.loc = locate(223, 400, 1)
 					src << "Decide what door to open."
 					sleep(5)
 					src << "To the left lies the shield - The power of the guardian.  Kindness to aid friends...A shield to repel all."
@@ -9214,7 +9028,7 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 						return
 					src.Base*=2
 					src.BaseMod*=2
-					src.PlusPower*=2
+			//		src.PlusPower*=2
 					src.RecoveryMultiplier*=1.5
 					src.RegenerationMultiplier*=1.5
 					src<<"Your body's power and stress increases!"
@@ -10102,44 +9916,8 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 				if(!src.CanBlast(Drain)) return
 				src.Attacking=1
 				src.Beaming=1
-				view(src)<< "[usr] performs a handseal! \[Snake]"
-				for(var/mob/E in hearers(12,src))
-					E<<sound('KunaiMod/Sounds/handseal.ogg')
-				sleep(60/src.HandsealMastery)
-				sleep(3)
-				src.HandsealMastery+=0.25
-				view(src)<< "[usr] performs a handseal! \[Ram]"
-				for(var/mob/E in hearers(12,src))
-					E<<sound('KunaiMod/Sounds/handseal.ogg')
-				sleep(60/src.HandsealMastery)
-				sleep(3)
-				src.HandsealMastery+=0.25
-				view(src)<< "[usr] performs a handseal! \[Monkey]"
-				for(var/mob/E in hearers(12,src))
-					E<<sound('KunaiMod/Sounds/handseal.ogg')
-				sleep(60/src.HandsealMastery)
-				sleep(3)
-				src.Attacking=0
-				src.Beaming=0
-				src.HandsealMastery+=0.25
-				view(src)<< "[usr] performs a handseal! \[Boar]"
-				for(var/mob/E in hearers(12,src))
-					E<<sound('KunaiMod/Sounds/handseal.ogg')
-				sleep(60/src.HandsealMastery)
-				sleep(3)
-				src.HandsealMastery+=0.25
-				view(src)<< "[usr] performs a handseal! \[Horse]"
-				for(var/mob/E in hearers(12,src))
-					E<<sound('KunaiMod/Sounds/handseal.ogg')
-				sleep(60/src.HandsealMastery)
-				sleep(3)
-				src.HandsealMastery+=0.25
-				view(src)<< "[usr] performs a handseal! \[Tiger]"
-				for(var/mob/E in hearers(12,src))
-					E<<sound('KunaiMod/Sounds/finalhandseal.ogg')
-				sleep(60/src.HandsealMastery)
-				sleep(3)
-				src.HandsealMastery+=0.25
+				view(src)<< "[usr] performs a series of handseals!"
+				sleep(10)
 				src.Energy-=Drain/src.Efficiency*100*(1/Z.Level)
 				Z.Skill_Increase(2.5)
 				if(Z.Level<100)
@@ -11182,6 +10960,8 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 						return
 				if(src.PowerUp)
 					src.Transform()
+
+
 					if(src.FrenzyLevel>2 && FrenzySuper==2)
 						spawn()DarknessFlash(src)
 				/*		spawn()for(var/turf/e in range(20,src))
@@ -14687,12 +14467,26 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 						src.RPPower*=5
 						src.SpeedMultiplier*=5
 						src.OMessage(15,null,"<font color=red>[src]([src.key]) uses Super Kaioken.")
+			if("GodKi")
+				if(!Z.BuffUsing)
+					if(src.KO)return
+
+					src.OMessage(15,"[src] unleashes their godly power.","<font color=red>[src]([src.key]) uses God Ki.")
+					if(!Divine) Divine = 1
+					src.god_ki += src.god_ticks
+					Z.BuffUsing=1
+				else
+					src.god_ki -= src.god_ticks
+					src.OMessage(15,"[src] relaxes their godly power.","<font color=red>[src]([src.key]) turns off God Ki.")
+					Z.BuffUsing=0
+
 			if("Kaioken")
 				if(src.KaiokenActive)
 				//	src.SpecialSlot=0
 					src<<"You stop using Kaioken."
 					src.KaiokenActive=0
-					src.RPPower/=1+(src.KaiokenLevel)
+					src.RPPower-=(src.KaiokenLevel)
+					src.OffenseMultiplier /= 1.3
 					src.KaiokenLevel=0
 					src.SuperKaioken=0
 					src.overlays-=image(icon='AurasBig.dmi',icon_state="Kaioken",pixel_x=-32)
@@ -14700,23 +14494,30 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 				//	src << "You're already using a special buff."
 				//	return
 				//	src.SpecialSlot=1
-					var/amount=input(src,"Kaioken multiple. (You have Kaioken x[src.KaiokenMastery] mastered)") as num
-					if(amount<1) amount=1
-					amount=round(amount)
-					if(amount>=20)
-						amount=20
+					var/amount
+					var/shout
+					switch(Z.Power)
+						if(1)
+							amount = 1.25
+							shout = "[min(KaiokenMastery, 3)]"
+						if(2)
+							amount = 1.5
+							shout = "4"
+						if(3)
+							amount = 2
+							shout = "10"
 					if(!usr.KaiokenActive)
 						src.overlays+=image(icon='AurasBig.dmi',icon_state="Kaioken",pixel_x=-32)
 						view(src)<<"A bright red aura bursts all around [src]."
-					/*	if(amount>=20)
-							amount=20*/
-						if(amount>=31)
-							src.SuperKaioken=1
-							amount=30
+						view(src)<<"[src] yells: <b>Kaioken x[amount]!</b>"
+					//	if(amount>=31)
+					//		src.SuperKaioken=1
+					//		amount=30
+						src.OffenseMultiplier *= 1.3
 						src.KaiokenActive=1
 						src.KaiokenLevel=amount
-						src.RPPower*=1+(src.KaiokenLevel)
-						src.OMessage(15,null,"<font color=red>[src]([src.key]) uses Kaioken x[amount].")
+						src.RPPower+=(src.KaiokenLevel)
+						src.OMessage(15,null,"<font color=red>[src]([src.key]) uses Kaioken x[shout].")
 			if("ChaosImitate")
 			{
 				if(src.KO||Blocking)return
@@ -17511,6 +17312,8 @@ mob/proc/Quake(var/duration=30)
 		sleep(1)
 
 mob/proc/Earthquake(var/duration=30,var/xpixelmin=0,var/xpixelmax=5,var/ypixelmin=0,var/ypixelmax=5)
+	set background = 1
+	set waitfor = 0
 	if(client)
 		while(duration)
 			duration-=1

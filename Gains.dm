@@ -126,7 +126,7 @@ mob/proc/LOLWUT()
 			src.contents+=new/obj/Skills/Buffs/ThirdEye
 			src<<"You unlocked the ability to use the legendary Third Eye technique!"
 */
-	if(src.Race=="Kaio")
+/*	if(src.Race=="Kaio")
 		if((src.Base/src.BaseMod>=28125&&src.AscensionsUnlocked>=1&&src.AscensionsAcquired<1)||\
 		   (src.Base/src.BaseMod>=37500&&src.AscensionsAcquired<1))
 			src.AscensionsAcquired=1
@@ -143,7 +143,7 @@ mob/proc/LOLWUT()
 		   (src.Base/src.BaseMod>=1500000&&src.AscensionsAcquired<3))
 			src.AscensionsAcquired=3
 			src.BaseMod=40
-			src.Divine=1
+			src.Divine=1*/
 
 	if(locate(/obj/Skills/Buffs/Rinnegan, src.contents))
 	{
@@ -173,7 +173,7 @@ mob/proc/LOLWUT()
 		}
 	}
 
-	if(src.Race=="Makyo")
+/*	if(src.Race=="Makyo")
 		if(src.AscensionsUnlocked>=1&&src.AscensionsAcquired<1)
 			src.AscensionsAcquired=1
 			src.BaseMod=10
@@ -233,7 +233,7 @@ mob/proc/LOLWUT()
 			FBM=5.5
 			BaseMod*=5.5
 		Regeneration*=1.2
-		Recovery*=1.2
+		Recovery*=1.2*/
 //	if(src.Race in list("Demi","Makyo","Human", "Saiyan","Alien", "Demon", "Popo", "Lycan","Vampire","Heran"))
 /*	if(src.Class in list("Wizard", "Healer", "Envy", "Blue Mage", "Deus", "Ancient","Power","Wisdom","Courage","Kitsune"))
 		if(src.ElementType=="Earth"||src.SecondElementType=="Earth"||src.AvatarUnique==1)
@@ -488,7 +488,7 @@ mob/proc/LOLWUT()
 							src<<"Your mastery of the sword is true, allowing you to show the fury of a Weapon Master."*/
 
 	if(src.Age>=src.PrimeAge)//Mate
-		if(!(src.Race in list("Android","Dragon","God of Destruction","Popo")))
+		if(!(src.Race in list("Android","Dragon","God of Destruction","Popo","Kaio")))
 			if(!locate(/obj/Child/Mate,src.contents))
 				src.contents+=new/obj/Child/Mate
 				src<<"You can have babies now!"
@@ -1968,9 +1968,9 @@ mob/proc/GainLoop()
 			Refire=25/Lawl
 			for(var/obj/Money/M in src) M.suffix="[Commas(M.Level)] Resources"
 
-			if(src.KaiokenActive||src.SuperKaioken)
+			if((src.KaiokenActive||src.SuperKaioken)&&!src.PureRPMode)
 				if(!src.SuperKaioken)
-					src.TotalInjury+=src.KaiokenLevel/src.KaiokenMastery*0.5*rand(1,6)
+					src.TotalInjury+=(src.KaiokenLevel/src.KaiokenMastery)*0.5
 				else if(src.SuperKaioken)
 					src.TotalInjury+=2*rand(1,6)
 				if(src.KO&&src.KaiokenActive)

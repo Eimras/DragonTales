@@ -322,10 +322,10 @@ mob/Admin3/verb
 				if(m.MadScientist > round(m.TotalMadScientistEXP/100))
 					m.MadScientist=round(m.TotalMadScientistEXP/100)
 
-	MakeMazokuHuman(var/mob/m in world)
+/*	MakeMazokuHuman(var/mob/m in world)
 		set category="Admin"
 		if(m.Race=="Human")
-			m.Class="Mazoku"
+			m.Class="Mazoku"*/
 	SetAscensionReqs()
 		set category="Admin"
 		var/race=input(usr, "What race's requirements do you want to modify?", "Set Ascension Reqs") in list("Demi", "Namekian", "Human", "Spirit Doll", "Half Demon", "Tuffle", "Heran", "Aetherian", "Kitsune", "Tanuki", "Neko")
@@ -1360,28 +1360,57 @@ mob/Admin1/verb
 		var/obj/selection=input("")in controlselection
 		switch(selection)
 			if("Add Race Lockout")
-				var/list/addracelockcontrol=list("Cancel")
-				for(var/racelockcheck in list("Human","Makyo","Spirit Doll","Half Saiyan","Quarter Saiyan","Popo","Namekian","Saiyan","Tsufurujin","Kaio","Demon","Demi","Makaioshin","Majin","Dragon","Alien","Heran","Lycan","Vampire","Android","Bio Android","Changeling","Youkai", "Neko", "Golem", "Sage","Schrodinger","Manakete","Galvan","Trueseer", "Synchronizer", "Reploid", "Lamia"))
-					if(!RaceLock.Find("[racelockcheck]"))
-						addracelockcontrol.Add("[racelockcheck]")
-				var/obj/racelockselection=input("")in addracelockcontrol
-				if(racelockselection=="Cancel")
-					return
-				RaceLock.Add(racelockselection)
-				Log("Admin","The [racelockselection] race has been locked out by [ExtractInfo(usr)].")
+				var/list/addracelockcontrol=list()
+				for(var/racelockcheck in GetAllRaces())
+					if(!("[racelockcheck]" in LockedRaces))
+						addracelockcontrol += "[racelockcheck]"
+				for(var/r in LockedRaces) addracelockcontrol -= r
+				var/racelockselection=input("")in addracelockcontrol | null
+				if(racelockselection)
+					if(racelockselection in LockedRaces)
+						src << "[racelockselection] is already locked."
+						return
+					LockedRaces["[racelockselection]"] = list()
+					src << "You've added [racelockselection] to the locked races. Use LockedRacesOptions to add keys."
+					Log("Admin","The [racelockselection] race has been locked out by [ExtractInfo(usr)].")
+
 			if("Remove Race Lockout")
-				var/list/addracelockcontrol=list("Cancel")
-				for(var/racelockcheck in list("Human","Makyo","Spirit Doll","Half Saiyan","Quarter Saiyan","Popo","Namekian","Saiyan","Tsufurujin","Kaio","Demon","Demi","Makaioshin","Majin","Dragon","Alien","Heran","Lycan","Vampire","Android","Bio Android","Changeling","Youkai", "Neko", "Golem", "Sage","Schrodinger","Manakete","Galvan","Trueseer", "Synchronizer", "Reploid", "Lamia"))
-					if(RaceLock.Find("[racelockcheck]"))
-						addracelockcontrol.Add("[racelockcheck]")
-				var/obj/racelockselection=input("")in addracelockcontrol
-				if(racelockselection=="Cancel")
-					return
-				RaceLock.Remove(racelockselection)
-				Log("Admin","The [racelockselection] race has had its lockout removed by [ExtractInfo(usr)].")
+				var/obj/racelockselection=input("")in LockedRaces | null
+				if(racelockselection)
+					LockedRaces -= racelockselection
+					src << "You've removed [racelockselection] from the locked races."
+					Log("Admin","The [racelockselection] race has had its lockout removed by [ExtractInfo(usr)].")
 			if("Cancel")
 				return
 
+	LockedRacesOptions()
+		set category="Admin"
+		var/blah=input("Selection an option.","Locked Races") in list("View","Add","Remove")
+		if(blah=="View")
+			for(var/x in LockedRaces)
+				for(var/e in LockedRaces[x])
+					usr<<"[x] : [e]"
+		if(blah=="Add")
+			var/list/options = list()
+			for(var/index in LockedRaces) options += "[index]"
+			var/unlock=input("Add to what list?","Locked Races") in options | null
+			if(unlock)
+				var/wut=input("Add the key to [unlock] list.","Adding")as null|text
+				if(wut)
+					LockedRaces[unlock] |= wut
+					Log("Admin","<font color=green>[ExtractInfo(usr)] added to the LockedRaces list: [unlock] to [wut].")
+
+		if(blah=="Remove")
+			var/list/options = list()
+			for(var/index in LockedRaces) options += "[index]"
+			var/unlock=input("Remove from what list?","Locked Races") in options | null
+			if(unlock)
+				var/list/Keys= LockedRaces[unlock]
+
+				var/wut=input("Remove the key to [unlock] list.","Removing") in Keys | null
+				if(wut&&wut!="Cancel")
+					LockedRaces[unlock] -= wut
+					Log("Admin","<font color=green>[ExtractInfo(usr)] removed from the LockedRaces list: [unlock] to [wut].")
 	FPSControl(fpsadjust as num)
 		set category="Admin"
 		world.fps=fpsadjust
@@ -3045,7 +3074,7 @@ mob/Admin3/verb
 
 			Log("Admin","[ExtractInfo(usr)] granted [selection] to [P].")
 
-	ToggleHalfDemonNerf()
+/*	ToggleHalfDemonNerf()
 		set category="Admin"
 		if(HalfDemonNerf)
 			for(var/mob/m in world)
@@ -3060,7 +3089,7 @@ mob/Admin3/verb
 					m.LowPower=1
 					m << "Your demonic power is at a low point..."
 			HalfDemonNerf=1
-			Log("Admin","[ExtractInfo(usr)] turned the half demon nerf <FONT COLOR='#00FF00'>ON</FONT COLOR>.")
+			Log("Admin","[ExtractInfo(usr)] turned the half demon nerf <FONT COLOR='#00FF00'>ON</FONT COLOR>.")*/
 	SetCyberBPCap()
 		set category="Admin"
 		var/cyBP = input("What will the new cyber BP cap be?","[CyberBPCap]",CyberBPCap) as num
@@ -3074,7 +3103,7 @@ mob/Admin3/verb
 		for(var/mob/Players/P)
 			P.Age_Increase(Year)
 		Log("Admin","<font color=green>[ExtractInfo(usr)] set the year to [setyear].")
-	MakeGijiSSj(mob/M in world)
+/*	MakeGijiSSj(mob/M in world)
 		set category="Admin"
 		M.GijiSSj(1)
 	MakeSSjGod(mob/M in world)
@@ -3082,13 +3111,13 @@ mob/Admin3/verb
 		if(SSJGod)
 			M.RevertSSJG()
 		else
-			M.SSJGod(1)
-	MakeSuperSpiral(mob/M in world)
+			M.SSJGod(1)*/
+/*	MakeSuperSpiral(mob/M in world)
 		set category="Admin"
 		if(SSJGod)
 			M.RevertSuperSpiral()
 		else
-			M.SuperSpiralMode(1)
+			M.SuperSpiralMode(1)*/
 /*	MakeSuperButch(mob/M in world)
 		set category="Admin"
 		if(SSJGod)
@@ -3166,70 +3195,6 @@ mob/Admin3/verb
 				TechLockOut.Remove(selection3)
 				Log("Admin","<font color=green>[ExtractInfo(usr)] removed the locked out on [selection3].")
 
-	LockedRacesOptions()
-		set category="Admin"
-		var/blah=input("Selection an option.","Locked Races") in list("View","Add","Add All","Remove")
-		if(blah=="View")
-			for(var/x in LockedRaces)
-				for(var/e in x)
-					usr<<"[e] : [x[e]]"
-		if(blah=="Add")
-			var/unlock=input("Add to what list?","Locked Races") in list("Elite","King Kold","Half Saiyan","Quarter Saiyan","Bio","Majin","Dragon","Vampire","Lycan","Half Demon","Makaioshin", "Legendary","Ancient","Popo","Deus","Fire God","God of Destruction","Volodarskii","Shifter","Aetherian","Youkai","Hell Raven","Nobody", "Neko", "Manakete", "Golem","1/16th Saiyan","Mazoku","Sage","Savage","Anti-Spiral","Galvan","Makyo","Human","Trueseer","Half Demon","Demi","Captain","Dhampir","Synchronizer","Lamia")
-			if(unlock)
-				var/wut=input("Add the key to [unlock] list.","Adding")as null|text
-				if(wut)
-					LockedRaces.Add(list(params2list("[unlock]=[wut]")))
-					Log("Admin","<font color=green>[ExtractInfo(usr)] added to the LockedRaces list: [unlock] to [wut].")
-		if(blah=="Add All")
-			var/keytounlock=input("Add the key to unlock a majority of rares.","Adding")as null|text
-			if(keytounlock)
-				LockedRaces.Add(list(params2list("Elite=[keytounlock]")))
-				LockedRaces.Add(list(params2list("King Kold=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Half Saiyan=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Quarter Saiyan=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Bio=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Majin=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Dragon=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Vampire=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Lycan=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Half Demon=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Makaioshin=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Legendary=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Heran=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Ancient=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Popo=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Deus=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Fire God=[keytounlock]")))
-				LockedRaces.Add(list(params2list("God of Destruction=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Volodarskii=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Shifter=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Aetherian=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Youkai=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Sage=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Hell Raven=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Nobody=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Neko=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Manakete=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Golem=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Savage=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Demi=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Captain=[keytounlock]")))
-				LockedRaces.Add(list(params2list("Dhampir=[keytounlock]")))
-		if(blah=="Remove")
-			var/unlock=input("Remove from what list?","Locked Races") in list("Elite","King Kold","Half Saiyan","Quarter Saiyan","Bio","Majin","Dragon","Vampire","Lycan","Half Demon","Makaioshin", "Legendary","Ancient","Popo","Deus", "Fire God","God of Destruction","Volodarskii","Shifter","Aetherian", "Youkai","Nobody", "Neko", "Manakete", "Golem","1/16th Saiyan","Mazoku", "Sage","Savage","Anti-Spiral","Galvan","Makyo","Trueseer","Half Demon","Demi","Captain","Dhampir","Synchronizer","Lamia")
-			if(unlock)
-				var/list/Keys=list("Cancel")
-				for(var/x in LockedRaces)
-					for(var/e in x)
-						if(e=="[unlock]")
-							Keys.Add(x[e])
-				var/wut=input("Remove the key to [unlock] list.","Removing")in Keys
-				if(wut&&wut!="Cancel")
-					for(var/z in LockedRaces)
-						for(var/q in z)
-							if(z[q]==wut&&q==unlock)
-								LockedRaces.Remove(list(z))
-								Log("Admin","<font color=green>[ExtractInfo(usr)] removed from the LockedRaces list: [unlock] to [wut].")
 
 	Adminize(mob/z as null|mob in GetListOfPlayers())
 		set category="Admin"

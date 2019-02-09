@@ -24,7 +24,7 @@ obj/Skills
 				usr<<"Don't try to pick multiple racials. It's unhealthy for you."
 				return
 			alienraciallockout=1
-			var/Choice=input("Pick a Active ability. This cannot be undone.") in list ("Invisiblity","Imitate","Venom","Ki Weapon","Fishman")
+			var/Choice=input("Pick a Active ability. This cannot be undone.") in list ("Invisiblity","Imitate","Venom","Ki Weapon","Fishman","Adrenaline","Striker")
 			switch(Choice)
 				if("Invisiblity")
 					usr.contents+=new/obj/Skills/Rank/Invisibility
@@ -43,6 +43,14 @@ obj/Skills
 					usr.contents+=new/obj/Skills/LimitBreaker
 				if("Fishman")
 					usr.Fishman=1
+				if("Flicker")
+					usr.contents+=new/obj/Skills/Rank/AfterImageStrike
+					usr.contents+=new/obj/Skills/Rank/Zanzoken
+				if("Adrenaline")
+					usr.passives["adrenaline"] = 1
+				if("Striker")
+					usr.passives["striker"] = 1
+
 			usr.AlienRacialActive=Choice
 //			if(usr.Special==1||usr.Special==23)
 //				usr.AlienRacialPassive="HoneyBadger"

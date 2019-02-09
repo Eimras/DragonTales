@@ -808,8 +808,8 @@ proc/Accuracy_Formula(mob/Offender,mob/Defender,Chance=WorldDefaultAcc)
 		for(var/obj/Items/Shield/S in Defender)
 			if(S.suffix)
 				Chance*=1.25
-		var/Offense=(Offender.Power*((Offender.Offense*Offender.OffenseMultiplier)*1.3)*Offender.Skill) * ((Offender.SpeedMod*Offender.SpeedMultiplier))
-		var/Defense=(Defender.Power*((Defender.Defense*Defender.DefenseMultiplier)*1.3)*Defender.Skill) * ((Defender.SpeedMod*Defender.SpeedMultiplier))
+		var/Offense=(Offender.Power*((Offender.Offense*Offender.OffenseMultiplier)*1.3)*Offender.Skill) + min(20, ((Offender.SpeedMod*Offender.SpeedMultiplier))/2 )
+		var/Defense=(Defender.Power*((Defender.Defense*Defender.DefenseMultiplier)*1)*Defender.Skill) + min(20, ((Defender.SpeedMod* Defender.SpeedMultiplier))/2 )
 		var/TotalAccuracy= Chance*(Offense/max(Defense,0.01))
 		if(TotalAccuracy>=100)
 			TotalAccuracy=100
@@ -818,6 +818,7 @@ proc/Accuracy_Formula(mob/Offender,mob/Defender,Chance=WorldDefaultAcc)
 		if(Defender.GER && !Offender.SpiralOffense)
 			TotalAccuracy=0
 	//	Offender << "Your total accuracy is [TotalAccuracy]"
+
 		return TotalAccuracy//Chance*(Offense/max(Defense,0.01))
 
 
@@ -1165,7 +1166,7 @@ mob/proc/Melee(var/damagemulti,var/speedmulti,var/iconoverlay,var/forcewarp,var/
 		Damage/=DamageCut
 		Damage/=ShieldDamageCut
 		if(damagemulti)Damage*=damagemulti
-		var/Knock_Distance=round((Power*(Strength*StrengthMultiplier))/(P.Power*(P.Endurance*P.EnduranceMultiplier))*rand(0.5,2))
+		var/Knock_Distance=round((Power*(Strength*StrengthMultiplier))/(P.Power*(P.Endurance*P.EnduranceMultiplier))*((rand()/2)*rand(0.5,2)))
 		///
 		//unelegant hardcoding for this for the moment
 		//checks your BuffList list, and if you have the proper buff in there
@@ -1202,8 +1203,7 @@ mob/proc/Melee(var/damagemulti,var/speedmulti,var/iconoverlay,var/forcewarp,var/
 				Knock_Distance+=3
 			if(prob(2))
 				Knock_Distance+=5
-		if(prob(70)&&!src.HeavyShot)
-			Knock_Distance=0
+
 		for(var/obj/Items/Weights/W in src) if(W.suffix) Drain*=3
 
 		for(var/obj/Items/Sword/S in src) if(S.suffix)
@@ -1669,9 +1669,15 @@ mob/proc/Melee(var/damagemulti,var/speedmulti,var/iconoverlay,var/forcewarp,var/
 			src.Comboz(P)
 			Damage/=20
 			Delay/=10
-		if(!prob(Accuracy_Formula(src,P,WorldWhiffChance)&&!Tengenkotsu)||src.AttackHardness==1) //whiffing
+
+		var/whiff = 0
+		var probb = Accuracy_Formula(src,P,WorldWhiffChance)//&&!Tengenkotsu
+	//	world << "whiff chance [100-probb]"
+		if(!prob(probb)||src.AttackHardness==1) //whiffing
 			if(!src.HeavyShot&&!src.StrengthOfWill)
 				Damage/=rand(3,7)
+				whiff = 1
+		//		world << "It whiffed"
 		if(P.KingCrimson)
 			Damage=0
 			P.Melee(2,2)
@@ -2367,15 +2373,15 @@ mob/proc/Melee(var/damagemulti,var/speedmulti,var/iconoverlay,var/forcewarp,var/
 					if(X.MusicToggle=="On")
 						src.HitSounds(Damage)
 				//P.Hit_Sparks("Normal")
-				if(Damage > 5)
+				if(Damage > 5 && !whiff)
 					if(AttackHardness!=4)
-						spawn()KenShockwave(P,Size=Damage/5)
+						spawn()KenShockwave(P,Size=sqrt(Damage)/2)
 					if(AttackHardness==4)
 						if(prob(30))
-							spawn()KenShockwave(P,Size=Damage/5)
-					var/QuakeIntensity=Damage
-					if(QuakeIntensity>24)
-						QuakeIntensity=24
+							spawn()KenShockwave(P,Size=sqrt(Damage)/2)
+					var/QuakeIntensity=Damage/3
+					if(QuakeIntensity>16)
+						QuakeIntensity=16
 					P.Earthquake(QuakeIntensity,-4,4,-4,4)
 				if(P.KO&&P.Health<=-5 && src.Lethal)
 					P.Death(src,null,Damage)
@@ -2562,7 +2568,14 @@ mob/proc/Melee(var/damagemulti,var/speedmulti,var/iconoverlay,var/forcewarp,var/
 						for(var/turf/A in oview(src,2))
 							A.CreateExplosion()
 						src.EpitaphUse=0
-					P.Knockback(Knock_Distance,src)
+
+				var knockback_prob = max(10,rand(50,90) - Final_Damage*10)
+				if(prob(knockback_prob)&&!src.HeavyShot)
+					Knock_Distance=0
+				else
+					Knock_Distance += Final_Damage / (1.2 + rand()	)
+
+				P.Knockback(Knock_Distance,src)
 
 
 
@@ -3402,8 +3415,11 @@ mob/proc/SpeedDelay()
 
 
 mob/proc/Knockback(var/Distance,mob/P,Direction=get_dir(P,src),KB_Damage=1) spawn if(src)//Some abilities won't damage upon KB
+	set waitfor=0
 	if(istype(src,/mob/Player/Afterimage)) return
 	///if we have Bubble Armor active, knock them back half again as far
+	if(1 > Distance) return
+
 	for(var/obj/Skills/Buffs/Bubble_Armor/B in P)
 		if(B.BuffUsing)
 			Distance *= 1.5
@@ -3434,6 +3450,7 @@ mob/proc/Knockback(var/Distance,mob/P,Direction=get_dir(P,src),KB_Damage=1) spaw
 		InitialLoc
 		Attack
 		Defense=src.Power*(src.Endurance*src.EnduranceMultiplier)
+		prev_loc
 	if(P)
 		Attack=P.Power*(P.Strength*P.StrengthMultiplier)*rand(1,5)/10
 
@@ -3445,10 +3462,13 @@ mob/proc/Knockback(var/Distance,mob/P,Direction=get_dir(P,src),KB_Damage=1) spaw
 				if(prob(25))
 					new/obj/Effects/Dust(src.loc)
 		//step_away(src,P,50)
-
-		step(src,Knockbacked)
 		flick("KB",src)
-
+		prev_loc = loc
+		step(src,Knockbacked)
+		if(loc==prev_loc)
+			Knockbacked = 0
+			Distance = 0
+			return
 
 		if(KB_Damage)
 
@@ -3473,20 +3493,21 @@ mob/proc/Knockback(var/Distance,mob/P,Direction=get_dir(P,src),KB_Damage=1) spaw
 				Distance=round(Distance*0.5)
 
 		var/turf/E = get_step(src,Direction)
-		E.Health-=(P.Power/(E.LogPEndurance+1))
-		if(E.Health<=0)
-			if(E.density)
-				src.Health-=Attack/Defense/10
-				if(src.WoundIntent)
-					Injure(src,Attack/Defense/10)
-/*				if(src.MysticEyes||src.TrueMysticEyes)
-					MysticInjure(src,Attack/Defense/10)*/
+		if(E)
+			E.Health-=(P.Power/(E.LogPEndurance+1))
+			if(E.Health<=0)
+				if(E.density)
+					src.Health-=Attack/Defense/10
+					if(src.WoundIntent)
+						Injure(src,Attack/Defense/10)
+	/*				if(src.MysticEyes||src.TrueMysticEyes)
+						MysticInjure(src,Attack/Defense/10)*/
 
-			global.GlobalTurfDestroyer=src.ckey
-			Destroy(E)
-		if(E&&E.density||src.x==500||src.x==1||src.y==1||src.y==500)
-			Distance=0
-			Knockbacked=0
+				global.GlobalTurfDestroyer=src.ckey
+				Destroy(E)
+			if(E&&E.density||src.x==500||src.x==1||src.y==1||src.y==500)
+				Distance=0
+				Knockbacked=0
 
 
 		for(var/turf/B in Turf_Circle(src,1)) if(Tengenkotsued || DragonFisted || AsaKujakuued || GokuDragonFisted)
@@ -3518,7 +3539,7 @@ mob/proc/Knockback(var/Distance,mob/P,Direction=get_dir(P,src),KB_Damage=1) spaw
 		if(Distance==0&&global.DustControl==1)
 			if(prob(90))
 				new/obj/Effects/Dust(src.loc)
-		sleep(2)
+		sleep(world.tick_lag)
 	walk(src,0)
 	if(DragonFisted && Distance==0)
 		P.Frozen=0
@@ -3788,10 +3809,11 @@ mob/proc/Grab()
 						continue
 				Choices+=O
 		var/mob/P=input(src,"Grab what?") in Choices
-		src.key1=0
-		src.key2=0
-		src.key3=0
-		src.key4=0
+	//	src.key1=0
+	//	src.key2=0
+	//	src.key3=0
+	//	src.key4=0
+		src.keys_pressed = null
 		if(!(locate(P) in get_step(src,dir))) return
 		if(istype(P,/obj/Materials))
 			P.Grab()

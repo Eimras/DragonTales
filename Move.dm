@@ -139,14 +139,15 @@ proc
 				B.Open()
 
 mob/proc/MovementSpeed()
-	var/Delay=2/SpeedMod
+	var/Delay=3/sqrt(SpeedMod)
+	if(Delay>=1.8) Delay=1.8
 	if(src.Blocking)
-		Delay=3/SpeedMod
+		Delay*=2
 	if(!src.Blocking)
-		if(src.ESpeed||src.WillSpeed||src.LightningAura||src.ForceSpeed||src.LightningArmor||src.BreathHero||src.Sidecut||src.NanayaDash||src.Sidewhack||(src.InUBW&&src.MadeOfSwords)||(src.Race=="Half Demon"&&src.trans["active"]>=1)||src.Quicksilver)
-			Delay=0.1
-	if(Race!="Android"&&src.GateNumber<2&&!src.SatsuiNoHado&&!src.MachinaMod&&!src.WillSpeed&&!src.Resolve&&!src.Berserkering&&!(src.InUBW&&src.MadeOfSwords))
-		if(!LastBreath)
+		if(src.WillSpeed||src.LightningAura||src.ForceSpeed||src.LightningArmor||src.BreathHero||(src.InUBW&&src.MadeOfSwords)||(src.Race=="Half Demon"&&src.trans["active"]>=1))
+			Delay=1.2
+	if(Race!="Android"&&!src.GateNumber>=2&&!src.SatsuiNoHado&&!src.MachinaMod&&!src.WillSpeed&&!src.Resolve&&!src.Berserkering&&!(src.InUBW&&src.MadeOfSwords))
+		if(!LastBreath && !GetPassive("adrenaline"))
 			Delay*=((100/(sqrt(max(1,Health))*sqrt(max(1,Health))))/4)
 	//	Delay*=EnergyMax/max((sqrt(max(1,Energy))*sqrt(max(1,Energy))),EnergyMax/100)/2
 		if(Delay>49||src.BladeSlow)
@@ -162,23 +163,23 @@ mob/proc/MovementSpeed()
 		Delay*=(Shocked+1)
 	if(Flying)
 		density=0
-		Delay*=0.5
+		Delay*=0.8
 	if(Swim)
-		Delay*=6
+		Delay*=3/sqrt(src.Skillz["Swim"]["Level"])
 	if(Chilled)
 		Delay*=1.5
 	if(QuickChilled)
-		Delay*=50
+		Delay*=3
 	if(src.Walking)
-		Delay*=16
+		Delay*=3
 	if(src.Cuffed)
-		Delay*=21
+		Delay*=2
 	if(src.TsukiScars)
-		Delay*=21
+		Delay*=2
 	if(src.Sneaking)
-		Delay*=35
+		Delay*=3
 	if(src.FatalStrike)
-		Delay*=35
+		Delay*=3
 	if(src.Slow)
 		Delay*=src.Slow/10
 	if(src.Berserkering)
@@ -189,11 +190,12 @@ mob/proc/MovementSpeed()
 		else if(src.BerserkerRise==3)
 			Delay*=0.5
 		else if(src.BerserkerRise==4)
-			Delay*=0.25
+			Delay*=0.35
 		if(src.VisoredStage)
 			Delay*=0.75
-	if(src.dir==SOUTHWEST||src.dir==SOUTHEAST||src.dir==NORTHWEST||src.dir==NORTHEAST)
-		Delay*=2
+	if(Delay<0.8) Delay=0.8
+//	if(src.dir==SOUTHWEST||src.dir==SOUTHEAST||src.dir==NORTHWEST||src.dir==NORTHEAST)
+//		Delay*=2
 /*	if(Control)
 		var/obj/Items/Tech/SpaceTravel/X=Control
 		Delay=20/X.MaxSpeed*/
@@ -206,14 +208,15 @@ mob/proc/MovementSpeed()
 mob/Move()
 	if(!client&&!Knockbacked&&!Move_Requirements()) return
 	var/Former_Location=loc
-//	Moving=1
-/*	var/Delay=2/SpeedMod
+	Moving=1
+	var/Delay=3/sqrt(SpeedMod)
+	if(Delay>=1.8) Delay=1.8
 	if(src.Blocking)
-		Delay=3/SpeedMod
+		Delay*=2
 	if(!src.Blocking)
-		if(src.ESpeed||src.WillSpeed||src.LightningAura||src.ForceSpeed||src.LightningArmor||src.BreathHero||(src.InUBW&&src.MadeOfSwords)||(src.Race=="Half Demon"&&src.trans["active"]>=1)||src.Quicksilver)
-			Delay=0.1
-	if(Race!="Android"&&src.GateNumber<2&&!src.SatsuiNoHado&&!src.MachinaMod&&!src.WillSpeed&&!src.Resolve&&!src.Berserkering&&!(src.InUBW&&src.MadeOfSwords))
+		if(src.WillSpeed||src.LightningAura||src.ForceSpeed||src.LightningArmor||src.BreathHero||(src.InUBW&&src.MadeOfSwords)||(src.Race=="Half Demon"&&src.trans["active"]>=1))
+			Delay=1.2
+	if(Race!="Android"&&!src.GateNumber>=2&&!src.SatsuiNoHado&&!src.MachinaMod&&!src.WillSpeed&&!src.Resolve&&!src.Berserkering&&!(src.InUBW&&src.MadeOfSwords))
 		if(!LastBreath)
 			Delay*=((100/(sqrt(max(1,Health))*sqrt(max(1,Health))))/4)
 	//	Delay*=EnergyMax/max((sqrt(max(1,Energy))*sqrt(max(1,Energy))),EnergyMax/100)/2
@@ -230,13 +233,11 @@ mob/Move()
 		Delay*=(Shocked+1)
 	if(Flying)
 		density=0
-		Delay*=0.5
+		Delay*=0.8
 	if(Swim)
-		Delay*=3
+		Delay*=3/sqrt(src.Skillz["Swim"]["Level"])
 	if(Chilled)
 		Delay*=1.5
-	if(src.Slow)
-		Delay*=src.Slow/10
 	if(src.Berserkering)
 		if(src.BerserkerRise==1)
 			Delay*=0.85
@@ -245,20 +246,19 @@ mob/Move()
 		else if(src.BerserkerRise==3)
 			Delay*=0.5
 		else if(src.BerserkerRise==4)
-			Delay*=0.25
+			Delay*=0.35
 		if(src.VisoredStage)
 			Delay*=0.75
-	if(src.dir==SOUTHWEST||src.dir==SOUTHEAST||src.dir==NORTHWEST||src.dir==NORTHEAST)
-		Delay*=2
+	if(Delay<0.8) Delay=0.8
 /*	if(Control)
 		var/obj/Items/Tech/SpaceTravel/X=Control
-		Delay=20/X.MaxSpeed*/
+		Delay=20/X.MaxSpeed
 	Decimals+=Delay-round(Delay)
 	if(round(Decimals)>1)
 		Delay+=round(Decimals)
 		Decimals-=round(Decimals)*/
-//	if(Knockbacked) Delay=0
-//	spawn(MovementSpeed()) Moving=0
+	if(Knockbacked) Delay=0
+	spawn(Delay) Moving=0
 	..()
 	Blok(src)
 	density=1
