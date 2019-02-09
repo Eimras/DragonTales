@@ -33,6 +33,7 @@ mob/verb
 	KeyDown(key_press as text)
 		set instant = 1
 		set hidden = 1
+		set waitfor=0
 		if(!keys_pressed) keys_pressed = list()
 		if(keys_pressed[key_press]) return
 		keys_pressed[key_press] = 1
@@ -51,6 +52,7 @@ mob/verb
 	KeyUp(key_release as text)
 		set instant = 1
 		set hidden = 1
+		set waitfor=0
 		if(!keys_pressed) keys_pressed = list()
 		if(!keys_pressed[key_release]) return
 		keys_pressed -= key_release
@@ -63,11 +65,20 @@ mob/verb
 			else if(keys_pressed["WEST"]) move_direction |= WEST
 
 
+client/North()
+client/South()
+client/East()
+client/West()
+client/Northwest()
+client/Southwest()
+client/Northeast()
+client/Southeast()
+
 mob/var/tmp/next_move = 0
 mob/var/tmp/movement_loop = 0
 mob/var/tmp/move_direction = 0
 mob/proc/movementLoop()
-	set instant = 1
+	//set instant = 1
 	set waitfor = 0
 	if(movement_loop) return
 	movement_loop=1

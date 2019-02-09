@@ -3450,6 +3450,7 @@ mob/proc/Knockback(var/Distance,mob/P,Direction=get_dir(P,src),KB_Damage=1) spaw
 		InitialLoc
 		Attack
 		Defense=src.Power*(src.Endurance*src.EnduranceMultiplier)
+		prev_loc
 	if(P)
 		Attack=P.Power*(P.Strength*P.StrengthMultiplier)*rand(1,5)/10
 
@@ -3462,8 +3463,12 @@ mob/proc/Knockback(var/Distance,mob/P,Direction=get_dir(P,src),KB_Damage=1) spaw
 					new/obj/Effects/Dust(src.loc)
 		//step_away(src,P,50)
 		flick("KB",src)
+		prev_loc = loc
 		step(src,Knockbacked)
-
+		if(loc==prev_loc)
+			Knockbacked = 0
+			Distance = 0
+			return
 
 		if(KB_Damage)
 
@@ -3488,20 +3493,21 @@ mob/proc/Knockback(var/Distance,mob/P,Direction=get_dir(P,src),KB_Damage=1) spaw
 				Distance=round(Distance*0.5)
 
 		var/turf/E = get_step(src,Direction)
-		E.Health-=(P.Power/(E.LogPEndurance+1))
-		if(E.Health<=0)
-			if(E.density)
-				src.Health-=Attack/Defense/10
-				if(src.WoundIntent)
-					Injure(src,Attack/Defense/10)
-/*				if(src.MysticEyes||src.TrueMysticEyes)
-					MysticInjure(src,Attack/Defense/10)*/
+		if(E)
+			E.Health-=(P.Power/(E.LogPEndurance+1))
+			if(E.Health<=0)
+				if(E.density)
+					src.Health-=Attack/Defense/10
+					if(src.WoundIntent)
+						Injure(src,Attack/Defense/10)
+	/*				if(src.MysticEyes||src.TrueMysticEyes)
+						MysticInjure(src,Attack/Defense/10)*/
 
-			global.GlobalTurfDestroyer=src.ckey
-			Destroy(E)
-		if(E&&E.density||src.x==500||src.x==1||src.y==1||src.y==500)
-			Distance=0
-			Knockbacked=0
+				global.GlobalTurfDestroyer=src.ckey
+				Destroy(E)
+			if(E&&E.density||src.x==500||src.x==1||src.y==1||src.y==500)
+				Distance=0
+				Knockbacked=0
 
 
 		for(var/turf/B in Turf_Circle(src,1)) if(Tengenkotsued || DragonFisted || AsaKujakuued || GokuDragonFisted)

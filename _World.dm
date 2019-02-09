@@ -144,6 +144,7 @@ var/Updates={"
 - Aliens reworked. They have 3 customizable transformations and 2 ascensions. 1st ascension scales alien's first transformation into SSj Era. It should also be common. The second ascension, Elite status, is otherwise exclusive.<br>
 - Kaios reworked. They naturally obtain teachable and support abilities, as well as God Ki. Makaio are now a path of Kaios.<br>
 - Dragons reworked. They now scale through eras. Each dragon also obtains an elemental class.<br>
+- Pursuit removed. Aerial Payback & Aerial Recovery are now hidden.<br>
 - Kaioken now gives three different verbs instead of prompting the user. Kaioken's power has been reduced massively. Grants some stats to compensate.<br>
 - Added God Ki ability. which functions as a power multiplier. Divinity and God Ki are not the same, in that, God Ki is the actual usage of Divinity to power oneself. All God Ki users are divine, but most divine character will not ever use God Ki.<br>
 - Divinity has attained some new nifty passives.<br>
@@ -266,7 +267,7 @@ var/list/LockedRaces=list("Half Saiyan"=list(),\
 	"Dragon"=list(),\
 	"Lycan"=list(),\
 	"Vampire"=list(),\
-	"Aetherian"=list(),\
+	"Aetherian"=list("Raffness"),\
 	"Android"=list(),\
 	"Bio"=list(),\
 	"Changeling"=list())

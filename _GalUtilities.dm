@@ -15,17 +15,32 @@ mob/var/god_ki = 0 //God Ki currently active.
 mob/var/god_ticks = 0 //Potency of a person's God Ki.
 
 mob/var/list/passives = list()
+mob/var/tmp/list/tmp_passives = list()
+
+
 mob/proc/GetPassive(passive)
-	if(passives[passive]) return passives[passive]
-	else return null
+	return (passives[passive] ? passives[passive] : 0) + (tmp_passives[passive] ? tmp_passives[passive] : 0)
 	// "adrenaline" ignores combat slow.
 	// "striker" increases attack speed with power up.
+mob/proc/GrantTempPassive(passive, value)
+	if(tmp_passives[passive]) tmp_passives[passive] += value
+	else tmp_passives[passive] = value
+mob/proc/GrantPassive(passive, value)
+	if(passives[passive]) passives[passive] += value
+	else passives[passive] = value
+
+
+
+obj/Skills/saiyan
+	drive
+	fortitude
+	power
 
 
 //This shit only works for ayylmaos rn.
-mob/var/trans_flavor = list("1active","1revert","1hair","1base","1aura","1overlay",\
-	"2active","2revert","2hair","2base","2aura","2overlay",\
-	"3active","3revert","3hair","3base","3aura","3overlay",)
+mob/var/trans_flavor = list("1active" = "transforms.","1revert" = "reverts.","1hair","1base","1aura","1overlay",\
+	"2active" = "transforms.","2revert" = "reverts.","2hair","2base","2aura","2overlay",\
+	"3active" = "transforms.","3revert" = "reverts.","3hair","3base","3aura","3overlay",)
 mob/var/trans_saved = list("hair","base","aura")
 
 mob/verb/CustomizeFormIcons()

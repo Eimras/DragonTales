@@ -3627,6 +3627,7 @@ obj/Skills/MartialArts
 		verb/AerialRecovery()
 			set name="Aerial Payback"
 			set category="Skills"
+			set hidden=1
 			usr.Skill1X("AerialPayback",src)
 	//		usr.BuffX("Pursuit",src)
 	AerialRecovery2
@@ -3640,6 +3641,7 @@ obj/Skills/MartialArts
 		verb/AerialRecovery2()
 			set name="Aerial Recovery"
 			set category="Skills"
+			set hidden=1
 			usr.Skill1X("AerialRecovery",src)
 	EightArms
 		Basic=1

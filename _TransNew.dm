@@ -1999,7 +1999,7 @@ mob/proc/SuperAlien(var/level)
 					if("Spirit") alertmessage = "Your spiritual might overflows with the intensity of your power."
 				if(alert("[alertmessage]"))
 					trans["alientrans"] = transtype
-					if(transtype == "Fury") NewAnger(1.8)
+					if(transtype == "Fury") NewAnger(2)
 				else transtype = null
 
 		switch(trans["alientrans"])

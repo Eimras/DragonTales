@@ -514,13 +514,6 @@ mob/Creation/verb
 						usr.Class="Fighter"
 					else
 						usr.Class="Juggernaut"*/
-			if(usr.Race=="Reploid")
-				if(usr.Class=="X")
-					usr.Class="Zero"
-				else if(usr.Class=="Zero")
-					usr.Class="Vile"
-				else if(usr.Class=="Vile")
-					usr.Class="X"
 			if(usr.Race=="Changeling")
 				if(usr.Class=="King Kold")
 					if(usr.CheckUnlock("King Kold"))
@@ -548,23 +541,6 @@ mob/Creation/verb
 				else if(usr.Class=="King")
 					usr.Class="Messenger"
 
-			if(usr.Race=="Lamia")
-				if(usr.Class=="Medusa")
-					usr.Class="Echidna"
-				else if(usr.Class=="Echidna")
-					usr.Class="Gorgon"
-				else if(usr.Class=="Gorgon")
-					usr.Class="Medusa"
-
-			if(usr.Race=="Synchronizer")
-				if(usr.Class=="Maid")
-					usr.Class="Mastermind"
-				else if(usr.Class=="Mastermind")
-					usr.Class="Meme"
-				else if(usr.Class=="Meme")
-					usr.Class="Revolutionary"
-				else if(usr.Class=="Revolutionary")
-					usr.Class="Maid"
 
 			else if(usr.Race=="Neko")
 				if(usr.Class=="Kitty")
@@ -587,23 +563,6 @@ mob/Creation/verb
 					usr.Class="Kitty"
 					usr<<"==="
 					usr<<"<br>Kittycats are well, the stereotypical cat-morphs you see everywhere! They only bother about being cute, scratching things, being lazy, cuddling and beating Youkai in sheer gayness."
-					usr<<"==="
-
-			else if(usr.Race=="Manakete")
-				if(usr.Class=="Hyattr")
-					usr.Class="Maid Dragon"
-					usr<<"==="
-					usr<<"Maid Dragon is... well. A dragon that decided to blend in the present society by the easiest means possible, with prowess enough to become a maid. Maid Dragons are the spiritual counterparty of Kitty Nekos, and poser of Synchronizers. But don't underestimate them, they're such good posers of Synchronizers that they actually mastered the Maid-Fu arts and are on pair with them in sheer skill."
-					usr<<"==="
-				else if(usr.Class=="Maid Dragon")
-					usr.Class="Dragonborn"
-					usr<<"==="
-					usr<<"Manaketes who are Dragonborns aren't actually full-blooded, they're born humanoids who can shapeshift into terrifying dragons, although that casts their magical prowess away, making them excellent melee fighters, but terrible arcane beings. And also, due to their lack of thick dragon blood, their lizard features are often well-disguised, they're no different from humans, at glance."
-					usr<<"==="
-				else if(usr.Class=="Dragonborn")
-					usr.Class="Hyattr"
-					usr<<"==="
-					usr<<"Hyattrs are a very rare sight, actual dragons who took the form of humans, but they cannot fully transform/hide away their lizard-ish features, so in the end they will be looking like dragonmorphs at a defined severity, depending on the dragon's mastery over their arcane flux. Those, well, are hinted to be the all-rounders, and they're extremely robust in all statistics."
 					usr<<"==="
 
 			else if(usr.Race=="Youkai")
@@ -887,7 +846,7 @@ mob/Creation/verb
 			usr.UpdateBio()
 		if(blah=="Size")
 			if(usr.BodyType=="Medium")
-				usr.BodyType="Large"
+			//	usr.BodyType="Large"
 				usr.RacialStats()
 				usr.UpdateBio()
 				return
@@ -3366,7 +3325,7 @@ mob/proc
 		if(src.Race=="Popo")
 			src.OriginalPotential=10
 		src.SetVars()
-		src.contents+=new/obj/Skills/MartialArts/Pursuit
+	//	src.contents+=new/obj/Skills/MartialArts/Pursuit
 		if(src.Race=="Alien"||src.Race=="Spirit Doll"||src.Race=="Makyo"||src.Race=="Demon")
 			var/blurp=input(src,"Would you like to be asexual?","EGGS HERE!") in list("Asexual","Sexual")
 			if(blurp=="Asexual")
