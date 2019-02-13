@@ -628,7 +628,7 @@ mob/Creation/verb
 					if(usr.CheckUnlock("Elite"))
 						usr.Class="Elite"
 					else
-						usr.Class="Low-Class"
+						usr.Class="Normal"
 				else if(usr.Class=="Elite")
 					if(usr.CheckUnlock("Legendary"))
 						usr.Class="Legendary"
@@ -639,7 +639,7 @@ mob/Creation/verb
 					else if(usr.CheckUnlock("Savage"))
 						usr.Class="Savage"
 					else
-						usr.Class="Low-Class"
+						usr.Class="Normal"
 				else if(usr.Class=="Legendary")
 					usr.Class="Legendary"
 				else if(usr.Class=="Hellspawn")
@@ -1015,6 +1015,7 @@ mob/proc/UpdateRaceScreen(var/wut,var/amountz)
 		if(7) if(src.CheckIfDestroyed("Ice",amountz)) available_races = ice_races.Copy()
 
 
+	for(var/index in LockedRaces) world << index
 	for(var/v in available_races)
 		if(LockedRaces.Find(v) && !(key in LockedRaces[v]))
 			world << "OOF [v]"
@@ -1888,12 +1889,11 @@ mob/proc
 						src.Meditation_Rate=0.75
 					if("Elite")
 						src.Class="Elite"
-						src.BaseMod=5
+						src.BaseMod=4
 						src.GravityMod=3
 						src.GravityMastered=10
 						src.Meditation_Rate=2
 						src.Zenkai_Rate=10
-						src.SaiyanAscension=1
 						src.ActiveBuffs=3
 						src.SpecialSlot=1
 					/*if("Savage")
@@ -1906,11 +1906,13 @@ mob/proc
 						src.Zenkai_Rate=30*/
 					if("Normal")
 						src.Class="Normal"
-						src.BaseMod=2.5
+						src.BaseMod=2
 						src.GravityMod=2.5
 						src.GravityMastered=10
 						src.Zenkai_Rate=15
 						src.Training_Rate=3
+						src.ActiveBuffs=3
+						src.SpecialSlot=1
 					if("Low-Class")
 						src.Class="Low-Class"
 						src.BaseMod=2
@@ -3133,7 +3135,7 @@ mob/proc
 			src.Decline=150
 			src.Decline_Rate=2.5
 			src.EnergyMax=src.EnergyMod*5000
-			src.contents+=new/obj/Skills/Absorb
+		//	src.contents+=new/obj/Skills/Absorb
 			src.PrimeAge=0.5
 			src.contents+=new/obj/Regenerate
 			for(var/obj/Regenerate/x in src)

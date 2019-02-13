@@ -162,9 +162,9 @@ mob
 							return 3
 				return 0
 			if(race=="Saiyan")
-				if(src.Class=="Elite"||src.Class=="Legendary"||src.Class=="Savage")
-					if(src.AscensionsUnlocked < 1)
-						src.AscensionsUnlocked = 1
+				//if(src.Class=="Elite"||src.Class=="Legendary"||src.Class=="Savage")
+				//	if(src.AscensionsUnlocked < 1)
+				//		src.AscensionsUnlocked = 1
 
 				//Anger Ascensions
 				if(src.AscensionsAcquired < 1)
@@ -176,6 +176,15 @@ mob
 				if(src.AscensionsAcquired < 3)
 					if(src.AscensionsUnlocked >= 3)
 						return 3
+				if(src.AscensionsAcquired < 4)
+					if(src.AscensionsUnlocked >= 4)
+						return 4
+				if(src.AscensionsAcquired < 5)
+					if(src.AscensionsUnlocked >= 5)
+						return 5
+				if(src.AscensionsAcquired < 6)
+					if(src.AscensionsUnlocked >= 6)
+						return 6
 				return 0
 			if(race=="Human")
 				if(src.AscensionsAcquired < 1)
@@ -363,6 +372,19 @@ mob
 						return 3
 				return 0
 			if(race=="Kaio")
+				if(src.AscensionsAcquired < 1)
+					if(src.AscensionsUnlocked>=1)
+						return 1
+				if(src.AscensionsAcquired < 2)
+					if(src.AscensionsUnlocked>=2&&src.AscensionsAcquired==1)
+						return 2
+				if(src.AscensionsAcquired < 3)
+					if(src.AscensionsUnlocked>=3&&src.AscensionsAcquired==2)
+						return 3
+				if(src.AscensionsAcquired < 4)
+					if(src.AscensionsUnlocked>=4&&src.AscensionsAcquired==3)
+						return 0
+			if(race=="Dragon")
 				if(src.AscensionsAcquired < 1)
 					if(src.AscensionsUnlocked>=1)
 						return 1
@@ -563,22 +585,63 @@ mob
 						src.Class="Ascendant"
 						src.SetVars()
 			if(race=="Saiyan")
+				if(num==1)
+					var selection
+					while(!selection)
+						selection = input("Which aspect of Saiyan will do you embody?") in list("Drive","Fortitude","Might")
+						var alertmsg
+						switch(selection)
+							if("Drive") alertmsg = "The Saiyan who embodies drive will compete against odds, no matter how strong. Saiyan Drive users are capable of burning their energy to further their power output."
+							if("Fortitude") alertmsg = "The Saiyan who embodies Fortitude is one to continue fighting until they can no more. Saiyan Fortitude users are capable of sustaining the damage of some of the heaviest of attacks through fortifying their defenses."
+							if("Might") alertmsg = "The Saiyan who embodies might is one committed to crushing the opposition. Saiyan Might users are capable of temporarily increasing their damage output dramatically."
+						switch(input("[alertmsg]") in list("Yes","No"))
+							if("Yes") break
+							if("No") selection = null
+					switch(selection)
+						if("Drive") src.contents += new/obj/Skills/saiyan/drive
+						if("Fortitude") src.contents += new/obj/Skills/saiyan/fortitude
+						if("Might") src.contents += new/obj/Skills/saiyan/power
+
 				if(src.Class!="Elite")
-					src << "Your primal rage grows..."
 					if(num==1)
-						src.SaiyanAngerAscensions=1
+						src.Ascend(4)
+						src.RecovMult(1.5)
 					if(num==2)
-						src.SaiyanAngerAscensions=2
+						src.Ascend(6)
+						src << "Your primal rage grows..."
+						SaiyanAngerAscensions=1
 					if(num==3)
-						src.SaiyanAngerAscensions=3
+						src << "Your primal rage grows..."
+						SaiyanAngerAscensions=2
+					if(num==4)
+						src.Ascend(8)
+						src.RecovMult(1.5)
+					if(num==5)
+						src.Ascend(15)
+						src.RecovMult(1.5)
+					if(num==6)
+						src << "Your primal rage reaches its pinnacle."
+						SaiyanAngerAscensions=3
+
 				else
 					if(num==1)
-						src.Ascend(7)
-						src.RecovMult(2)
+						src.Ascend(6)
+						src.RecovMult(1.5)
 					if(num==2)
-						src.Ascend(11)
-						src.RecovMult(2)
-						//src.NewAnger(2)
+						src.Ascend(8)
+						src.RecovMult(1.5)
+					if(num==3)
+						src << "Your primal rage grows..."
+						SaiyanAngerAscensions=1
+					if(num==4)
+						src << "Your primal rage grows..."
+						SaiyanAngerAscensions=2
+					if(num==5)
+						src.Ascend(15)
+						src.RecovMult(1.5)
+					if(num==6)
+						src << "Your primal rage reaches its pinnacle."
+						SaiyanAngerAscensions=3
 
 			if(race=="Human")
 				if(num==1)
@@ -612,14 +675,14 @@ mob
 					src.DefMult(1.25)
 					src.NewAnger(1.75)
 				if(num==3)
-					src.Ascend(2.5)
-					src.StrMult(1.35)
-					src.EndMult(1.35)
-					src.SpdMult(1.35)
-					src.ForMult(1.35)
+					src.Ascend(2)
+					src.StrMult(1.15)
+					src.EndMult(1.15)
+					src.SpdMult(1.15)
+					src.ForMult(1.15)
 					src.ResMult(1.35)
-					src.OffMult(1.35)
-					src.DefMult(1.35)
+					src.OffMult(1.15)
+					src.DefMult(1.15)
 			if(race=="Nobody")
 				if(num==1)
 					var/list/choices=list("Berserker", "Assassin", "Sorcerer")
@@ -1062,8 +1125,9 @@ mob
 							if("Time") alertmsg = "A dragon of time perceives the world from the flow of time. From the passage of seasons, to birth and death. History, and the Future. Their wisdom is grand."
 							if("Space") alertmsg = "A dragon of space perceives the vastness of the Universe. That all things are, and eventually will not be. The dragon of space sees it all."
 							if("Gold") alertmsg = "A dragon of gold sees the wealth in all things, material possession and mind alike."
-						if(alert("[alertmsg]"))
-							break
+						switch(input("[alertmsg]") in list("Yes","No"))
+							if("Yes") break
+							if("No") src.Class=null
 
 					switch(Class)
 						if("Fire")
@@ -1104,7 +1168,7 @@ mob
 					src.Ascend(25)
 					AllMult(1.1)
 				if(num==4) //God
-					src.Ascend(50)
+					src.Ascend(60)
 					AllMult(1.1)
 			if(race=="Kaio")
 				if(num==1)
@@ -1172,7 +1236,7 @@ mob
 					//PASSIVES.
 
 				if(num==2) //SSj2 God Ki awakening
-					src.Ascend(10)
+					src.Ascend(15)
 					src.EnergyMult(1.2)
 					src.RecovMult(1.2)
 					src.contents += new/obj/Skills/Rank/GodKi
@@ -1183,6 +1247,10 @@ mob
 				//		if("Makaio")
 				//			src.
 				if(num==3) //Kaioshin / Makaioshin. Obtained in Late SSj2 / Early SSj3 Era
+					if(src.Class=="Makaio")
+						src.Ascend(30)
+					else
+						src.Ascend(20)
 					src.god_ticks = 2
 					src.contents += new/obj/Skills/Rank/UnlockPotential
 					switch(Class)
@@ -1191,8 +1259,7 @@ mob
 						if("Makaio")
 							src.contents += new/obj/Skills/Rank/Majinize
 
-				if(num==4) //God Era
-					src.Ascend(20)
+				if(num==4) //God Era. This probably aint necessary.
 					src.god_ticks = 3
 
 

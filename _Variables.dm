@@ -32,7 +32,6 @@ var
 	StrongestEXP=0 //Sets strongest possible exp according to year. Helps determine power/stat rank.
 	StrongestEnergy=0 //Determined how much energy raised by using rpp. Determined power rank.
 	ZenkaiReset //Reset's everyone's zenkai value.
-	SpeedCap=25 //Isn't present in any other part of the code; most likely can be removed
 	StarsActivated=0 //Boosts Makyo BP according to number of stars
 	RankToggle=1 //Alternate configuration for power ranks
 	Destroyer //Anti spiral class

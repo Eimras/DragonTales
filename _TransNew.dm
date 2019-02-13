@@ -290,72 +290,28 @@ mob/proc/SetVars()
 			src.ssj["3give"]=125000000
 			src.ssj["3multi"]=2
 
-		if(src.Class=="Normal")
+		if(src.Class in list("Normal","Low-Class","Elite"))
 			src.ssj["1req"]=3500000
 			src.ssj["1give"]=17500000
-			src.ssj["1multi"]=1.5
+			src.ssj["1multi"]=2
 			if(src.ssj["1mastery"]>=100)
 				src.ssj["1give"]=26250000
-				src.ssj["1multi"]=1.5
+				src.ssj["1multi"]=2.25
 
 
 			src.ssj["2req"]=45000000
 			src.ssj["2give"]=50000000
-			src.ssj["2multi"]=2
+			src.ssj["2multi"]=1.5
 			if(src.ssj["2mastery"]>=100)
 				src.ssj["2give"]=75000000
-				src.ssj["2multi"]=2
+				src.ssj["2multi"]=1.75
 
 
 			src.ssj["3req"]=300000000
 			src.ssj["3give"]=150000000
-			src.ssj["3multi"]=2.5
+			src.ssj["3multi"]=2
 			if(src.ssj["3mastery"]>=100)
 				src.ssj["3give"]=225000000
-				src.ssj["3multi"]=2.5
-
-		if(src.Class=="Low-Class")
-			src.ssj["1req"]=3000000
-			src.ssj["1give"]=15000000
-			src.ssj["1multi"]=1.5
-			if(src.ssj["1mastery"]>=100)
-				src.ssj["1give"]=22500000
-				src.ssj["1multi"]=1.5
-
-			src.ssj["2req"]=45000000
-			src.ssj["2give"]=40000000
-			src.ssj["2multi"]=2
-			if(src.ssj["2mastery"]>=100)
-				src.ssj["2give"]=60000000
-				src.ssj["2multi"]=2
-
-			src.ssj["3req"]=300000000
-			src.ssj["3give"]=100000000
-			src.ssj["3multi"]=2.5
-			if(src.ssj["3mastery"]>=100)
-				src.ssj["3give"]=150000000
-				src.ssj["3multi"]=2.5
-
-		else if(src.Class=="Elite")
-			src.ssj["1req"]=6500000
-			src.ssj["1give"]=20000000
-			src.ssj["1multi"]=1.5
-			if(src.ssj["1mastery"]>=100)
-				src.ssj["1give"]=30000000
-				src.ssj["1multi"]=1.5
-
-			src.ssj["2req"]=45000000
-			src.ssj["2give"]=60000000
-			src.ssj["2multi"]=2
-			if(src.ssj["2mastery"]>=100)
-				src.ssj["2give"]=90000000
-				src.ssj["2multi"]=2
-
-			src.ssj["3req"]=300000000
-			src.ssj["3give"]=200000000
-			src.ssj["3multi"]=2.5
-			if(src.ssj["3mastery"]>=100)
-				src.ssj["3give"]=300000000
 				src.ssj["3multi"]=2.5
 
 		else if(src.Class=="Legendary")

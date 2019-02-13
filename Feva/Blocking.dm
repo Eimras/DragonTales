@@ -29,6 +29,16 @@ proc
 						BlockStop(m)
 					spawn(100)
 						m.BlockShield=0
+
+		if(m.GetPassive("saiyan fortitude"))
+			NewDamage /= 2
+			m.tmp_passives["saiyan fortitude"] -= 1
+			if(0 >= m.tmp_passives["saiyan fortitude"])
+				m.tmp_passives -= "saiyan fortitude"
+				viewers(m) << "[m]'s fortification falls apart."
+		if(m.GetPassive("saiyan might"))
+			NewDamage *= m.tmp_passives["saiyan might"]
+
 		return sqrt(NewDamage)/2
 mob
 	Players
