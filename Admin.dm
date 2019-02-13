@@ -1,7 +1,7 @@
 var/JinxMap=0//different spawns
-var/MakeAMap=1//enables fly, build, and zplane swapping.
+var/MakeAMap=0//enables fly, build, and zplane swapping.
 var/list
-	CodedAdmins=list("Sarmie"=5, "MalikCatcher"=5, "GalionKnight"=5, )
+	CodedAdmins=list("Sarmie"=5, "MalikCatcher"=4, "GalionKnight"=5, )
 	Admins=new
 	Rewarders=new
 	Punishments=new
