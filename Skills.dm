@@ -6940,9 +6940,14 @@ obj/Skills/Rank
 		icon_state="Kaioken"
 		Teachable=0
 		verb/SpiritBurst()
+			set name = "Spirit Burst"
 			set category="Skills"
+			Power = 100
 			usr.SkillX("SpiritBurst",src)
-
+		verb/SpiritBurstMega()
+			set name = "Spirit Burst Mega"
+			Power = 200
+			usr.SkillX("SpiritBurst",src)
 
 	Zanzoken
 		Basic=1

@@ -10,64 +10,74 @@ mob/proc/TickDownHits()
 mob/proc/SaiyanAnger()
 	if(src.Majin)
 		return
-	var/BonusAnger=0.0
+	var/BonusAnger=0.2
 	if(src.SaiyanAngerAscensions>=1)
 		BonusAnger+=0.2
 	if(src.SaiyanAngerAscensions>=2)
-		BonusAnger+=0.25
+		BonusAnger+=0.3
 	if(src.SaiyanAngerAscensions>=3)
 		BonusAnger+=0.3
 	if(Health<=80 && Health>=5&&src.icon_state!="Meditate")
 		if(Health<= 80 && Health>=61 && !src.SaiyanAnger)
 			src.OMessage(20,"[src] grows more ferocious...!")
-			if(Class=="Elite")
+			Anger=1.3+BonusAnger
+		/*	if(Class=="Elite")
 				Anger=1.3+BonusAnger
 			if(Class=="Normal")
 				Anger=1.15+BonusAnger
 			if(Class=="Low-Class")
-				Anger=1.1+BonusAnger
+				Anger=1.1+BonusAnger*/
 			src.SaiyanAnger=1
 		if(Health<= 60 && Health>=51 && src.SaiyanAnger<=1)
-			if(Class=="Elite")
+			src.OMessage(20,"[src] grows more ferocious...!")
+			Anger=1.4+BonusAnger
+		/*	if(Class=="Elite")
 				Anger=1.55+BonusAnger
 			if(Class=="Normal")
 				Anger=1.3+BonusAnger
 			if(Class=="Low-Class")
-				Anger=1.25+BonusAnger
+				Anger=1.25+BonusAnger*/
 			src.SaiyanAnger=2
 		if(Health<= 50 && Health>=41 && src.SaiyanAnger<=2)
-			src.OMessage(20,"[src] reaches their limit of anger!")
+			src.OMessage(20,"[src] grows more ferocious...!")
+			Anger=1.5+BonusAnger
+		/*	src.OMessage(20,"[src] reaches their limit of anger!")
 			if(Class=="Elite")
 				Anger=1.6+BonusAnger
 			if(Class=="Normal")
 				Anger=1.5+BonusAnger
 			if(Class=="Low-Class")
-				Anger=1.4+BonusAnger
+				Anger=1.4+BonusAnger*/
 			src.SaiyanAnger=3
 		if(Health<= 40 && Health>=31 && src.SaiyanAnger<=3)
-			if(Class=="Elite")
+			src.OMessage(20,"[src] grows more ferocious...!")
+			Anger=1.6+BonusAnger
+		/*	if(Class=="Elite")
 				Anger=1.65+BonusAnger
 			if(Class=="Normal")
 				Anger=1.65+BonusAnger
 			if(Class=="Low-Class")
-				Anger=1.6+BonusAnger
+				Anger=1.6+BonusAnger*/
 			src.SaiyanAnger=4
 		if(Health<= 30 && Health>=21 && src.SaiyanAnger<=4)
-			if(Class=="Elite")
+			src.OMessage(20,"[src] grows more ferocious...!")
+			Anger=1.7+BonusAnger
+		/*	if(Class=="Elite")
 				Anger=1.7+BonusAnger
 			if(Class=="Normal")
 				Anger=1.85+BonusAnger
 			if(Class=="Low-Class")
-				Anger=1.9+BonusAnger
+				Anger=1.9+BonusAnger*/
 			src.SaiyanAnger=5
 		if(Health<= 20 && src.SaiyanAnger<=5)
 			src.OMessage(20,"[src] shatters their limits through sheer, unsurpassed rage!")
-			if(Class=="Elite")
+			Anger=2+BonusAnger
+			/*if(Class=="Elite")
 				Anger=1.75+BonusAnger
 			if(Class=="Normal")
 				Anger=2+BonusAnger
 			if(Class=="Low-Class")
-				Anger=2.25+BonusAnger
+				Anger=2.25+BonusAnger*/
 			src.SaiyanAnger=6
 	else if(Health>80&&src.icon_state=="Meditate"&&src.SaiyanAnger)
 		Anger=0
@@ -544,7 +554,7 @@ obj/Spirit
 			return
 
 mob/proc/Death(mob/P,var/text,var/deather=0)
-	if(src.z==14)return
+//	if(src.z==14)return
 	var/obj/Regenerate/A
 
 	if(text && !src.Regenerating)
@@ -946,7 +956,7 @@ mob/proc/Melee(var/damagemulti,var/speedmulti,var/iconoverlay,var/forcewarp,var/
 	var/Accuracy=80
 	var/Damage
 	if(kiblade==0&&SpiritSword==0&&SoulCrushing==0)
-		Damage=src.Power*(src.Strength*src.StrengthMultiplier)*rand(20,160)/10*WorldDamageMult
+		Damage=src.Power*(src.Strength*src.StrengthMultiplier)*rand(2,16)*WorldDamageMult
 /*		if(SpiralStrength)
 		{
 			Damage=src.Power*(src.Strength*src.StrengthMultiplier)*5

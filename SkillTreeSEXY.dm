@@ -54,7 +54,7 @@ mob/proc/fml2()
 					del(x)*/
 
 var/list/SkillTree=list(
-"Tier0"=list("/obj/Skills/PowerControl"=10,"/obj/Skills/Rank/Zanzoken"=10,"/obj/Skills/Rank/AfterImageStrike"=100,"/obj/Skills/Rank/WildSense"=100),
+"Tier0"=list("/obj/Skills/PowerControl"=100,"/obj/Skills/Rank/Zanzoken"=50,"/obj/Skills/Rank/AfterImageStrike"=100,"/obj/Skills/Rank/WildSense"=100),
 "BlastT1"=list("/obj/Skills/Attacks/Blast"=50,"/obj/Skills/Attacks/Charge"=150),
 "BlastT2"=list("/obj/Skills/Attacks/Barrage"=150),
 "BlastT3"=list("/obj/Skills/Attacks/DragonNova"=500),
@@ -188,9 +188,9 @@ obj/SkillTreeObj
 				usr.RewardPoints-=final_cost
 				usr.spentrp+=src.cost
 				usr<<"You bought [s] for [final_cost] points!"
-				if(s.name=="Fly")
-					usr<<"Buying Fly has also unlocked your Turf Build."
-					usr.BuildGiven=1
+			//	if(s.name=="Fly")
+			//		usr<<"Buying Fly has also unlocked your Turf Build."
+			//		usr.BuildGiven=1
 		..()
 
 

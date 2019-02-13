@@ -118,8 +118,9 @@ mob/proc/Oozaru(Go_Oozaru=1,var/revert)
 			BonusAnger+=0.15*src.SaiyanAngerAscensions
 			if(BonusAnger==0.45)
 				BonusAnger=0.5
+
 			if(Class=="Elite")
-				Anger=2+BonusAnger
+				Anger=2.25+BonusAnger
 			if(Class=="Normal")
 				Anger=2.25+BonusAnger
 			if(Class=="Low-Class")

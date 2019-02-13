@@ -1970,7 +1970,7 @@ mob/proc/GainLoop()
 
 			if((src.KaiokenActive||src.SuperKaioken)&&!src.PureRPMode)
 				if(!src.SuperKaioken)
-					src.TotalInjury+=(src.KaiokenLevel/src.KaiokenMastery)*0.5
+					src.TotalInjury+=(src.KaiokenLevel/src.KaiokenMastery)
 				else if(src.SuperKaioken)
 					src.TotalInjury+=2*rand(1,6)
 				if(src.KO&&src.KaiokenActive)

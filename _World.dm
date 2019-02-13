@@ -141,10 +141,13 @@ proc/GlobalSave()
 var/Updates={"
 <i>|Version MM/DD/YYYY|</i><br><br>
 <b>Version V1.2.0 1/27/2019</b><br>
+- Races with large amount of stat points have all had their points lowered dramatically.<br>
+- Saiyans reworked. All saiyans are locked out of buffs. Zenkai has 6 tiers. Saiyans choose one of three different racials upon obtaining their first tier of zenkai.<br>
 - Aliens reworked. They have 3 customizable transformations and 2 ascensions. 1st ascension scales alien's first transformation into SSj Era. It should also be common. The second ascension, Elite status, is otherwise exclusive.<br>
 - Kaios reworked. They naturally obtain teachable and support abilities, as well as God Ki. Makaio are now a path of Kaios.<br>
 - Dragons reworked. They now scale through eras. Each dragon also obtains an elemental class.<br>
 - Pursuit removed. Aerial Payback & Aerial Recovery are now hidden.<br>
+- Spirit Burst got similar treatment to Kaioken.<br>
 - Kaioken now gives three different verbs instead of prompting the user. Kaioken's power has been reduced massively. Grants some stats to compensate.<br>
 - Added God Ki ability. which functions as a power multiplier. Divinity and God Ki are not the same, in that, God Ki is the actual usage of Divinity to power oneself. All God Ki users are divine, but most divine character will not ever use God Ki.<br>
 - Divinity has attained some new nifty passives.<br>
@@ -157,7 +160,7 @@ var/Updates={"
 - Knockbacks occur immediately. They were stalled by a number of calls prior to the KB one. KB speed is fast, so chaining them should not be a real issue.<br>
 - Knockback distances greatly reduced, and also factor damage as well as strength vs endurance. <br>
 - Speed factor in accuracy formula changed from a direct multiplier to an additive value. <br>
-- Damage values on most/all projectiles are now pushed into a diminshing returns function. This should reduce damage greatly. <br>
+- Damage values on most/all projectiles are now reduced. This should overall damage greatly, though a lot of skills are awaiting this shift. <br>
 - Aligned tick_lag and world fps. Set client FPS to 40.<br>
 
 <b>Version V1.1.4 11/21/2016</b><br>
@@ -256,21 +259,7 @@ var/WorldLoading
 var/SecurityHex="PrivateTesting666"
 
 
-var/list/LockedRaces=list("Half Saiyan"=list(),\
-	"Makyo"=list(),\
-	"Half Demon"=list(),\
-	"Demi"=list(),\
-	"Saiyan"=list(),\
-	"Kaio"=list(),\
-	"Demon"=list(),\
-	"Majin"=list(),\
-	"Dragon"=list(),\
-	"Lycan"=list(),\
-	"Vampire"=list(),\
-	"Aetherian"=list("Raffness"),\
-	"Android"=list(),\
-	"Bio"=list(),\
-	"Changeling"=list())
+var/list/LockedRaces=list("Half Saiyan"=list(),"Makyo"=list(),"Half Demon"=list(),"Demi"=list(),"Saiyan"=list(),"Kaio"=list(),"Demon"=list(),"Majin"=list(),"Dragon"=list(),"Lycan"=list(),"Vampire"=list(),"Aetherian"=list("Raffness"),"Android"=list(),"Bio"=list(),"Changeling"=list())
 
 //removed due to QQing
 mob/proc/CheckUnlock(var/blah)

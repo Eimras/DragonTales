@@ -31,10 +31,6 @@ mob/proc/GrantPassive(passive, value)
 
 
 
-obj/Skills/saiyan
-	drive
-	fortitude
-	power
 
 
 //This shit only works for ayylmaos rn.
@@ -96,3 +92,168 @@ mob/proc/CustomizedRevert(var/level,var/restrictions = list())
 			if(trans_flavor["2base"]) icon = trans_flavor["2base"]
 			overlays += trans_flavor["2overlay"]
 	viewers(src) << "[trans_flavor["[level]revert"]]"
+
+
+
+obj/Skills/saiyan
+	drive //Grants an instant burst of PU. Scales with ascension level.
+		Cooldown=25
+		verb/Saiyan_Drive()
+			set name = "Saiyan Drive"
+			set category="Skills"
+			usr.SkillGX("SaiyanDrive", src)
+
+	fortitude
+		Cooldown=220
+		verb/Saiyan_Fortitude()
+			set name = "Saiyan Fortitude"
+			set category="Skills"
+			usr.SkillGX("SaiyanFortitude", src)
+	power
+		Cooldown=220
+		verb/Saiyan_Might()
+			set name = "Saiyan Might"
+			set category="Skills"
+
+
+
+mob/proc/SkillGX(var/Wut,var/obj/Skills/Z,var/bypass=0) //A-I
+	if(Z)
+		if(!locate(Z) in src)
+			return
+
+		if(Z.Using) return
+	if(src.Stunned)
+		return
+	var/ManaDrain=1
+	var/StaffPower=1
+	var/Element=0
+	for(var/obj/Items/Enchantment/Staff/N in src) if (N.suffix)
+		ManaDrain=N.Mana_Drain
+		StaffPower=N.Staff_Power
+		Element=N.Element
+	if(bypass||Z)
+		switch(Wut)
+			if("SaiyanDrive")
+				var level = min(3, 1 * (AscensionsAcquired*0.5)) //Strengthened by zenkai.
+				if(100 > ControlPower)
+					src << "You must be over 100% power to use this."
+					return
+				Energy -= (EnergyMax * 0.05)
+				ControlPower += 10 * level
+				Earthquake(6,-2,2,-2,2)
+				src.OMessage(30,"[src] roars as their power rises!","<font color=red>[src]([src.key]) used Saiyan Drive.")
+
+				if(!src.PowerUp) src.SkillX("PowerUp",src)
+				Z.Cooldown()
+			if("SaiyanFortitude")
+				GrantTempPassive("saiyan fortitude", 3 + AscensionsAcquired)
+				src.OMessage(30,"[src] fortifies their stance!","<font color=red>[src]([src.key]) used Saiyan Fortitude.")
+				spawn(100 + (AscensionsAcquired*10))
+					tmp_passives -= "saiyan fortitude"
+					viewers(src) << "[src] fortification falls apart."
+				Z.Cooldown()
+			if("SaiyanMight")
+				GrantTempPassive("saiyan might", min(3, 2 + (AscensionsAcquired * 0.25)) )
+				src.OMessage(30,"[src] unleashes their overwhelming might!","<font color=red>[src]([src.key]) used Saiyan Might.")
+
+				spawn(100)
+					viewers(src) << "[src] relaxes their power."
+					tmp_passives -= "saiyan might"
+				Z.Cooldown()
+			if("Overpower")
+				if(src.KO||Blocking)return
+				if(Z.Using) return
+				if(src.Grab) return
+				if(src.Meditating) return
+				if(src.Digging) return
+				if(src.TimeFrozen)return
+				if(src.ShadowBound)return
+				if(src.Flying) return
+				if(src.Clothesline) return
+				var/DistanceZ=2
+				var/Ready=0
+
+				var using_sword = 0
+				for(var/obj/Items/Sword/S in usr)
+					if(S.suffix)
+						using_sword = 1
+						break
+				if(src.Energy>EnergyMax/8)
+					Z.Cooldown()
+					Z.Using=1
+					src.Frozen=1
+
+					for(var/mob/S in view(src,12))
+						S<<sound('KunaiMod/Sounds/nanayaspecial.ogg')
+					src.OMessage(10,"[src] lunges forth, attempting to overpower their opponent!","<font color=red>[src]([src.key]) used Overpower.")
+					for(var/mob/S in view(src,12))
+						S<<sound('KunaiMod/Sounds/nanayasensou.ogg')
+					while(DistanceZ>0)
+						AfterImage(src)
+						step(src,src.dir)
+						DistanceZ-=1
+						for(var/mob/P in view(src,1))
+							if(P!=src)
+								Stun(P,4)
+								DistanceZ=0
+								Ready=1
+						sleep(1.25)
+						if(DistanceZ==0&&Ready==1)
+							var/Slashes=10
+							while(Slashes>0)
+								for(var/mob/U in view(src,1))
+									if(U!=src)
+										Stun(U,1)
+										if(using_sword)
+											Slash(U)
+										else
+											HitEffect(U)
+										var/Damage=src.StrVsEnd(U,rand(0.5,2))
+										DoDamage(U, Damage)
+										for(var/mob/S in view(src,12))
+											if(using_sword)
+												S<<sound('KunaiMod/Sounds/daggerhit.ogg', volume=35)
+											else
+												if(prob(50))
+													S<<sound('KunaiMod/Sounds/hit1.ogg')
+												else
+													S<<sound('KunaiMod/Sounds/taphit.ogg')
+
+									Slashes-=1
+								for(var/mob/S in view(src,12))
+									if(using_sword)
+										S<<sound('KunaiMod/Sounds/daggerswung.ogg')
+									else
+										if(prob(50))
+											S<<sound('KunaiMod/Sounds/hit1.ogg')
+										else
+											S<<sound('KunaiMod/Sounds/taphit.ogg')
+
+								sleep(1.75)
+								if(DistanceZ<=0&&Slashes<=0)
+									src.OMessage(10, "[src] overpowers their opponent with gargantuan might!", "[src]([src.key]) finished Overpower.")
+									for(var/mob/YE in view(src,1))
+										if(using_sword)
+											Slash(YE)
+										else
+											HitEffect(YE)
+										var/Damage=src.StrVsEnd(YE,4)
+										if(Health > YE.Health)
+											var damage_mult = 1 + (1 - (YE.Health/Health))
+											Damage *= damage_mult
+
+							//		spawn()new/obj/Tipper(src)
+
+
+									for(var/mob/S in view(src,12))
+										if(using_sword)
+											S<<sound('KunaiMod/Sounds/daggerswing.ogg')
+										else
+											S<<sound('KunaiMod/Sounds/taphitstrong.ogg')
+										S<<sound('KunaiMod/Sounds/impact1.ogg')
+									src.Frozen=0
+									src.Using=0
+						else if(DistanceZ<=0&&Ready==0)
+							src.Frozen=0
+							src.Using=0

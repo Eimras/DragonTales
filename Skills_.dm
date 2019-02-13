@@ -14390,33 +14390,29 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 				if(src.SpiritBurst)
 					src.SpecialSlot=0
 					src<<"You stop using Spirit Burst."
+					src.ControlPower = max(100, src.ControlPower - src.SpiritBurst)
 					src.SpiritBurst=0
 					if(src.PowerUp)
 						src.PowerUp=0
 						src.Auraz("Remove")
-					src.Energy=1
 				else if(!src.SpiritBurst&&!src.KO)
 					if(src.SpecialSlot)
 						src << "You're already using a special buff."
 						return
 					src.SpecialSlot=1
-					var/amount=input(src,"How high do you want to power up?") as num
-					if(amount<100) amount=101
-					amount=round(amount)
-					if(amount>=300)
-						amount=300
-					if(usr.Race=="Android"&&amount>=250)
-						amount=250
+					var/amount=Z.Power
+
+
 					if(!usr.SpiritBurst)
 						if(src.PowerDown&&!src.PowerUp)
 							src.Auraz("Remove")
 							src.PowerDown=0
 						view(src)<<"[src]'s power spikes upwards at a rapid rate!"
 						src.ControlPower=amount
+						src.SpiritBurst=amount
 						if(!src.PowerUp&&!src.PowerDown)
 							src.PowerUp=1
 							src.Auraz("Add")
-						src.SpiritBurst=1
 						src.OMessage(15,null,"<font color=red>[src]([src.key]) uses Spirit Burst.")
 				return
 /*			if("EightGates")
@@ -14482,7 +14478,8 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 
 			if("Kaioken")
 				if(src.KaiokenActive)
-				//	src.SpecialSlot=0
+					if(src.Race != "Saiyan")
+						src.SpecialSlot=0
 					src<<"You stop using Kaioken."
 					src.KaiokenActive=0
 					src.RPPower-=(src.KaiokenLevel)
@@ -14491,15 +14488,17 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 					src.SuperKaioken=0
 					src.overlays-=image(icon='AurasBig.dmi',icon_state="Kaioken",pixel_x=-32)
 				else if(!src.KaiokenActive&&!src.KO&&!src.SuperKaioken)
-				//	src << "You're already using a special buff."
-				//	return
-				//	src.SpecialSlot=1
+					if(src.SpecialSlot && src.Race != "Saiyan")
+						src << "You're already using a special buff."
+						return
+					src.SpecialSlot = 1
+
 					var/amount
 					var/shout
 					switch(Z.Power)
 						if(1)
 							amount = 1.25
-							shout = "[min(KaiokenMastery, 3)]"
+							shout = "[min(round(KaiokenMastery), 3)]"
 						if(2)
 							amount = 1.5
 							shout = "4"
@@ -14509,7 +14508,7 @@ mob/proc/SkillX(var/Wut,var/obj/Skills/Z,var/bypass=0)//var/_isSkillActive
 					if(!usr.KaiokenActive)
 						src.overlays+=image(icon='AurasBig.dmi',icon_state="Kaioken",pixel_x=-32)
 						view(src)<<"A bright red aura bursts all around [src]."
-						view(src)<<"[src] yells: <b>Kaioken x[amount]!</b>"
+						view(src)<<"[src] yells: <b>Kaioken x[shout]!</b>"
 					//	if(amount>=31)
 					//		src.SuperKaioken=1
 					//		amount=30

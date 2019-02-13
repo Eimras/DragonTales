@@ -1313,14 +1313,14 @@ mob/proc/Available_Power()
 					src.ControlPower-=(src.Recovery*src.RecoveryMultiplier)
 					if(src.ControlPower<100)
 						src.ControlPower=100
-				if(src.Race=="Android" && ControlPower>=250 && src.AscensionsAcquired < 1 &&!src.Overdrive)
+				if(src.Race=="Android" && ControlPower>=150 && src.AscensionsAcquired < 1 &&!src.Overdrive)
+					src.ControlPower=150
+				if(src.Race=="Android" && ControlPower>=200 && src.AscensionsAcquired == 1 &&!src.Overdrive)
+					src.ControlPower=200
+				if(src.Race=="Android" && ControlPower>=250 && src.AscensionsAcquired == 2 &&!src.Overdrive)
 					src.ControlPower=250
-				if(src.Race=="Android" && ControlPower>=300 && src.AscensionsAcquired == 1 &&!src.Overdrive)
+				if(src.Race=="Android" && ControlPower>=300 && src.AscensionsAcquired == 3 &&!src.Overdrive)
 					src.ControlPower=300
-				if(src.Race=="Android" && ControlPower>=400 && src.AscensionsAcquired == 2 &&!src.Overdrive)
-					src.ControlPower=400
-				if(src.Race=="Android" && ControlPower>=500 && src.AscensionsAcquired == 3 &&!src.Overdrive)
-					src.ControlPower=500
 				var/PowerDrain=1
 				var/PUdrain=(src.Recovery*src.RecoveryMultiplier)
 				if(PUdrain>=10)
