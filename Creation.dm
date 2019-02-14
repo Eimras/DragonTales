@@ -1015,10 +1015,8 @@ mob/proc/UpdateRaceScreen(var/wut,var/amountz)
 		if(7) if(src.CheckIfDestroyed("Ice",amountz)) available_races = ice_races.Copy()
 
 
-	for(var/index in LockedRaces) world << index
 	for(var/v in available_races)
 		if(LockedRaces.Find(v) && !(key in LockedRaces[v]))
-			world << "OOF [v]"
 			available_races -= v
 
 
