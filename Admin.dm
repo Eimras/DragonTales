@@ -140,24 +140,6 @@ mob/Admin1/verb
 			if(M.Admin)
 				M<<"<font color=lime>(ADMIN VOTE):</font color> <b>[usr.key]</b> is conducting a vote for: <b>[what]</b> because of <i>[reason]</i> <big><a href=?src=\ref[Q];action=MasterControl;do=Vote>VOTE</a></b>"
 
-	Admin_Examine(var/atom/A as mob|obj in world)
-		set category="Admin"
-		if(istype(A,/obj))
-			if(A.desc)
-				src<<A.desc
-			if(istype(A,/obj/Items/Tech/SpaceTravel))
-				for(var/obj/Items/Tech/SpaceTravelParts/Engines/B in A)
-					src<<"There appears to be a [B] Engine installed."
-				for(var/obj/Items/Tech/SpaceTravelParts/Misc/C in A)
-					src<<"There appears to be a [C] installed."
-			if(istype(A,/obj/Items/Tech/Scouter))
-				for(var/obj/Items/Tech/ScouterUpgrades/D in A)
-					src<<"There appears to be a [D] installed."
-		else if(ismob(A))
-			var/mob/M = A
-			//usr << "This is: [M]"
-			usr << browse(M.playerdescription, "window=[M.name]_profile;display=1;size=480x600;border=0;can_close=1;can_resize=1;can_minimize=1;titlebar=1")
-
 var
 	_AutoRewardTier=list("EnvyAttraction"=5)//just coded so its a placement, do not set to null
 	_AutoReward=list("MaxBase"=10,"MaxStat"=10,"LastRewardTime"=0,"RewardsTotal"=0,"RPChara"=2500,"RPFreq"=5)
