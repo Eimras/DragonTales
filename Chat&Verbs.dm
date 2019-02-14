@@ -306,6 +306,8 @@ mob/Players/verb
 			return
 	UseRewardPoints()
 		set category="Other"
+		set hidden = 1
+		return
 		//usr<<"Trainless means no using this verb anymore."
 		//return
 		if(src.UsingRPP)
