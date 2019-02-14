@@ -4597,7 +4597,7 @@ window "SwordCustom"
 		background-color = #000000
 		border = line
 		saved-params = ""
-		text = "0"
+		text = ""
 	elem "LabelExplosive"
 		type = LABEL
 		pos = 100,115
@@ -4690,8 +4690,8 @@ window "SwordCustom"
 		background-color = #000000
 		border = line
 		saved-params = "is-checked"
-		text = "+"
-		command = ".SwordCustom \"Homing\""
+		text = ""
+		command = ""
 		is-flat = true
 	elem "button15"
 		type = BUTTON
@@ -4769,7 +4769,7 @@ window "SwordCustom"
 		background-color = #000000
 		border = line
 		saved-params = ""
-		text = "- Damage Multi: Increases the effiency of using the blade.\n- Accuracy Multi: Increases the accuracy of the blade connecting.\n- Delay Multi: Decreases the delay between blade hits.\n- Drain Multi: Higher it is lower the drain, 1x is same drain as a regular attack. \n- Explosive: An explosion upon each hit!\n- Homing: Will rush to the victim and strike them down."
+		text = "- Damage Multi: Increases the effiency of using the blade.\n- Accuracy Multi: Increases the accuracy of the blade connecting.\n- Delay Multi: Decreases the delay between blade hits.\n- Drain Multi: Higher it is lower the drain, 1x is same drain as a regular attack. \n- Explosive: An explosion upon each hit!"
 		text-wrap = true
 	elem "SwordPoints"
 		type = LABEL
@@ -4797,7 +4797,7 @@ window "SwordCustom"
 		background-color = #000000
 		border = line
 		saved-params = ""
-		text = "Homing (10)"
+		text = ""
 		image-mode = stretch
 	elem "POW"
 		type = LABEL
