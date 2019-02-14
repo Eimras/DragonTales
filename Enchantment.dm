@@ -24,7 +24,7 @@ mob/proc/PoM_Heal(Amount)
 			ManaAmount=ManaMax
 		sleep(10)
 
-mob/proc/EnchantmentGain(var/Multiplier=1)
+mob/proc/EnchantmentGain(var/Multiplier=0.2)
 	src.EnchantmentEXP+=rand(10,100)*(EnchantmentRate/100)*src.Meditation_Rate*Multiplier
 	if(Multiplier>1)
 		src.EnchantmentEXP+=(src.EnchantmentEXPNeeded*0.01)*(EnchantmentRate/50)*src.Meditation_Rate*Multiplier

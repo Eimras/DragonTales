@@ -877,7 +877,7 @@ mob/Players/verb
 				usr.EnchantmentFocus=1
 				usr.IntFocus=0
 
-mob/proc/IntGain(var/Multiplier=1)
+mob/proc/IntGain(var/Multiplier=0.2)
 	src.IntelligenceEXP+=rand(10,100)*(IntRate/100)*src.Meditation_Rate*Multiplier
 	if(Multiplier>1)
 		src.IntelligenceEXP+=(src.IntelligenceEXPNeeded*0.01)*(IntRate/50)*src.Meditation_Rate*Multiplier

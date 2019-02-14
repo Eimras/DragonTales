@@ -271,6 +271,7 @@ mob/proc/Digging()
 	if(src.Digging==0)
 		src.PassiveGain=null
 
+mob/var/tmp/last_meditate
 mob/proc/Meditation()
 	src.PassiveGain=1
 	var/obj/Skills/Meditate/med
@@ -280,9 +281,12 @@ mob/proc/Meditation()
 	if(med.delay)
 		sleep(5)
 		return
+
+	var medtime = world.time
+	last_meditate = world.time
 	spawn()
 		med.delayTimer()
-	while(src.icon_state=="Meditate")
+	while(src.icon_state=="Meditate" && last_meditate == medtime)
 		src.Decline+=0.0000004*(Meditation_Rate*ControlMedRate)*(DeclineGains/100)
 		Base+=0.04*sqrt(sqrt(Gravity))*GetPowerRank(2)*(Gains/100)*BaseMod*(Meditation_Rate*ControlMedRate)*WeightFormula(1)*EXP/1000*0.01/2
 		if(src.Race=="Kurama")
