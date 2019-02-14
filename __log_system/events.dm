@@ -16,8 +16,8 @@ proc/Log(var/e,var/Info)
 	if(e=="Admin")
 		e="Saves/AdminLogs/Log"
 		if(usr)
-			if(!(usr.Admin<=4)&&usr.Admin!=null)e="Saves/AdminLogz/Log"
-			if(usr.Admin<=4)AdminMessage(Info)
+			if(!(usr.Admin<=5)&&usr.Admin!=null)e="Saves/AdminLogz/Log"
+			if(usr.Admin<=5)AdminMessage(Info)
 		else
 			AdminMessage(Info)
 	if(e=="Rewarder")
