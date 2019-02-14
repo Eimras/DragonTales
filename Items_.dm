@@ -2817,7 +2817,7 @@ obj/Items/Sword
 		winshow(usr,"SwordCustom",0)
 		if(src in usr.contents)
 			if(PointsAssigned==0)
-				Points+=35//35+round((usr.IntelligenceLevel/2.5))
+				Points+=25//35+round((usr.IntelligenceLevel/2.5))
 				//if(Points>=35)
 				//	Points=35
 				PointsAssigned=1
@@ -2878,7 +2878,7 @@ mob/Players/verb/CustomizeSword(type as text)
 					Q.Points--
 				else
 					if(Q.Points>=10)
-						if(type in list("Explosive","Homing"))
+						if(type in list("Explosive")) //if(type in list("Explosive","Homing")) -- I REMOVED HOMING
 							if(!Q.vars["[type]"])
 								Q.vars["[type]"]=1
 								Q.Points-=10

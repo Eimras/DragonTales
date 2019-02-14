@@ -141,6 +141,7 @@ proc/GlobalSave()
 var/Updates={"
 <i>|Version MM/DD/YYYY|</i><br><br>
 <b>Version V1.2.0 1/27/2019</b><br>
+- Sword Homing Removed. Swords receive less points now.<br>
 - Races with large amount of stat points have all had their points lowered dramatically.<br>
 - Saiyans reworked. All saiyans are locked out of buffs. Zenkai has 6 tiers. Saiyans choose one of three different racials upon obtaining their first tier of zenkai.<br>
 - Aliens reworked. They have 3 customizable transformations and 2 ascensions. 1st ascension scales alien's first transformation into SSj Era. It should also be common. The second ascension, Elite status, is otherwise exclusive.<br>
@@ -162,6 +163,7 @@ var/Updates={"
 - Speed factor in accuracy formula changed from a direct multiplier to an additive value. <br>
 - Damage values on most/all projectiles are now reduced. This should overall damage greatly, though a lot of skills are awaiting this shift. <br>
 - Aligned tick_lag and world fps. Set client FPS to 40.<br>
+
 
 <b>Version V1.1.4 11/21/2016</b><br>
 -Added custom stances.  Has to be set up by an admin with Edit.<br>
