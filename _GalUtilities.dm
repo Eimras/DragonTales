@@ -1,5 +1,8 @@
 
 
+mob/var/tmp/obj/Skills/attack_queued //For the queueable framework when its implemented.
+obj/Skills/queueable
+
 
 
 proc/GetRealDamage(var/damage)
