@@ -614,10 +614,10 @@ mob/Creation/verb
 
 			else if(usr.Race=="Heran")
 				if(usr.Class=="Fighter")
-					if(usr.CheckUnlock("Captain"))
-						usr.Class="Captain"
-					else
-						usr.Class="Fighter"
+				//	if(usr.CheckUnlock("Captain"))
+				//		usr.Class="Captain"
+				//	else
+					usr.Class="Fighter"
 				else if(usr.Class=="Captain")
 					usr.Class="Fighter"
 
@@ -649,16 +649,16 @@ mob/Creation/verb
 					else if(usr.CheckUnlock("Savage"))
 						usr.Class="Savage"
 					else
-						usr.Class="Low-Class"
+						usr.Class="Normal"
 				else if(usr.Class=="Fire God")
 					if(usr.CheckUnlock("Savage"))
 						usr.Class="Savage"
 					else
 						usr.Class="Savage"
 				else if(usr.Class=="Savage")
-					usr.Class="Low-Class"
+					usr.Class="Normal"
 				else
-					usr.Class="Low-Class"
+					usr.Class="Normal"
 
 
 
@@ -2923,6 +2923,8 @@ mob/proc
 			if(src.Class=="Legendary")
 				src.Potential=0.25
 				if(src.Base<10)src.Base=1
+				src.ActiveBuffs=3
+				src.SpecialSlot=1
 				src.Special=rand(1,5)
 			if(src.Class=="Elite")
 				src.Potential=0.75
@@ -2933,10 +2935,14 @@ mob/proc
 			if(src.Class=="Normal")
 				src.Potential=1
 				if(src.Base<10)src.Base=1
+				src.ActiveBuffs=3
+				src.SpecialSlot=1
 			if(src.Class=="Low-Class")
 				src.Potential=1.5
 				src.Special=rand(1,10)
 				if(src.Base<10)src.Base=1
+				src.ActiveBuffs=3
+				src.SpecialSlot=1
 			if(src.Class=="Gohan")
 				src.Potential=3.35
 				src.Special=rand(1,30)
@@ -2955,12 +2961,16 @@ mob/proc
 				src.Special=5
 				src.Base=1
 				src.Potential=0.5
+				src.ActiveBuffs=3
+				src.SpecialSlot=1
 			if(src.Class=="Hellspawn")
 				src.Potential=1
 				if(src.Base<10)src.Base=1
 				src.contents+=new/obj/Skills/Absorb
 				src.contents+=new/obj/Skills/Buffs/Majin
 				src.Special=rand(1,5)
+				src.ActiveBuffs=3
+				src.SpecialSlot=1
 			if(src.Class=="Fire God")
 				src.Potential=0.1
 				if(src.Base<10)src.Base=1
@@ -3004,7 +3014,6 @@ mob/proc
 			src.SenseReq=pick(1,1.5,2,2.5)
 			src.PrimeAge=rand(5,20)
 			src.Potential=4
-			src.contents+=new/obj/Skills/Buffs/Berserk
 			src.Special=rand(1,25)
 			if(src.Class=="Blue Mage")
 				src.Decline*=2

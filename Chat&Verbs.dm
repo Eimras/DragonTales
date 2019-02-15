@@ -1273,8 +1273,8 @@ obj/Communication
 			return
 		usr.AutoReward["RPFreq"]++
 		usr.AutoReward["RPChara"]+=length(T)
-		if(usr.AutoReward["RPFreq"]>=REWARDMINIMUM_EMOTES && usr.AutoReward["RPChara"]>=REWARDMINIMUM_CHARACTERS)
-			RewarderMessage("[usr] has made [usr.AutoReward["RPFreq"]] emotes. With a total of [usr.AutoReward["RPChara"]] characters, reward them.")
+//		if(usr.AutoReward["RPFreq"]>=REWARDMINIMUM_EMOTES && usr.AutoReward["RPChara"]>=REWARDMINIMUM_CHARACTERS)
+//			RewarderMessage("[usr] has made [usr.AutoReward["RPFreq"]] emotes. With a total of [usr.AutoReward["RPChara"]] characters, reward them.")
 		/*if(usr.AutoReward["RPFreq"]==100)
 			Log("Admin","[usr] has made a hundred emotes holy shit when are rewards happening!?")
 		if(usr.AutoReward["RPFreq"]==200)
