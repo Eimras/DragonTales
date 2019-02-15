@@ -1367,7 +1367,7 @@ mob/Admin1/verb
 
 	LockedRacesOptions()
 		set category="Admin"
-		var/blah=input("Selection an option.","Locked Races") in list("View","Add","Remove")
+		var/blah=input("Selection an option.","Locked Races") in list("View","Add","Remove","Add Rare Class Key","Remove Rare Class Key")
 		if(blah=="View")
 			for(var/x in LockedRaces)
 				for(var/e in LockedRaces[x])
@@ -1393,6 +1393,20 @@ mob/Admin1/verb
 				if(wut&&wut!="Cancel")
 					LockedRaces[unlock] -= wut
 					Log("Admin","<font color=green>[ExtractInfo(usr)] removed from the LockedRaces list: [unlock] to [wut].")
+
+		if(blah=="Add Rare Class Key")
+			var/newkey = input("Add key to rare classes list?","Add") as text | null
+			if(newkey)
+				UnlockClasses |= newkey
+				src << "[newkey] can now make as any locked class. This will reset on reboot."
+		if(blah=="Remove Rare Class Key")
+			var/newkey = input("Remove key from rare class unlocks?","Add") as text | null
+			if(newkey)
+				if(newkey in UnlockClasses) src << "You remove [newkey] from rare classes unlocks."
+				else src << "[newkey] was not in rare class unlocks."
+				UnlockClasses -= newkey
+
+
 	FPSControl(fpsadjust as num)
 		set category="Admin"
 		world.fps=fpsadjust
