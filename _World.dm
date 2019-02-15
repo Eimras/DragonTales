@@ -262,13 +262,9 @@ var/SecurityHex="PrivateTesting666"
 
 
 var/list/LockedRaces=list("Half Saiyan"=list(),"Makyo"=list(),"Half Demon"=list(),"Demi"=list(),"Saiyan"=list(),"Kaio"=list(),"Demon"=list(),"Majin"=list(),"Dragon"=list(),"Lycan"=list(),"Vampire"=list(),"Aetherian"=list("Raffness"),"Android"=list(),"Bio"=list(),"Changeling"=list())
-var/tmp/list/UnlockClasses = list()
-
 
 //removed due to QQing
 mob/proc/CheckUnlock(var/blah)
-	if(key in UnlockClasses) return 1
-	else return 0
 	if(blah=="Elite"||blah=="Low-Class"||blah=="King Kold"||blah=="Half Demon"||blah=="Trunks"||blah=="Gohan"||blah=="Majin"||blah=="Bio"||blah=="Dragon"||blah=="Vampire"||blah=="Lycan"||blah=="Legendary"||blah=="Savage"||blah=="Fire God"||blah=="Heran"||blah=="Popo"||blah=="Ancient"||blah=="Half Saiyan"||blah=="Quarter Saiyan"||blah=="Makaioshin"||blah=="Deus"||blah=="God of Destruction"||blah=="Volodarskii"||blah=="Shifter"||blah=="Aetherian"||blah=="Youkai"||blah=="Quincy"||blah=="Neko"||blah=="Hell Raven"||blah=="Nobody"||blah=="Golem"||blah=="1/16th Saiyan"||blah=="Mazoku"||blah=="Sage"||blah=="Schrodinger"||blah=="Manakete"||blah=="Anti-Spiral"||blah=="Makyo"||blah=="Human"||blah=="Demi"||blah=="Captain"||blah=="Dhampir"||blah=="Synchronizer"||blah=="Reploid"||blah=="Lamia")
 		var/rarity=3
 		if(blah=="Elite")
