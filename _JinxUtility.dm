@@ -604,17 +604,17 @@ mob
 
 				if(src.Class!="Elite")
 					if(num==1)
-						src.Ascend(4)
+						src.Ascend(5)
 						src.RecovMult(1.5)
 					if(num==2)
-						src.Ascend(6)
+						src.Ascend(8)
 						src << "Your primal rage grows..."
 						SaiyanAngerAscensions=1
 					if(num==3)
 						src << "Your primal rage grows..."
 						SaiyanAngerAscensions=2
 					if(num==4)
-						src.Ascend(8)
+						src.Ascend(10)
 						src.RecovMult(1.5)
 					if(num==5)
 						src.Ascend(15)
@@ -625,10 +625,10 @@ mob
 
 				else
 					if(num==1)
-						src.Ascend(6)
+						src.Ascend(7)
 						src.RecovMult(1.5)
 					if(num==2)
-						src.Ascend(8)
+						src.Ascend(12)
 						src.RecovMult(1.5)
 					if(num==3)
 						src << "Your primal rage grows..."
