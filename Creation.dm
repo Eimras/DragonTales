@@ -395,7 +395,7 @@ mob/Creation
 		//usr<<"<font color=#FFFF00>Welcome!"
 		usr << login_notes
 		usr << "</font><b><small>Click the title screen to continue...</b><br>"
-		usr << "</font><b><small>CHANGELOG CHECK: This was updated on by Sarmie/Galion on (1/31/19 5:14 pm)!</b><br>"
+		usr << "</font><b><small>CHANGELOG CHECK: This was updated on by Sarmie on (2/16/19 7:57 pm)!</b><br>"
 		usr.loc=locate(1,7,1)//KEY POINT: title screen
 		//winshow(usr,"window1.ChatBox",0)
 		//winset(usr,"window1.MapChild","left=New_Screen")

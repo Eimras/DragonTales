@@ -9,6 +9,19 @@ var/Crazy=0
 //#define DEBUG
 client
 	fps = 40
+
+world/proc/UpdateHub()
+	var/ssdis=""
+	ssdis += "<b>Dragon Tales</b> &#8212; "
+	ssdis += "<b>Roleplay</b>";
+	ssdis += " ("
+	ssdis += "<a href=\"https://discord.gg/AsUhakr\">" //Link for clicky, set to the discord
+	ssdis += "Discord"
+	ssdis += "</a>"
+	ssdis += ")"
+	ssdis += "<br>The best RP this side of Universe 4 - NEW WIPE<br>"
+	src.status = ssdis
+
 world
 	name="Dragon Tales"
 	status=":yuh:"
@@ -23,6 +36,7 @@ world
 	cache_lifespan=2
 	loop_checks=0
 	view=8
+	UpdateHub()
 
 	OpenPort()
 		..()
@@ -49,20 +63,6 @@ world
 //		debuglog << "\n\nSERVER STOPPED AT: [time2text(world.timeofday, "hh:mm.ss")]\n\n"
 		..()
 
-world/proc/UpdateHub()
-	var/ssdis=""
-	ssdis += "<b>Dragon Tales</b> &#8212; "
-	ssdis += "<b>Roleplay</b>";
-	ssdis += " ("
-	ssdis += "<a href=\"https://discord.gg/AsUhakr\">" //Link for clicky, set to the discord
-	ssdis += "Discord"
-	ssdis += "</a>"
-	ssdis += ")"
-	ssdis += "<br>The best RP this side of Universe 4 - NEW WIPE<br>"
-	src.status = ssdis
-
-world
-	UpdateHub()
 
 proc/SpawnMaterial()
 	var/num=0
